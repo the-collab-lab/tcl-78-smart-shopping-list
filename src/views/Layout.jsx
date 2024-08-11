@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Outlet } from 'react-router-dom';
 import './Layout.css';
 import { auth } from '../api/config.js';
+import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
 
 /**
  * TODO: The links defined in this file don't work!
@@ -11,24 +13,33 @@ import { auth } from '../api/config.js';
  */
 
 export function Layout() {
+	const { user } = useAuth();
 	return (
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
 					<h1>Smart shopping list</h1>
+					{!!user ? (
+						<div>
+							<span>Sign in as {auth.currentUser.displayName}</span>
+							<SignOutButton></SignOutButton>
+						</div>
+					) : (
+						<SignInButton></SignInButton>
+					)}
 				</header>
 				<main className="Layout-main">
 					<Outlet />
 				</main>
 				<nav className="Nav">
 					<div className="Nav-container">
-						<a href="#" className="Nav-link">
+						<a href="/" className="Nav-link">
 							Home
 						</a>
-						<a href="#" className="Nav-link">
+						<a href="/list" className="Nav-link">
 							List
 						</a>
-						<a href="#" className="Nav-link">
+						<a href="/add-items" className="Nav-link">
 							Manage List
 						</a>
 					</div>
