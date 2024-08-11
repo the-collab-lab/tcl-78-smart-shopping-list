@@ -13,5 +13,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Mentors
 
 - [Chiamaka Umeh](https://github.com/amaka202) 💥
+- [Viviana Yanez](https://github.com/vivitt) ⚡️
 
 ## Code of Conduct Contacts
