@@ -33,7 +33,7 @@ export function Layout() {
 				</main>
 				<nav className="Nav">
 					<div className="Nav-container">
-						<NavLink to="/home" className="Nav-link">
+						<NavLink to="/" className="Nav-link">
 							Home
 						</NavLink>
 						<NavLink to="/list" className="Nav-link">
