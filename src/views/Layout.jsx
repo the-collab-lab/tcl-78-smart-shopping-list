@@ -39,9 +39,9 @@ export function Layout() {
 						<NavLink to="/list" className="Nav-link">
 							List
 						</NavLink>
-						<a href="/manage-list" className="Nav-link">
+						<NavLink to="/manage-list" className="Nav-link">
 							Manage List
-						</a>
+						</NavLink>
 					</div>
 				</nav>
 			</div>
