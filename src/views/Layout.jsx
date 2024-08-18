@@ -2,7 +2,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 
 import './Layout.css';
 import { auth } from '../api/config.js';
-import { useAuth, SignInButton, SignOutButton } from '../api/useAuth.jsx';
+import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
 
 /**
  * TODO: The links defined in this file don't work!
@@ -21,11 +21,11 @@ export function Layout() {
 					<h1>Smart shopping list</h1>
 					{!!user ? (
 						<div>
-							<span>Signed in as {auth.currentUser.displayName}</span> (
-							<SignOutButton />)
+							<span>Sign in as {auth.currentUser.displayName}</span>
+							<SignOutButton></SignOutButton>
 						</div>
 					) : (
-						<SignInButton />
+						<SignInButton></SignInButton>
 					)}
 				</header>
 				<main className="Layout-main">
