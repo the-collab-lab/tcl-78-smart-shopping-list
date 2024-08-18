@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { Outlet } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
+
 import './Layout.css';
 import { auth } from '../api/config.js';
 import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
@@ -33,15 +33,15 @@ export function Layout() {
 				</main>
 				<nav className="Nav">
 					<div className="Nav-container">
-						<a href="/" className="Nav-link">
+						<NavLink to="/" className="Nav-link">
 							Home
-						</a>
-						<a href="/list" className="Nav-link">
+						</NavLink>
+						<NavLink to="/list" className="Nav-link">
 							List
-						</a>
-						<a href="/add-items" className="Nav-link">
+						</NavLink>
+						<NavLink to="/manage-list" className="Nav-link">
 							Manage List
-						</a>
+						</NavLink>
 					</div>
 				</nav>
 			</div>
