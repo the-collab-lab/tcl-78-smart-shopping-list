@@ -38,7 +38,7 @@ export function App() {
 	 * This custom hook takes our token and fetches the data for our list.
 	 * Check ./api/firestore.js for its implementation.
 	 */
-	const data = useShoppingListData('/A45I0SLfsWeHLDg47ETZM5vP8fG2/test-list');
+	const data = useShoppingListData(listPath);
 
 	return (
 		<Router>

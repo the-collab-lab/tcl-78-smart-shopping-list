@@ -9,7 +9,12 @@ export function Home({ data, setListPath }) {
 			</p>
 			<ul>
 				{data.map((list, id) => (
-					<SingleList key={id} name={list.name} />
+					<SingleList
+						key={id}
+						name={list.name}
+						path={list.path}
+						setListPath={setListPath}
+					/>
 				))}
 			</ul>
 		</div>
