@@ -22,7 +22,7 @@ This document serves as your comprehensive guide to all available resources nece
 | 🤝 Developer pairings | 🖥 Assigned Github issue                                                                                                                    |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | Eva & Tataw     | [2. As a user, I want to read all of my shopping lists and the items in them](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/2)                                          |
-| didem & Teresiah     | [3. As a user, I want to be able to navigate to all the pages in the application by clicking the links in the nav bar](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/3) |
+| didem & Rebeca     | [3. As a user, I want to be able to navigate to all the pages in the application by clicking the links in the nav bar](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/3) |
 
 | 📖 Self-study learning modules                                                               |
 | -------------------------------------------------------------------------------------------- |
@@ -39,7 +39,7 @@ This document serves as your comprehensive guide to all available resources nece
 | 🤝 Developer pairings | 🖥 Assigned Github issue                                                                                              |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | Tataw & didem     | [4. As a user, I want to set up a new shopping list so I can start tracking purchased items.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/4)    |
-| Eva & Teresiah     | [5. As a user, I want to add a new item to my shopping list so I can start recording purchases.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/5) |
+| Eva & Rebeca     | [5. As a user, I want to add a new item to my shopping list so I can start recording purchases.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/5) |
 
 | 📖 Self-study learning modules                                                                                                                                                | Description                                                                                                                |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -56,7 +56,7 @@ This document serves as your comprehensive guide to all available resources nece
 | 🤝 Developer pairings | 🖥 Assigned Github issue                                                                                                |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | didem & Eva     | [6. As a user, I want to be able to invite others to an existing shopping list.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/6)                   |
-| Teresiah & Tataw     | [7. As a user, I want to filter my shopping list to make it easier to locate an item in the list.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/7) |
+| Rebeca & Tataw     | [7. As a user, I want to filter my shopping list to make it easier to locate an item in the list.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/7) |
 
 | 📖 Self-study learning modules                                                               |
 | -------------------------------------------------------------------------------------------- |
@@ -73,7 +73,7 @@ This document serves as your comprehensive guide to all available resources nece
 | 🤝 Developer pairings | 🖥 Assigned Github issue                                                                                                                                      |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Eva & Tataw     | [8. As a user, I want to see a welcoming prompt to add my first item if my list is empty to help me get oriented to how the app works. ](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/8) |
-| didem & Teresiah     | [9. As a user, I want to mark an item on my shopping list as purchased so the app can learn how often I buy different items.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/9)            |
+| didem & Rebeca     | [9. As a user, I want to mark an item on my shopping list as purchased so the app can learn how often I buy different items.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/9)            |
 
 | 📖 Self-study learning modules                                                                | Description                                                                                                                                                                     |
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -90,7 +90,7 @@ This document serves as your comprehensive guide to all available resources nece
 | 🤝 Developer pairings | 🖥 Assigned Github issue                                                                                                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Tataw & didem     | [10. As a user, I want to be alerted when I’m entering an empty item or an item that's already on my list.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/10)                                                                       |
-| Eva & Teresiah     | [11. As an item, I want my estimated next purchase date to be computed at the time my purchase is recorded in the database so the app can learn how often I buy different items.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/11) |
+| Eva & Rebeca     | [11. As an item, I want my estimated next purchase date to be computed at the time my purchase is recorded in the database so the app can learn how often I buy different items.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/11) |
 
 | 📖 Self-study learning modules                                                               |
 | -------------------------------------------------------------------------------------------- |
@@ -107,7 +107,7 @@ This document serves as your comprehensive guide to all available resources nece
 | 🤝 Developer pairings | 🖥 Assigned Github issue                                                                                                                                                                              |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | didem & Eva     | [12. As a user, I want to be able to delete items from my shopping list so that my list isn’t cluttered with items I don’t want to buy in the future.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/12)                          |
-| Teresiah & Tataw     | [13. As a user, I want to view a list of my shopping list items in order of how soon I am likely to need to buy each of them again so that it’s clear what I need to buy soon.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/13) |
+| Rebeca & Tataw     | [13. As a user, I want to view a list of my shopping list items in order of how soon I am likely to need to buy each of them again so that it’s clear what I need to buy soon.](https://github.com/the-collab-lab/tcl-78-smart-shopping-list/issues/13) |
 
 | 📖 Self-study learning modules                                                       | Description                                                                                                                       |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
