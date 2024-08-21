@@ -1,0 +1,10 @@
+form {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+#listName,
+.button {
+	padding: 4% 4%;
+	margin: 2% 2%;
+}
