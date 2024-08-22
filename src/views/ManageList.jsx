@@ -29,10 +29,11 @@ export function ManageList() {
 		try {
 			// we need to pass the List Path in here, the hard coded value is a placeholder
 			await addItem('A45I0SLfsWeHLDg47ETZM5vP8fG2/test-list', {
-				name,
-				nextPurchase,
+				itemName: name,
+				daysUntilNextPurchase: nextPurchase,
 			});
-			setMessage(`${name} + item has been successfully added to the list`);
+			setMessage(`${name} has been successfully added to the list`);
+			// After submitting the form we should clear it out so it's empty again (or redirect to List)
 			// Nice to have: redirect to the updated list
 		} catch (error) {
 			setMessage('Failed to add the item to the list.');
@@ -52,6 +53,7 @@ export function ManageList() {
 					name="name"
 					required
 				/>
+				<br />
 
 				<label htmlFor="nextPurchase">When is your next purchase</label>
 				<select
@@ -66,8 +68,9 @@ export function ManageList() {
 					<option value={30}>Not soon</option>
 				</select>
 
+				<p>{message}</p>
+
 				<button>Add Item</button>
-				{message}
 			</form>
 		</>
 	);
