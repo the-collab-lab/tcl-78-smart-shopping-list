@@ -15,6 +15,16 @@ export function Home({ data, setListPath, userId, userEmail }) {
 			setMessage('Enter a list name');
 			return;
 		}
+		// Log the parameters to debug
+		console.log('userId:', userId);
+		console.log('userEmail:', userEmail);
+		console.log('listName:', listName);
+
+		// Check if userId or userEmail is empty
+		if (!userId || !userEmail) {
+			setMessage('User ID or Email is missing');
+			return;
+		}
 
 		try {
 			await createList(userId, userEmail, listName);
@@ -24,6 +34,7 @@ export function Home({ data, setListPath, userId, userEmail }) {
 			setListPath(createListPath);
 			navigate('/list'); //redirect to the list view
 		} catch (error) {
+			//Logging and error messages if list is not created
 			console.error('error creating a list', error);
 			setMessage('Failed to create list. Please try again');
 		}
@@ -55,8 +66,7 @@ export function Home({ data, setListPath, userId, userEmail }) {
 					placeholder="Enter the name of your new list"
 				/>
 				<button type="submit" className="button">
-					{' '}
-					Create list{' '}
+					Create list
 				</button>
 				{message}
 			</form>
