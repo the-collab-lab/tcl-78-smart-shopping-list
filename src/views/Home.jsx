@@ -15,16 +15,6 @@ export function Home({ data, setListPath, userId, userEmail }) {
 			setMessage('Enter a list name');
 			return;
 		}
-		// Log the parameters to debug
-		console.log('userId:', userId);
-		console.log('userEmail:', userEmail);
-		console.log('listName:', listName);
-
-		// Check if userId or userEmail is empty
-		if (!userId || !userEmail) {
-			setMessage('User ID or Email is missing');
-			return;
-		}
 
 		try {
 			await createList(userId, userEmail, listName);
