@@ -26,7 +26,7 @@ export function Home({ data, setListPath, userId, userEmail }) {
 		} catch (error) {
 			//Logging and error messages if list is not created
 			console.error('error creating a list', error);
-			setMessage('Failed to create list. Please try again');
+			setMessage('Failed to create list. Please try again!');
 		}
 	};
 
