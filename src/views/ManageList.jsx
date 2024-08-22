@@ -6,6 +6,7 @@ export function ManageList() {
 		name: '',
 		nextPurchase: 0,
 	});
+	const [message, setMessage] = useState('');
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -17,11 +18,25 @@ export function ManageList() {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { name, nextPurchase } = formData;
-		console.log(name, nextPurchase);
-		addItem('A45I0SLfsWeHLDg47ETZM5vP8fG2/test-list', { name, nextPurchase });
+
+		if (!name || !nextPurchase) {
+			setMessage('Please fill out all fields');
+			return;
+		}
+		try {
+			// we need to pass the List Path in here, the hard coded value is a placeholder
+			await addItem('A45I0SLfsWeHLDg47ETZM5vP8fG2/test-list', {
+				name,
+				nextPurchase,
+			});
+			setMessage(`${name} + item has been successfully added to the list`);
+			// Nice to have: redirect to the updated list
+		} catch (error) {
+			setMessage('Failed to add the item to the list.');
+		}
 	};
 
 	return (
@@ -52,6 +67,7 @@ export function ManageList() {
 				</select>
 
 				<button>Add Item</button>
+				{message}
 			</form>
 		</>
 	);

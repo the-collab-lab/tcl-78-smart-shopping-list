@@ -167,7 +167,7 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 	// TODO: Replace this call to console.log with the appropriate
 	// Firebase function, so this information is sent to your database!
 	try {
-		const docRef = await addDoc(listCollectionRef, {
+		await addDoc(listCollectionRef, {
 			dateCreated: new Date(),
 			// NOTE: This is null because the item has just been created.
 			// We'll use updateItem to put a Date here when the item is purchased!
