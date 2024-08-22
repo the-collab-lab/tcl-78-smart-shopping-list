@@ -33,9 +33,10 @@ export function ManageList() {
 				daysUntilNextPurchase: nextPurchase,
 			});
 			setMessage(`${name} has been successfully added to the list`);
-			// After submitting the form we should clear it out so it's empty again (or redirect to List)
-			// Nice to have: redirect to the updated list
+			// After submitting the form we should clear it out so it's empty again
+			// or redirect to the updated list
 		} catch (error) {
+			console.log('Failed to add the item: ', error);
 			setMessage('Failed to add the item to the list.');
 		}
 	};
