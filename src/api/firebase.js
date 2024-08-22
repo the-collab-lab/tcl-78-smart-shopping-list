@@ -163,18 +163,22 @@ export async function shareList(listPath, currentUserId, recipientEmail) {
  * @param {number} itemData.daysUntilNextPurchase The number of days until the user thinks they'll need to buy the item again.
  */
 export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
-	const listCollectionRef = collection(db, listPath, 'items');
+	const listCollectionRef = await collection(db, listPath, 'items');
 	// TODO: Replace this call to console.log with the appropriate
 	// Firebase function, so this information is sent to your database!
-	return addDoc(listCollectionRef, {
-		dateCreated: new Date(),
-		// NOTE: This is null because the item has just been created.
-		// We'll use updateItem to put a Date here when the item is purchased!
-		dateLastPurchased: null,
-		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-		name: itemName,
-		totalPurchases: 0,
-	});
+	try {
+		const docRef = await addDoc(listCollectionRef, {
+			dateCreated: new Date(),
+			// NOTE: This is null because the item has just been created.
+			// We'll use updateItem to put a Date here when the item is purchased!
+			dateLastPurchased: null,
+			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
+			name: itemName,
+			totalPurchases: 0,
+		});
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 export async function updateItem() {

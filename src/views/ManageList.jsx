@@ -20,7 +20,8 @@ export function ManageList() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { name, nextPurchase } = formData;
-		addItem(listPath, { name, nextPurchase });
+		console.log(name, nextPurchase);
+		addItem('A45I0SLfsWeHLDg47ETZM5vP8fG2/test-list', { name, nextPurchase });
 	};
 
 	return (
