@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { addItem } from '../api';
 
 export function ManageList() {
 	const [formData, setFormData] = useState({
@@ -18,20 +19,9 @@ export function ManageList() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData);
-		// submit to DB?? (call addItem from firebase.js and pass in the pathList and formData)
+		const { name, nextPurchase } = formData;
+		addItem(listPath, { name, nextPurchase });
 	};
-
-	// template react form function for reference
-	// const handleChange = (e) => {
-	//   const { name, value, type, checked } = e.target;
-	//   setFormData((prevFormData) => {
-	//     return {
-	//       ...prevFormData,
-	//       [name]: type === "checkbox" ? checked : value,
-	//     };
-	//   });
-	// };
 
 	return (
 		<>
