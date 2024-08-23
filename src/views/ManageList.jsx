@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { addItem } from '../api';
 
-export function ManageList() {
+export function ManageList({ listPath }) {
 	const [formData, setFormData] = useState({
 		name: '',
 		nextPurchase: 0,
@@ -27,14 +27,15 @@ export function ManageList() {
 			return;
 		}
 		try {
-			// we need to pass the List Path in here, the hard coded value is a placeholder
-			await addItem('A45I0SLfsWeHLDg47ETZM5vP8fG2/test-list', {
+			await addItem(listPath, {
 				itemName: name,
 				daysUntilNextPurchase: nextPurchase,
 			});
 			setMessage(`${name} has been successfully added to the list`);
-			// After submitting the form we should clear it out so it's empty again
-			// or redirect to the updated list
+			setFormData({
+				name: '',
+				nextPurchase: 0,
+			});
 		} catch (error) {
 			console.log('Failed to add the item: ', error);
 			setMessage('Failed to add the item to the list.');
