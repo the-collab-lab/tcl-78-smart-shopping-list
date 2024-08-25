@@ -45,5 +45,13 @@
 			"prettier --cache --write"
 		],
 		"*.{html,json,css,scss,md}": "prettier --cache --write"
-	}
+	},
+	"version": "1.0.0",
+	"description": "This README file explains The Collab Lab’s smart shopping list project and provides instructions for developing it locally.",
+	"main": "vite.config.js",
+	"directories": {
+		"test": "tests"
+	},
+	"author": "",
+	"license": "ISC"
 }

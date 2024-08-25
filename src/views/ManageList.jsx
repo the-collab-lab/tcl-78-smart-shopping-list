@@ -1,7 +1,79 @@
-export function ManageList() {
+import { useState } from 'react';
+import { addItem } from '../api';
+
+export function ManageList({ listPath }) {
+	const [formData, setFormData] = useState({
+		name: '',
+		nextPurchase: 0,
+	});
+	const [message, setMessage] = useState('');
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((prevFormData) => {
+			return {
+				...prevFormData,
+				[name]: value,
+			};
+		});
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const { name, nextPurchase } = formData;
+
+		if (!name || !nextPurchase) {
+			setMessage('Please fill out all fields');
+			return;
+		}
+		try {
+			await addItem(listPath, {
+				itemName: name,
+				daysUntilNextPurchase: nextPurchase,
+			});
+			setMessage(`${name} has been successfully added to the list`);
+			setFormData({
+				name: '',
+				nextPurchase: 0,
+			});
+		} catch (error) {
+			console.log('Failed to add the item: ', error);
+			setMessage('Failed to add the item to the list.');
+		}
+	};
+
 	return (
-		<p>
-			Hello from the <code>/manage-list</code> page!
-		</p>
+		<>
+			<form onSubmit={handleSubmit}>
+				<label htmlFor="name">Item name</label>
+				<input
+					id="name"
+					type="text"
+					placeholder="Item"
+					value={formData.name}
+					onChange={handleChange}
+					name="name"
+					required
+				/>
+				<br />
+
+				<label htmlFor="nextPurchase">When is your next purchase</label>
+				<select
+					name="nextPurchase"
+					id="nextPurchase"
+					onChange={handleChange}
+					value={formData.nextPurchase}
+				>
+					<option value="">---</option>
+					<option value={7}>Soon</option>
+					<option value={14}>Kind of soon</option>
+					<option value={30}>Not soon</option>
+				</select>
+
+				<p>{message}</p>
+
+				<button>Add Item</button>
+			</form>
+		</>
 	);
 }
