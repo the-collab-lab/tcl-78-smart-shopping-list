@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { addItem } from '../api';
+import { shareList } from '../api/firebase';
 
-export function ManageList({ listPath }) {
+export function ManageList({ listPath, currentUserId }) {
 	const [formNewItem, setFormNewItem] = useState({
 		name: '',
 		nextPurchase: 0,
@@ -47,7 +48,20 @@ export function ManageList({ listPath }) {
 
 	const handleAddUserSubmit = async (e) => {
 		e.preventDefault();
-		// to do
+		if (!formAddUser) {
+			setMessageUser('Enter a recipient email');
+			return;
+		}
+		try {
+			await shareList(listPath, currentUserId, formAddUser);
+			setMessageUser(
+				`the list has been successfully shared with ${formAddUser}`,
+			);
+			setFormAddUser('');
+		} catch (error) {
+			console.error('error sharing a list', error);
+			setMessageUser('Failed to share the list. Please try again!');
+		}
 	};
 
 	return (
