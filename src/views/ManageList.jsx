@@ -53,14 +53,19 @@ export function ManageList({ listPath, userId }) {
 			return;
 		}
 		try {
-			await shareList(listPath, userId, formAddUser);
-			setMessageUser(
-				`the list has been successfully shared with ${formAddUser}`,
-			);
+			const successMessage = await shareList(listPath, userId, formAddUser);
+			setMessageUser(successMessage);
 			setFormAddUser('');
 		} catch (error) {
-			console.error('error sharing a list', error);
-			setMessageUser('Failed to share the list. Please try again!');
+			console.error('Error sharing a list', error);
+			if (
+				error.message === 'You do not have permission to share this list' ||
+				error.message === 'The user with the provided email does not exist'
+			) {
+				setMessageUser(error.message);
+			} else {
+				setMessageUser('Failed to share the list. Please try again!');
+			}
 		}
 	};
 

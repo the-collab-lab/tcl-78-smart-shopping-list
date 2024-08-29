@@ -138,21 +138,22 @@ export async function createList(userId, userEmail, listName) {
 export async function shareList(listPath, currentUserId, recipientEmail) {
 	// Check if current user is owner.
 	if (!listPath.includes(currentUserId)) {
-		return;
+		throw new Error('You do not have permission to share this list');
 	}
 	// Get the document for the recipient user.
 	const usersCollectionRef = collection(db, 'users');
 	const recipientDoc = await getDoc(doc(usersCollectionRef, recipientEmail));
 	// If the recipient user doesn't exist, we can't share the list.
 	if (!recipientDoc.exists()) {
-		return;
+		throw new Error('The user with the provided email does not exist');
 	}
 	// Add the list to the recipient user's sharedLists array.
 	const listDocumentRef = doc(db, listPath);
 	const userDocumentRef = doc(db, 'users', recipientEmail);
-	updateDoc(userDocumentRef, {
+	await updateDoc(userDocumentRef, {
 		sharedLists: arrayUnion(listDocumentRef),
 	});
+	return `The list has been successfully shared with ${recipientEmail}`;
 }
 
 /**
