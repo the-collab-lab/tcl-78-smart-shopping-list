@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { addItem } from '../api';
 import { shareList } from '../api/firebase';
 
-export function ManageList({ listPath, currentUserId }) {
+export function ManageList({ listPath, userId }) {
 	const [formNewItem, setFormNewItem] = useState({
 		name: '',
 		nextPurchase: 0,
@@ -53,7 +53,7 @@ export function ManageList({ listPath, currentUserId }) {
 			return;
 		}
 		try {
-			await shareList(listPath, currentUserId, formAddUser);
+			await shareList(listPath, userId, formAddUser);
 			setMessageUser(
 				`the list has been successfully shared with ${formAddUser}`,
 			);
