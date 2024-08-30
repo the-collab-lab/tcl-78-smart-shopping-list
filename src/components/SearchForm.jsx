@@ -1,13 +1,15 @@
-function SearchForm({ onSearch }) {
+import { useState } from 'react';
+
+function SearchForm() {
+	const [searchItem, setSearchItem] = useState('');
+
 	const handleSearch = (e) => {
 		e.preventDefault();
-		const value = e.target.value;
-
-		onSearch(value);
+		setSearchItem(e.target.value);
 	};
 
 	const clearSearch = () => {
-		onSearch('');
+		setSearchItem('');
 	};
 
 	return (
@@ -15,6 +17,7 @@ function SearchForm({ onSearch }) {
 			<div className="search-input-container">
 				<label htmlFor="search-input">Search items:</label>
 				<input
+					value={searchItem}
 					type="search"
 					id="search-input"
 					placeholder="Item from list"

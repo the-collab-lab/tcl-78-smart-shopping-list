@@ -7,27 +7,16 @@ export function List({ data }) {
 
 	const [searchTerm, setSearchTerm] = useState('');
 
-	console.log(data);
-
-	const handleSearch = (searchItem) => {
-		console.log(searchItem);
-		setSearchTerm(searchItem);
-		if (searchItem === '') {
-			setFilteredItems(data);
-		} else {
-			const filtered = data.filter((item) =>
-				item.name.toLowerCase().includes(searchItem.toLowerCase()),
-			);
-			setFilteredItems(filtered);
-		}
-	};
+	const filteredData = data.filter((item) =>
+		item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+	);
 
 	return (
 		<>
 			<p>
 				Hello from the <code>/list</code> page!
 			</p>
-			<SearchForm onSearch={handleSearch} />
+			<SearchForm onClick={handleSearch} />
 			<ul>
 				{searchTerm
 					? filteredItems.map((item) => (
