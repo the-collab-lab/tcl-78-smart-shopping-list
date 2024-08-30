@@ -3,7 +3,7 @@ import SearchForm from '../components/SearchForm';
 import { useState } from 'react';
 
 export function List({ data }) {
-	const [filteredItems, setFilteredItems] = useState(data);
+	// const [filteredItems, setFilteredItems] = useState(data);
 
 	const [searchTerm, setSearchTerm] = useState('');
 
@@ -16,14 +16,23 @@ export function List({ data }) {
 			<p>
 				Hello from the <code>/list</code> page!
 			</p>
-			<SearchForm onClick={handleSearch} />
-			<ul>
-				{searchTerm
-					? filteredItems.map((item) => (
-							<ListItem key={item.id} name={item.name} />
-						))
-					: data.map((item) => <ListItem key={item.id} name={item.name} />)}
-			</ul>
+			<SearchForm value={searchTerm} />
+			{/* <ul>
+				<li> data.map((item) => <ListItem key={item.id} name={item.name} />)}
+				</li>
+			</ul> */}
 		</>
 	);
+}
+
+// {filteredData.map((item)=>(
+// 	<li key={item.id}>{item.name}</li>
+// ))}
+// </ul>}
+
+{
+	/* {searchTerm
+					? filteredData.map((item) => (
+							<ListItem key={item.id} name={item.name} />
+						)) */
 }
