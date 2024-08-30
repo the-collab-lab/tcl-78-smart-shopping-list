@@ -55,15 +55,3 @@ export function List({ data }) {
 		</>
 	);
 }
-
-// {filteredData.map((item)=>(
-// 	<li key={item.id}>{item.name}</li>
-// ))}
-// </ul>}
-
-{
-	/* {searchTerm
-					? filteredData.map((item) => (
-							<ListItem key={item.id} name={item.name} />
-						)) */
-}
