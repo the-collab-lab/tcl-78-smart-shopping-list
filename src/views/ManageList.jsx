@@ -55,7 +55,6 @@ export function ManageList({ listPath, userId }) {
 		try {
 			const successMessage = await shareList(listPath, userId, formAddUser);
 			setMessageUser(successMessage);
-			setFormAddUser('');
 		} catch (error) {
 			console.error('Error sharing a list', error);
 			if (
@@ -66,6 +65,8 @@ export function ManageList({ listPath, userId }) {
 			} else {
 				setMessageUser('Failed to share the list. Please try again!');
 			}
+		} finally {
+			setFormAddUser('');
 		}
 	};
 
