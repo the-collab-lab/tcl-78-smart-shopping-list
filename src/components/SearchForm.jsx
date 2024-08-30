@@ -18,12 +18,12 @@ function SearchForm({ entry }) {
 			<div className="search-input-container">
 				<label htmlFor="search-input">Search items:</label>
 				<input
-					value={entry}
 					type="search"
 					id="search-input"
-					placeholder="Item from list"
+					placeholder="Search list..."
 					onChange={handleSearch}
 					required
+					name="search-input"
 				/>
 				<button type="button" onClick={clearSearch} className="clear-button">
 					x
