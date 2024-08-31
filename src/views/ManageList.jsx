@@ -1,29 +1,33 @@
 import { useState } from 'react';
 import { addItem } from '../api';
+import { shareList } from '../api/firebase';
 
-export function ManageList({ listPath }) {
-	const [formData, setFormData] = useState({
+export function ManageList({ listPath, userId }) {
+	const [formNewItem, setFormNewItem] = useState({
 		name: '',
 		nextPurchase: 0,
 	});
-	const [message, setMessage] = useState('');
+	const [messageItem, setMessageItem] = useState('');
 
-	const handleChange = (e) => {
+	const [formAddUser, setFormAddUser] = useState('');
+	const [messageUser, setMessageUser] = useState('');
+
+	const handleNewItemChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((prevFormData) => {
+		setFormNewItem((prevForm) => {
 			return {
-				...prevFormData,
+				...prevForm,
 				[name]: value,
 			};
 		});
 	};
 
-	const handleSubmit = async (e) => {
+	const handleNewItemSubmit = async (e) => {
 		e.preventDefault();
-		const { name, nextPurchase } = formData;
+		const { name, nextPurchase } = formNewItem;
 
 		if (!name || !nextPurchase) {
-			setMessage('Please fill out all fields');
+			setMessageItem('Please fill out all fields');
 			return;
 		}
 		try {
@@ -31,27 +35,52 @@ export function ManageList({ listPath }) {
 				itemName: name,
 				daysUntilNextPurchase: nextPurchase,
 			});
-			setMessage(`${name} has been successfully added to the list`);
-			setFormData({
+			setMessageItem(`${name} has been successfully added to the list`);
+			setFormNewItem({
 				name: '',
 				nextPurchase: 0,
 			});
 		} catch (error) {
 			console.log('Failed to add the item: ', error);
-			setMessage('Failed to add the item to the list.');
+			setMessageItem('Failed to add the item to the list.');
+		}
+	};
+
+	const handleAddUserSubmit = async (e) => {
+		e.preventDefault();
+		if (!formAddUser) {
+			setMessageUser('Enter a recipient email');
+			return;
+		}
+		try {
+			const successMessage = await shareList(listPath, userId, formAddUser);
+			setMessageUser(successMessage);
+		} catch (error) {
+			console.error('Error sharing a list', error);
+			if (
+				error.message === 'You do not have permission to share this list' ||
+				error.message === 'The user with the provided email does not exist'
+			) {
+				setMessageUser(error.message);
+			} else {
+				setMessageUser('Failed to share the list. Please try again!');
+			}
+		} finally {
+			setFormAddUser('');
 		}
 	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<h2>Add new item to your list</h2>
+			<form onSubmit={handleNewItemSubmit}>
 				<label htmlFor="name">Item name</label>
 				<input
 					id="name"
 					type="text"
 					placeholder="Item"
-					value={formData.name}
-					onChange={handleChange}
+					value={formNewItem.name}
+					onChange={handleNewItemChange}
 					name="name"
 					required
 				/>
@@ -61,8 +90,9 @@ export function ManageList({ listPath }) {
 				<select
 					name="nextPurchase"
 					id="nextPurchase"
-					onChange={handleChange}
-					value={formData.nextPurchase}
+					onChange={handleNewItemChange}
+					value={formNewItem.nextPurchase}
+					required
 				>
 					<option value="">---</option>
 					<option value={7}>Soon</option>
@@ -70,9 +100,27 @@ export function ManageList({ listPath }) {
 					<option value={30}>Not soon</option>
 				</select>
 
-				<p>{message}</p>
+				<p>{messageItem}</p>
 
 				<button>Add Item</button>
+			</form>
+
+			<h2>Invite a user to share your list with you</h2>
+			<form onSubmit={handleAddUserSubmit}>
+				<label htmlFor="email">User email</label>
+				<input
+					id="email"
+					type="email"
+					placeholder="Email"
+					value={formAddUser}
+					onChange={(e) => setFormAddUser(e.target.value)}
+					name="email"
+					required
+				/>
+
+				<p>{messageUser}</p>
+
+				<button>Invite</button>
 			</form>
 		</>
 	);
