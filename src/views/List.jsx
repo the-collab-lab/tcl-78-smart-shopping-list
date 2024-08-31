@@ -24,7 +24,7 @@ export function List({ data }) {
 			</p>
 			<form onSubmit={handleSearch}>
 				<div>
-					<label htmlFor="search-input"> Search items:</label>
+					<label htmlFor="search-item-in-list"> Search items:</label>
 					<input
 						onChange={handleSearch}
 						type="search"
