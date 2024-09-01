@@ -18,3 +18,5 @@ Add yourself as a contributor to this project as a Markdown link that links your
 - [Viviana Yanez](https://github.com/vivitt) ⚡️
 
 ## Code of Conduct Contacts
+
+- [Ayu Adiati](https://github.com/adiati98) 🤩
