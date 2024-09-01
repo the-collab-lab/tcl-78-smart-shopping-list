@@ -27,7 +27,7 @@ export function List({ data }) {
 					<label htmlFor="search-item-in-list"> Search items:</label>
 					<input
 						onChange={handleSearch}
-						type="search"
+						type="text"
 						id="search-item-in-list"
 						value={searchItem}
 						placeholder="Search item..."
