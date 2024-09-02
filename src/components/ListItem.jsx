@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './ListItem.css';
 
 export function ListItem({ name, id, onCheck }) {
-	const { isChecked, setIsChecked } = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
 
 	const handleChecked = () => {
 		const newCheckedStatus = !isChecked;
