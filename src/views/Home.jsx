@@ -29,22 +29,27 @@ export function Home({ data, setListPath, userId, userEmail }) {
 			setMessage('Failed to create list. Please try again!');
 		}
 	};
+	console.log(data.length);
 
 	return (
 		<div className="Home">
 			<p>
 				Hello from the home (<code>/</code>) page!
 			</p>
-			<ul>
-				{data.map((list, id) => (
-					<SingleList
-						key={id}
-						name={list.name}
-						path={list.path}
-						setListPath={setListPath}
-					/>
-				))}
-			</ul>
+			{data.length == 0 ? (
+				<p> Please create a list using the form below</p>
+			) : (
+				<ul>
+					{data.map((list, id) => (
+						<SingleList
+							key={id}
+							name={list.name}
+							path={list.path}
+							setListPath={setListPath}
+						/>
+					))}
+				</ul>
+			)}
 
 			<form onSubmit={handleCreateListButton}>
 				<label htmlFor="listName">List Name:</label>
