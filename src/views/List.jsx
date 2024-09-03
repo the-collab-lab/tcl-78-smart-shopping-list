@@ -1,5 +1,6 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
+import { updateItem } from '../api/firebase';
 
 export function List({ data }) {
 	const [searchItem, setSearchItem] = useState('');
@@ -16,6 +17,20 @@ export function List({ data }) {
 	const filterItems = data.filter((item) =>
 		item.name.toLowerCase().includes(searchItem.toLocaleLowerCase()),
 	);
+
+	const handleCheck = async (itemId, isChecked) => {
+		//the item being checked or unchecked.
+		console.log(`Item ID: ${itemId}, Checked: ${isChecked}`);
+		if (isChecked) {
+			const currentTime = new Date(); //the current date and time when the item is checked.
+			console.log(`Updating item with ID ${itemId} at ${currentTime}`);
+			await updateItem(itemId, {
+				//to update the Firestore document
+				dateLastPurchased: currentTime,
+				totalPurchases: 1,
+			});
+		}
+	};
 
 	return (
 		<>
@@ -40,7 +55,13 @@ export function List({ data }) {
 					{searchItem && (
 						<ul>
 							{filterItems.map((item) => (
-								<ListItem key={item.id} name={item.name} />
+								<ListItem
+									key={item.id}
+									id={item.id}
+									name={item.name}
+									dateLastPurchased={item.dateLastPurchased}
+									onCheck={handleCheck}
+								/>
 							))}
 						</ul>
 					)}
@@ -49,7 +70,13 @@ export function List({ data }) {
 
 			<ul>
 				{data.map((item) => (
-					<ListItem key={item.id} name={item.name} />
+					<ListItem
+						key={item.id}
+						name={item.name}
+						id={item.id}
+						dateLastPurchased={item.dateLastPurchased}
+						onCheck={handleCheck}
+					/>
 				))}
 			</ul>
 		</>
