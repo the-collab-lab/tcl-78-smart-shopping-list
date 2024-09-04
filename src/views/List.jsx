@@ -24,11 +24,11 @@ export function List({ data, listPath }) {
 		if (isChecked) {
 			const currentTime = new Date(); //the current date and time when the item is checked.
 			console.log(`Updating item with ID ${itemId} at ${currentTime}`);
-			// await updateItem(listPath, itemId, {
-			// 	//to update the Firestore document
-			// 	dateLastPurchased: currentTime,
-			// 	totalPurchases: 1,
-			// });
+			await updateItem(listPath, itemId, {
+				//to update the Firestore document
+				dateLastPurchased: currentTime,
+				totalPurchases: 1,
+			});
 
 			await updateItem(listPath, itemId);
 		}

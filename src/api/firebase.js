@@ -192,13 +192,12 @@ export async function updateItem(listPath, itemId) {
 	const itemRef = await doc(listCollectionRef, itemId);
 	const itemDoc = await getDoc(itemRef);
 
-	console.log(itemDoc);
-
 	try {
 		await updateDoc(itemDoc, {
-			dateLastPurchased: null,
-			dateNextPurchased: getFutureDate(dateLastPurchased),
+			dateLastPurchased: new Date(Date.now),
+			// totalPurchases need to be incremented every time the checkbox is ticked off
 			totalPurchases: 0,
+			// dateNextPurchased will be addressed in the future
 		});
 	} catch (error) {
 		console.log(error);
