@@ -2,7 +2,7 @@ import { ListItem } from '../components';
 import { useState } from 'react';
 import { updateItem } from '../api/firebase';
 
-export function List({ data }) {
+export function List({ data, listPath }) {
 	const [searchItem, setSearchItem] = useState('');
 
 	const handleSearch = (e) => {
@@ -24,11 +24,13 @@ export function List({ data }) {
 		if (isChecked) {
 			const currentTime = new Date(); //the current date and time when the item is checked.
 			console.log(`Updating item with ID ${itemId} at ${currentTime}`);
-			await updateItem(itemId, {
-				//to update the Firestore document
-				dateLastPurchased: currentTime,
-				totalPurchases: 1,
-			});
+			// await updateItem(listPath, itemId, {
+			// 	//to update the Firestore document
+			// 	dateLastPurchased: currentTime,
+			// 	totalPurchases: 1,
+			// });
+
+			await updateItem(listPath, itemId);
 		}
 	};
 
