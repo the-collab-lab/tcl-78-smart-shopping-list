@@ -19,18 +19,39 @@ export function List({ data, listPath }) {
 	);
 
 	const handleCheck = async (itemId, isChecked) => {
-		//the item being checked or unchecked.
 		console.log(`Item ID: ${itemId}, Checked: ${isChecked}`);
+		const item = data.find((item) => item.id === itemId);
+		const currentTime = new Date(); //the current date and time when the item is checked.
+
 		if (isChecked) {
-			const currentTime = new Date(); //the current date and time when the item is checked.
+			// The item is being checked, so we increment totalPurchases and update Firestore
+
+			const newTotalPurchases = (item.totalPurchases || 0) + 1;
+
 			console.log(`Updating item with ID ${itemId} at ${currentTime}`);
+
 			await updateItem(listPath, itemId, {
-				//to update the Firestore document
 				dateLastPurchased: currentTime,
-				totalPurchases: 1,
+				totalPurchases: newTotalPurchases,
 			});
 
-			await updateItem(listPath, itemId);
+			// Automatically uncheck the item after 24 hours
+			setTimeout(
+				async () => {
+					console.log(`Unchecking item with ID ${itemId} after 24 hours`);
+					await updateItem(listPath, itemId, {
+						dateLastPurchased: null,
+						totalPurchases: newTotalPurchases,
+					});
+				},
+				24 * 60 * 60 * 1000,
+			); // 24 hours in milliseconds
+		} else {
+			// If the item is being unchecked, update Firestore accordingly (optional behavior)
+			await updateItem(listPath, itemId, {
+				dateLastPurchased: null,
+				totalPurchases: item.totalPurchases,
+			});
 		}
 	};
 
@@ -61,7 +82,11 @@ export function List({ data, listPath }) {
 									key={item.id}
 									id={item.id}
 									name={item.name}
-									dateLastPurchased={item.dateLastPurchased}
+									isChecked={
+										item.dateLastPurchased &&
+										new Date() - new Date(item.dateLastPurchased) <
+											24 * 60 * 60 * 1000
+									}
 									onCheck={handleCheck}
 								/>
 							))}
@@ -76,7 +101,11 @@ export function List({ data, listPath }) {
 						key={item.id}
 						name={item.name}
 						id={item.id}
-						dateLastPurchased={item.dateLastPurchased}
+						isChecked={
+							item.dateLastPurchased &&
+							new Date() - new Date(item.dateLastPurchased) <
+								24 * 60 * 60 * 1000
+						}
 						onCheck={handleCheck}
 					/>
 				))}
