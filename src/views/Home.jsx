@@ -36,9 +36,14 @@ export function Home({ data, setListPath, userId, userEmail }) {
 			<p>
 				Hello from the home (<code>/</code>) page!
 			</p>
-			{data.length == 0 ? (
-				<p> Please create a list using the form below</p>
-			) : (
+			{data.length === 0 && (
+				<p>
+					{' '}
+					It seems you don&apos;t have any lists yet, Please create a list using
+					the form below
+				</p>
+			)}
+			{data.length > 0 && (
 				<ul>
 					{data.map((list, id) => (
 						<SingleList
