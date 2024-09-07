@@ -5,6 +5,8 @@ import { getFutureDate } from '../utils';
 
 export function List({ data, listPath }) {
 	const [searchItem, setSearchItem] = useState('');
+	// Log filtered data
+	console.log('Rendering List with data:', data);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -29,7 +31,9 @@ export function List({ data, listPath }) {
 
 			const newTotalPurchases = (item.totalPurchases || 0) + 1;
 
-			console.log(`Updating item with ID ${itemId} at ${currentTime}`);
+			console.log(
+				`Updating item with ID ${itemId}, New Purchases: ${newTotalPurchases}, Time: ${currentTime}`,
+			);
 
 			await updateItem(listPath, itemId, {
 				dateLastPurchased: currentTime,
@@ -39,12 +43,13 @@ export function List({ data, listPath }) {
 			// Automatically uncheck the item after 24 hours
 			setTimeout(async () => {
 				await updateItem(listPath, itemId, {
-					dateLastPurchased: null,
+					dateLastPurchased: null, // Reset purchase date after 24 hours
 					totalPurchases: newTotalPurchases,
 				});
 			}, getFutureDate);
 		} else {
-			// If the item is being unchecked, update Firestore accordingly (optional behavior)
+			console.log(`Unchecking item ${itemId} and resetting dateLastPurchased.`);
+			// // Uncheck and reset the dateLastPurchased to null
 			await updateItem(listPath, itemId, {
 				dateLastPurchased: null,
 				totalPurchases: item.totalPurchases,
@@ -79,11 +84,7 @@ export function List({ data, listPath }) {
 									key={item.id}
 									id={item.id}
 									name={item.name}
-									isChecked={
-										item.dateLastPurchased &&
-										new Date() - new Date(item.dateLastPurchased) <
-											getFutureDate
-									}
+									dateLastPurchased={item.dateLastPurchased}
 									onCheck={handleCheck}
 								/>
 							))}
@@ -98,10 +99,7 @@ export function List({ data, listPath }) {
 						key={item.id}
 						name={item.name}
 						id={item.id}
-						isChecked={
-							item.dateLastPurchased &&
-							new Date() - new Date(item.dateLastPurchased) < getFutureDate
-						}
+						dateLastPurchased={item.dateLastPurchased}
 						onCheck={handleCheck}
 					/>
 				))}

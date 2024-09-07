@@ -7,18 +7,36 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 
 	const [isChecked, setIsChecked] = useState(false);
 
+	// to see if `dateLastPurchased` and `isChecked` are working
+	console.log(`Rendering ListItem for ${name}:`, {
+		dateLastPurchased,
+		isChecked,
+	});
+
 	// Update `isChecked` based on the `dateLastPurchased` value
 
 	useEffect(() => {
 		const checkStatus = () => {
 			if (dateLastPurchased) {
-				const timeSinceLastPurchase = new Date() - new Date(dateLastPurchased);
-				const hasBeenPurchasedRecently = timeSinceLastPurchase < getFutureDate;
+				// If dateLastPurchased is a Firestore _Timestamp, convert it to a JavaScript Date
+				const purchaseDate = dateLastPurchased.toDate
+					? dateLastPurchased.toDate()
+					: new Date(dateLastPurchased);
+				const timeSinceLastPurchase = new Date() - purchaseDate;
+				const hasBeenPurchasedRecently =
+					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
+
+				// Log check status
+				console.log(
+					`${name} was last purchased ${timeSinceLastPurchase} ms ago.`,
+				);
 				setIsChecked(hasBeenPurchasedRecently);
 			} else {
+				console.log(`${name} has never been purchased.`);
 				setIsChecked(false);
 			}
 		};
+
 		// initial check
 		checkStatus();
 	}, [dateLastPurchased]);
@@ -27,6 +45,12 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 	const handleChecked = () => {
 		// Handle checkbox change
 		const newCheckedStatus = !isChecked;
+		// Log checkbox change
+		console.log(
+			`${name} checkbox clicked. New checked status:`,
+			newCheckedStatus,
+		);
+
 		setIsChecked(newCheckedStatus);
 		onCheck(id, newCheckedStatus);
 	};
