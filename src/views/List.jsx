@@ -100,8 +100,7 @@ export function List({ data, listPath }) {
 						id={item.id}
 						isChecked={
 							item.dateLastPurchased &&
-							new Date() - new Date(item.dateLastPurchased) <
-								24 * 60 * 60 * 1000
+							new Date() - new Date(item.dateLastPurchased) < getFutureDate
 						}
 						onCheck={handleCheck}
 					/>
