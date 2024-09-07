@@ -1,25 +1,34 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
+import { getFutureDate } from '../utils';
 
 export function ListItem({ name, id, dateLastPurchased, onCheck }) {
-	const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+	// State to track whether the item is checked
 
-	const [isChecked, setIsChecked] = useState(false); // State to track whether the item is checked
+	const [isChecked, setIsChecked] = useState(false);
 
 	// Update `isChecked` based on the `dateLastPurchased` value
+
 	useEffect(() => {
-		if (dateLastPurchased) {
-			const hasBeenPurchasedRecently =
-				new Date() - new Date(dateLastPurchased) < ONE_DAY_IN_MILLISECONDS;
-			setIsChecked(hasBeenPurchasedRecently);
-		}
+		const checkStatus = () => {
+			if (dateLastPurchased) {
+				const timeSinceLastPurchase = new Date() - new Date(dateLastPurchased);
+				const hasBeenPurchasedRecently = timeSinceLastPurchase < getFutureDate;
+				setIsChecked(hasBeenPurchasedRecently);
+			} else {
+				setIsChecked(false);
+			}
+		};
+		// initial check
+		checkStatus();
 	}, [dateLastPurchased]);
 
+	// old code from here
 	const handleChecked = () => {
 		// Handle checkbox change
 		const newCheckedStatus = !isChecked;
 		setIsChecked(newCheckedStatus);
-		onCheck(id, newCheckedStatus); // Notify parent component about the change
+		onCheck(id, newCheckedStatus);
 	};
 	return (
 		<li className="ListItem">
