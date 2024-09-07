@@ -2,6 +2,8 @@ import { ListItem } from '../components';
 import { useState } from 'react';
 import { updateItem } from '../api/firebase';
 
+const ONE_MINUTE = 60 * 1000; // 1 minute in milliseconds
+
 export function List({ data, listPath }) {
 	const [searchItem, setSearchItem] = useState('');
 
@@ -38,13 +40,13 @@ export function List({ data, listPath }) {
 			// Automatically uncheck the item after 24 hours
 			setTimeout(
 				async () => {
-					console.log(`Unchecking item with ID ${itemId} after 24 hours`);
+					console.log(`Unchecking item with ID ${itemId} after 1 minute`);
 					await updateItem(listPath, itemId, {
 						dateLastPurchased: null,
 						totalPurchases: newTotalPurchases,
 					});
 				},
-				24 * 60 * 60 * 1000,
+				ONE_MINUTE, //24 * 60 * 60 * 1000,
 			); // 24 hours in milliseconds
 		} else {
 			// If the item is being unchecked, update Firestore accordingly (optional behavior)
