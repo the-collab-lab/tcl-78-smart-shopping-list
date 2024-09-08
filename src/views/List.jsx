@@ -44,7 +44,6 @@ export function List({ data, listPath }) {
 			setTimeout(async () => {
 				await updateItem(listPath, itemId, {
 					dateLastPurchased: null, // Reset purchase date after 24 hours
-					totalPurchases: newTotalPurchases,
 				});
 			}, getFutureDate);
 		} else {
