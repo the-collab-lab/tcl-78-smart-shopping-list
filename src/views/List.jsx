@@ -32,7 +32,7 @@ export function List({ data, lists }) {
 				</p>
 			)}
 
-			{data.length === 0 && (
+			{lists.length > 0 && data.length === 0 && (
 				<p>
 					Your list is currently empty. To add items, visit{' '}
 					<Link to="/manage-list">manage list</Link> and start building your
@@ -40,38 +40,40 @@ export function List({ data, lists }) {
 				</p>
 			)}
 
-			{data.length > 0 && (
-				<form onSubmit={handleSearch}>
-					<div>
-						<label htmlFor="search-item-in-list"> Search items:</label>
-						<input
-							onChange={handleSearch}
-							type="search"
-							id="search-item-in-list"
-							value={searchItem}
-							placeholder="Search item..."
-						/>
-						{searchItem && (
-							<button type="button" onClick={clearSearch}>
-								x
-							</button>
-						)}
-						{searchItem && (
-							<ul>
-								{filterItems.map((item) => (
-									<ListItem key={item.id} name={item.name} />
-								))}
-							</ul>
-						)}
-					</div>
-				</form>
-			)}
+			{lists.length > 0 && data.length > 0 && (
+				<>
+					<form onSubmit={handleSearch}>
+						<div>
+							<label htmlFor="search-item-in-list"> Search items:</label>
+							<input
+								onChange={handleSearch}
+								type="search"
+								id="search-item-in-list"
+								value={searchItem}
+								placeholder="Search item..."
+							/>
+							{searchItem && (
+								<button type="button" onClick={clearSearch}>
+									x
+								</button>
+							)}
+							{searchItem && (
+								<ul>
+									{filterItems.map((item) => (
+										<ListItem key={item.id} name={item.name} />
+									))}
+								</ul>
+							)}
+						</div>
+					</form>
 
-			<ul>
-				{data.map((item) => (
-					<ListItem key={item.id} name={item.name} />
-				))}
-			</ul>
+					<ul>
+						{data.map((item) => (
+							<ListItem key={item.id} name={item.name} />
+						))}
+					</ul>
+				</>
+			)}
 		</>
 	);
 }
