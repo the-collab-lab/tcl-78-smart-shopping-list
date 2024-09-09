@@ -43,21 +43,17 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 
 	// old code from here
 	const handleChecked = () => {
-		// Handle checkbox change
-		const newCheckedStatus = !isChecked;
-		// Log checkbox change
-		console.log(
-			`${name} checkbox clicked. New checked status:`,
-			newCheckedStatus,
-		);
-
-		setIsChecked(newCheckedStatus);
-		onCheck(id, newCheckedStatus);
+		onCheck(id);
 	};
 	return (
 		<li className="ListItem">
 			<label>
-				<input type="checkbox" checked={isChecked} onChange={handleChecked} />
+				<input
+					type="checkbox"
+					checked={isChecked}
+					onChange={handleChecked}
+					disabled={isChecked}
+				/>
 				{name}
 			</label>
 		</li>
