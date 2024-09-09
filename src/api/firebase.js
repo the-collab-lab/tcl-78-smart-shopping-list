@@ -182,12 +182,30 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 	}
 }
 
-export async function updateItem() {
+export async function updateItem(
+	listPath,
+	itemId,
+	{ dateLastPurchased, totalPurchases },
+) {
 	/**
 	 * TODO: Fill this out so that it uses the correct Firestore function
 	 * to update an existing item. You'll need to figure out what arguments
 	 * this function must accept!
 	 */
+
+	try {
+		// Get a reference to the specific item document in Firestore
+		const itemRef = doc(db, listPath, 'items', itemId);
+
+		await updateDoc(itemRef, {
+			dateLastPurchased: dateLastPurchased || new Date(), // Use the provided date or the current date
+			// totalPurchases need to be incremented every time the checkbox is ticked off
+			totalPurchases: totalPurchases, // Increment totalPurchases or set it to 1 if undefined
+			// dateNextPurchased will be addressed in the future
+		});
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 export async function deleteItem() {

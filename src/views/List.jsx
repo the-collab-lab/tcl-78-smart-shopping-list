@@ -1,9 +1,13 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
+import { updateItem } from '../api/firebase';
+import { getFutureDate } from '../utils';
 import { Link } from 'react-router-dom';
 
-export function List({ data, lists }) {
+export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
+	// Log filtered data
+	console.log('Rendering List with data:', data);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -18,12 +22,30 @@ export function List({ data, lists }) {
 		item.name.toLowerCase().includes(searchItem.toLocaleLowerCase()),
 	);
 
+	const handleCheck = async (itemId) => {
+		const item = data.find((item) => item.id === itemId);
+		const currentTime = new Date();
+
+		const newTotalPurchases = (item.totalPurchases || 0) + 1;
+
+		await updateItem(listPath, itemId, {
+			dateLastPurchased: currentTime,
+			totalPurchases: newTotalPurchases,
+		});
+
+		setTimeout(async () => {
+			await updateItem(listPath, itemId, {
+				dateLastPurchased: null,
+				totalPurchases: newTotalPurchases,
+			});
+		}, getFutureDate);
+	};
+
 	return (
 		<>
 			<p>
 				Hello from the <code>/list</code> page!
 			</p>
-
 			{lists.length === 0 && (
 				<p>
 					It looks like you don&apos;t have any shopping lists yet. Head to the{' '}
@@ -39,7 +61,6 @@ export function List({ data, lists }) {
 					shopping list!
 				</p>
 			)}
-
 			{lists.length > 0 && data.length > 0 && (
 				<>
 					<form onSubmit={handleSearch}>
@@ -47,7 +68,7 @@ export function List({ data, lists }) {
 							<label htmlFor="search-item-in-list"> Search items:</label>
 							<input
 								onChange={handleSearch}
-								type="search"
+								type="text"
 								id="search-item-in-list"
 								value={searchItem}
 								placeholder="Search item..."
@@ -57,19 +78,31 @@ export function List({ data, lists }) {
 									x
 								</button>
 							)}
-							{searchItem && (
-								<ul>
-									{filterItems.map((item) => (
-										<ListItem key={item.id} name={item.name} />
-									))}
-								</ul>
-							)}
 						</div>
 					</form>
+					{searchItem && (
+						<ul>
+							{filterItems.map((item) => (
+								<ListItem
+									key={item.id}
+									id={item.id}
+									name={item.name}
+									dateLastPurchased={item.dateLastPurchased}
+									onCheck={handleCheck}
+								/>
+							))}
+						</ul>
+					)}
 
 					<ul>
 						{data.map((item) => (
-							<ListItem key={item.id} name={item.name} />
+							<ListItem
+								key={item.id}
+								name={item.name}
+								id={item.id}
+								dateLastPurchased={item.dateLastPurchased}
+								onCheck={handleCheck}
+							/>
 						))}
 					</ul>
 				</>
