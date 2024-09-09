@@ -57,7 +57,7 @@ export function App() {
 					/>
 					<Route
 						path="/list"
-						element={<List data={data} listPath={listPath} />}
+						element={<List data={data} lists={lists} listPath={listPath} />}
 					/>
 					<Route
 						path="/manage-list"
