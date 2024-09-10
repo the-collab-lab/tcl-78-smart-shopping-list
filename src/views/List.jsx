@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
 	// Log filtered data
-	console.log('Rendering List with data:', data);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -38,6 +37,7 @@ export function List({ data, listPath, lists }) {
 				dateLastPurchased: null,
 				totalPurchases: newTotalPurchases,
 			});
+			// Up for review - does it need to be here?
 		}, getFutureDate);
 	};
 
