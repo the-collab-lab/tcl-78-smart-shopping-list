@@ -21,14 +21,16 @@ export function List({ data, listPath, lists }) {
 		item.name.toLowerCase().includes(searchItem.toLocaleLowerCase()),
 	);
 
-	const handleCheck = async (itemId) => {
+	const handleCheck = async (itemData) => {
+		console.log(itemData);
+		let itemId = itemData.id;
 		const item = data.find((item) => item.id === itemId);
 		const currentTime = new Date();
 
 		const newTotalPurchases = (item.totalPurchases || 0) + 1;
 
 		await updateItem(listPath, itemId, {
-			dateLastPurchased: currentTime,
+			dateLastPurchased: itemData.dateLastPurchased,
 			totalPurchases: newTotalPurchases,
 		});
 
@@ -88,7 +90,7 @@ export function List({ data, listPath, lists }) {
 									id={item.id}
 									name={item.name}
 									dateLastPurchased={item.dateLastPurchased}
-									onCheck={handleCheck}
+									onCheck={() => handleCheck(item)}
 								/>
 							))}
 						</ul>
@@ -101,7 +103,7 @@ export function List({ data, listPath, lists }) {
 								name={item.name}
 								id={item.id}
 								dateLastPurchased={item.dateLastPurchased}
-								onCheck={handleCheck}
+								onCheck={() => handleCheck(item)}
 							/>
 						))}
 					</ul>

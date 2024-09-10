@@ -199,7 +199,7 @@ export async function updateItem(
 		const itemRef = doc(db, listPath, 'items', itemId);
 
 		await updateDoc(itemRef, {
-			dateLastPurchased: dateLastPurchased || new Date(), // Use the provided date or the current date
+			dateLastPurchased: new Date(), // Use the provided date or the current date
 			totalPurchases: totalPurchases, // Increment totalPurchases or set it to 1 if undefined
 			// dateNextPurchased will be addressed in the future
 		});
