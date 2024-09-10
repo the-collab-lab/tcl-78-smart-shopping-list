@@ -20,7 +20,7 @@ export function getFutureDate(offset) {
  * @returns {number}
  */
 export function getDaysBetweenDates(lastPurchase, nextPurchase) {
-	const lastDateInMS = lastPurchase.toDate().geTime();
+	const lastDateInMS = lastPurchase.toDate().getTime();
 	const nextDateInMS = nextPurchase.toDate().getTime();
 	return (nextDateInMS - lastDateInMS) / ONE_DAY_IN_MILLISECONDS;
 }
