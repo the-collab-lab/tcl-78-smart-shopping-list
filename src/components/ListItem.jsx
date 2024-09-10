@@ -12,7 +12,7 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 		const checkStatus = () => {
 			if (dateLastPurchased) {
 				// If dateLastPurchased is a Firestore _Timestamp, convert it to a JavaScript Date
-				const purchaseDate = dateLastPurchased.toDate
+				const purchaseDate = dateLastPurchased.toDate()
 					? dateLastPurchased.toDate()
 					: new Date(dateLastPurchased);
 				const timeSinceLastPurchase = new Date() - purchaseDate;
