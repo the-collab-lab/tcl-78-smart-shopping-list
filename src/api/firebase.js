@@ -199,7 +199,6 @@ export async function updateItem(
 
 		await updateDoc(itemRef, {
 			dateLastPurchased: dateLastPurchased || new Date(), // Use the provided date or the current date
-			// totalPurchases need to be incremented every time the checkbox is ticked off
 			totalPurchases: totalPurchases, // Increment totalPurchases or set it to 1 if undefined
 			// dateNextPurchased will be addressed in the future
 		});

@@ -28,7 +28,7 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 		// initial check
 		checkStatus();
 	}, [dateLastPurchased]);
-	t;
+
 	const handleChecked = () => {
 		onCheck(id);
 	};
