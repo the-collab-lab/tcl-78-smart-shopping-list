@@ -22,6 +22,13 @@ export function ManageList({ listPath, userId, data }) {
 		});
 	};
 
+	const normalizedName = (name) => {
+		return name
+			.toLowerCase()
+			.replace(/[^\w\s]|_/g, '') // for punctuattion
+			.replace(/\s+/g, ''); // for spaces
+	};
+
 	const handleNewItemSubmit = async (e) => {
 		e.preventDefault();
 		const { name, nextPurchase } = formNewItem;
@@ -31,17 +38,13 @@ export function ManageList({ listPath, userId, data }) {
 			return;
 		}
 		try {
-			if (formNewItem.name === '') {
-				setMessageItem('List item cannot be empty');
-				console.log('List item cannot be empty');
-				return;
-			}
-
 			//Function to normalize the item name and convert to lowercase goes here
+
+			const normalizedItem = normalizedName(name);
 
 			// check if the item already exists
 			const itemExists = data.some(
-				(item) => item.name.toLowerCase() === formNewItem.name.toLowerCase(),
+				(item) => normalizedName(item.name) === normalizedItem,
 			);
 
 			// if the item already exists, show an error message
