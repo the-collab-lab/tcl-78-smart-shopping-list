@@ -183,13 +183,7 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 	}
 }
 
-export async function updateItem(
-	listPath,
-	itemId,
-
-	// can we delete dateLastPurchased?
-	{ dateLastPurchased, totalPurchases },
-) {
+export async function updateItem(listPath, itemId, { totalPurchases }) {
 	/**
 	 * TODO: Fill this out so that it uses the correct Firestore function
 	 * to update an existing item. You'll need to figure out what arguments
@@ -199,9 +193,9 @@ export async function updateItem(
 	try {
 		// Get a reference to the specific item document in Firestore
 		const itemRef = doc(db, listPath, 'items', itemId);
-		// get the properties needed for calculateEstimate (dateLastPurchased, dateNextPurchased) from the DB and do the calculations
 		const docSnap = await getDoc(itemRef);
 		const data = docSnap.data();
+
 		const lastPurchase = data.dateLastPurchased
 			? data.dateLastPurchased.toDate()
 			: data.dateCreated.toDate();
@@ -215,13 +209,10 @@ export async function updateItem(
 			data.totalPurchases,
 		);
 
-		console.log(prevEstimate, daysSinceLastPurch, data.totalPurchases);
-		console.log(newEstimate);
-
-		// use these values to update the item below using the updateDoc method
 		await updateDoc(itemRef, {
 			dateLastPurchased: new Date(),
 			totalPurchases: totalPurchases,
+			dateNextPurchased: getFutureDate(newEstimate),
 		});
 	} catch (error) {
 		console.log(error);

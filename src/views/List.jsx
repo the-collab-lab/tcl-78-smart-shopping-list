@@ -1,7 +1,6 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
 import { updateItem } from '../api/firebase';
-import { getFutureDate } from '../utils';
 import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
@@ -24,25 +23,10 @@ export function List({ data, listPath, lists }) {
 	const handleCheck = async (itemData) => {
 		let itemId = itemData.id;
 		const item = data.find((item) => item.id === itemId);
-		// can we delete currentTime?
-		const currentTime = new Date();
-
 		const newTotalPurchases = (item.totalPurchases || 0) + 1;
-
 		await updateItem(listPath, itemId, {
-			// can we delete dateLastPurchased?
-			dateLastPurchased: itemData.dateLastPurchased,
 			totalPurchases: newTotalPurchases,
 		});
-
-		setTimeout(async () => {
-			await updateItem(listPath, itemId, {
-				// can we delete dateLastPurchased?
-				dateLastPurchased: null,
-				totalPurchases: newTotalPurchases,
-			});
-			// does this do anything?
-		}, getFutureDate);
 	};
 
 	return (
