@@ -22,13 +22,6 @@ export function ManageList({ listPath, userId, data }) {
 		});
 	};
 
-	const normalizedName = (name) => {
-		return name
-			.toLowerCase()
-			.replace(/[^\w\s]|_/g, '') // for punctuattion
-			.replace(/\s+/g, ''); // for spaces
-	};
-
 	const handleNewItemSubmit = async (e) => {
 		e.preventDefault();
 		const { name, nextPurchase } = formNewItem;
@@ -39,18 +32,21 @@ export function ManageList({ listPath, userId, data }) {
 		}
 		try {
 			//Function to normalize the item name and convert to lowercase goes here
-
-			const normalizedItem = normalizedName(name);
+			const normalizedName = (name) => {
+				return name
+					.toLowerCase()
+					.replace(/[^\w\s]|_/g, '') // for punctuattion
+					.replace(/\s+/g, ''); // for spaces
+			};
 
 			// check if the item already exists
 			const itemExists = data.some(
-				(item) => normalizedName(item.name) === normalizedItem,
+				(item) => normalizedName(item.name) === normalizedName(name),
 			);
 
 			// if the item already exists, show an error message
 			if (itemExists) {
-				setMessageItem(`${formNewItem.name} is already in the list`);
-				console.log(formNewItem.name, 'is already in the list');
+				setMessageItem(`${normalizedName(name)} is already in the list`);
 				return;
 			}
 			// if the item does not exist, add it to the list

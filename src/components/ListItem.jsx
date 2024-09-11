@@ -7,12 +7,6 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 
 	const [isChecked, setIsChecked] = useState(false);
 
-	// to see if `dateLastPurchased` and `isChecked` are working
-	// console.log(`Rendering ListItem for ${name}:`, {
-	// 	dateLastPurchased,
-	// 	isChecked,
-	// });
-
 	// Update `isChecked` based on the `dateLastPurchased` value
 
 	useEffect(() => {
@@ -25,14 +19,8 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 				const timeSinceLastPurchase = new Date() - purchaseDate;
 				const hasBeenPurchasedRecently =
 					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
-
-				// Log check status
-				// console.log(
-				// 	`${name} was last purchased ${timeSinceLastPurchase} ms ago.`,
-				// );
 				setIsChecked(hasBeenPurchasedRecently);
 			} else {
-				// console.log(`${name} has never been purchased.`);
 				setIsChecked(false);
 			}
 		};
@@ -41,10 +29,10 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 		checkStatus();
 	}, [dateLastPurchased]);
 
-	// old code from here
 	const handleChecked = () => {
 		onCheck(id);
 	};
+
 	return (
 		<li className="ListItem">
 			<label>

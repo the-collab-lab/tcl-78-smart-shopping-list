@@ -29,7 +29,6 @@ export function Home({ data, setListPath, userId, userEmail }) {
 			setMessage('Failed to create list. Please try again!');
 		}
 	};
-	// console.log(data.length);
 
 	return (
 		<div className="Home">
