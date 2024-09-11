@@ -13,8 +13,6 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 			if (dateLastPurchased) {
 				// If dateLastPurchased is a Firestore _Timestamp, convert it to a JavaScript Date
 				const purchaseDate = dateLastPurchased.toDate();
-				// ? dateLastPurchased.toDate()
-				// : new Date(dateLastPurchased);
 				const timeSinceLastPurchase = new Date() - purchaseDate;
 				const hasBeenPurchasedRecently =
 					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
