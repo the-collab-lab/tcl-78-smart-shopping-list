@@ -8,10 +8,10 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 	const [isChecked, setIsChecked] = useState(false);
 
 	// to see if `dateLastPurchased` and `isChecked` are working
-	console.log(`Rendering ListItem for ${name}:`, {
-		dateLastPurchased,
-		isChecked,
-	});
+	// console.log(`Rendering ListItem for ${name}:`, {
+	// 	dateLastPurchased,
+	// 	isChecked,
+	// });
 
 	// Update `isChecked` based on the `dateLastPurchased` value
 
@@ -27,12 +27,12 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
 
 				// Log check status
-				console.log(
-					`${name} was last purchased ${timeSinceLastPurchase} ms ago.`,
-				);
+				// console.log(
+				// 	`${name} was last purchased ${timeSinceLastPurchase} ms ago.`,
+				// );
 				setIsChecked(hasBeenPurchasedRecently);
 			} else {
-				console.log(`${name} has never been purchased.`);
+				// console.log(`${name} has never been purchased.`);
 				setIsChecked(false);
 			}
 		};

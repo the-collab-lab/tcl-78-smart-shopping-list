@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { addItem } from '../api';
 import { shareList } from '../api/firebase';
 
-export function ManageList({ listPath, userId }) {
+export function ManageList({ listPath, userId, data }) {
 	const [formNewItem, setFormNewItem] = useState({
 		name: '',
 		nextPurchase: 0,
@@ -31,6 +31,18 @@ export function ManageList({ listPath, userId }) {
 			return;
 		}
 		try {
+			// check if the item already exists
+			const itemExists = data.some(
+				(item) => item.name.toLowerCase() === formNewItem.name.toLowerCase(),
+			);
+
+			// if the item already exists, show an error message
+			if (itemExists) {
+				setMessageItem(`${formNewItem.name} is already in the list`);
+				console.log(formNewItem.name, 'is already in the list');
+				return;
+			}
+			// if the item does not exist, add it to the list
 			await addItem(listPath, {
 				itemName: name,
 				daysUntilNextPurchase: nextPurchase,
