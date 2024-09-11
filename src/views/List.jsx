@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
-	// Log filtered data
 
 	const handleSearch = (e) => {
 		e.preventDefault();

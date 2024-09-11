@@ -7,7 +7,7 @@ import { createList } from '../api/firebase';
 export function Home({ data, setListPath, userId, userEmail }) {
 	const [listName, setListName] = useState('');
 	const [message, setMessage] = useState('');
-	const navigate = useNavigate(); //to call redirected to the List view
+	const navigate = useNavigate();
 
 	const handleCreateListButton = async (e) => {
 		e.preventDefault();
@@ -22,9 +22,8 @@ export function Home({ data, setListPath, userId, userEmail }) {
 
 			const createListPath = `${userId}/${listName}}`;
 			setListPath(createListPath);
-			navigate('/list'); //redirect to the list view
+			navigate('/list');
 		} catch (error) {
-			//Logging and error messages if list is not created
 			console.error('error creating a list', error);
 			setMessage('Failed to create list. Please try again!');
 		}

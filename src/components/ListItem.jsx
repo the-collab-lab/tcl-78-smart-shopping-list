@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
 
-export function ListItem({ name, id, dateLastPurchased, onCheck }) {
-	// State to track whether the item is checked
-
+export function ListItem({ name, dateLastPurchased, onCheck }) {
 	const [isChecked, setIsChecked] = useState(false);
-
-	// Update `isChecked` based on the `dateLastPurchased` value
 
 	useEffect(() => {
 		const checkStatus = () => {
@@ -14,7 +10,7 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 				const purchaseDate = dateLastPurchased.toDate();
 				const timeSinceLastPurchase = new Date() - purchaseDate;
 				const hasBeenPurchasedRecently =
-					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
+					timeSinceLastPurchase < 24 * 60 * 60 * 1000;
 
 				setIsChecked(hasBeenPurchasedRecently);
 			} else {
@@ -22,7 +18,6 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 			}
 		};
 
-		// initial check
 		checkStatus();
 	}, [dateLastPurchased]);
 
