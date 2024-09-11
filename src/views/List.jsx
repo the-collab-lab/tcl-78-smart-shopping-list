@@ -24,21 +24,24 @@ export function List({ data, listPath, lists }) {
 	const handleCheck = async (itemData) => {
 		let itemId = itemData.id;
 		const item = data.find((item) => item.id === itemId);
+		// can we delete currentTime?
 		const currentTime = new Date();
 
 		const newTotalPurchases = (item.totalPurchases || 0) + 1;
 
 		await updateItem(listPath, itemId, {
+			// can we delete dateLastPurchased?
 			dateLastPurchased: itemData.dateLastPurchased,
 			totalPurchases: newTotalPurchases,
 		});
 
 		setTimeout(async () => {
 			await updateItem(listPath, itemId, {
+				// can we delete dateLastPurchased?
 				dateLastPurchased: null,
 				totalPurchases: newTotalPurchases,
 			});
-			// Up for review - does it need to be here?
+			// does this do anything?
 		}, getFutureDate);
 	};
 

@@ -186,6 +186,8 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 export async function updateItem(
 	listPath,
 	itemId,
+
+	// can we delete dateLastPurchased?
 	{ dateLastPurchased, totalPurchases },
 ) {
 	/**
