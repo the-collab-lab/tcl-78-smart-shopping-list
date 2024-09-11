@@ -22,7 +22,6 @@ export function List({ data, listPath, lists }) {
 	);
 
 	const handleCheck = async (itemData) => {
-		console.log(itemData);
 		let itemId = itemData.id;
 		const item = data.find((item) => item.id === itemId);
 		const currentTime = new Date();

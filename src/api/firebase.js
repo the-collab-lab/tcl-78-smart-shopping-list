@@ -197,11 +197,29 @@ export async function updateItem(
 	try {
 		// Get a reference to the specific item document in Firestore
 		const itemRef = doc(db, listPath, 'items', itemId);
+		// get the properties needed for calculateEstimate (dateLastPurchased, dateNextPurchased) from the DB and do the calculations
+		const docSnap = await getDoc(itemRef);
+		const data = docSnap.data();
+		const lastPurchase = data.dateLastPurchased
+			? data.dateLastPurchased.toDate()
+			: data.dateCreated.toDate();
+		const nextPurchase = data.dateNextPurchased.toDate();
 
+		const prevEstimate = getDaysBetweenDates(lastPurchase, nextPurchase);
+		const daysSinceLastPurch = getDaysBetweenDates(lastPurchase, new Date());
+		const newEstimate = calculateEstimate(
+			prevEstimate,
+			daysSinceLastPurch,
+			data.totalPurchases,
+		);
+
+		console.log(prevEstimate, daysSinceLastPurch, data.totalPurchases);
+		console.log(newEstimate);
+
+		// use these values to update the item below using the updateDoc method
 		await updateDoc(itemRef, {
-			dateLastPurchased: new Date(), // Use the provided date or the current date
-			totalPurchases: totalPurchases, // Increment totalPurchases or set it to 1 if undefined
-			// dateNextPurchased will be addressed in the future
+			dateLastPurchased: new Date(),
+			totalPurchases: totalPurchases,
 		});
 	} catch (error) {
 		console.log(error);
