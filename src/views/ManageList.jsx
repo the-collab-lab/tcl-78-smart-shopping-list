@@ -31,6 +31,14 @@ export function ManageList({ listPath, userId, data }) {
 			return;
 		}
 		try {
+			if (formNewItem.name === '') {
+				setMessageItem('List item cannot be empty');
+				console.log('List item cannot be empty');
+				return;
+			}
+
+			//Function to normalize the item name and convert to lowercase goes here
+
 			// check if the item already exists
 			const itemExists = data.some(
 				(item) => item.name.toLowerCase() === formNewItem.name.toLowerCase(),
