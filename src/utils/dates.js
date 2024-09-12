@@ -13,8 +13,8 @@ export function getFutureDate(offset) {
 
 /**
  * Get a difference of days between two dates.
- * @param {Timestamp} lastPurchase
- * @param {Timestamp} nextPurchase
+ * @param {Date} lastPurchase
+ * @param {Date} nextPurchase
  * @returns {number}
  */
 export function getDaysBetweenDates(lastDate, nextDate) {
