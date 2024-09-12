@@ -35,7 +35,7 @@ export function ManageList({ listPath, userId, data }) {
 			const normalizedName = (name) => {
 				return name
 					.toLowerCase()
-					.replace(/[^\w\s]|_/g, '') // for punctuattion
+					.replace(/[^\w\s]|_/g, '') // for punctuation
 					.replace(/\s+/g, ''); // for spaces
 			};
 
