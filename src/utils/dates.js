@@ -1,5 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
-
 const ONE_DAY_IN_MILLISECONDS = 86400000;
 
 /**
@@ -20,7 +18,5 @@ export function getFutureDate(offset) {
  * @returns {number}
  */
 export function getDaysBetweenDates(lastDate, nextDate) {
-	// const lastDateInMS = lastPurchase.toDate().getTime();
-	// const nextDateInMS = nextPurchase.toDate().getTime();
 	return Math.abs(nextDate - lastDate) / ONE_DAY_IN_MILLISECONDS;
 }
