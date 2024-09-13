@@ -10,3 +10,13 @@ const ONE_DAY_IN_MILLISECONDS = 86400000;
 export function getFutureDate(offset) {
 	return new Date(Date.now() + offset * ONE_DAY_IN_MILLISECONDS);
 }
+
+/**
+ * Get a difference of days between two dates.
+ * @param {Date} lastPurchase
+ * @param {Date} nextPurchase
+ * @returns {number}
+ */
+export function getDaysBetweenDates(lastDate, nextDate) {
+	return Math.abs(nextDate - lastDate) / ONE_DAY_IN_MILLISECONDS;
+}
