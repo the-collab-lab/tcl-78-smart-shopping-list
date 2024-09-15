@@ -1,7 +1,6 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
 import { updateItem } from '../api/firebase';
-import { getFutureDate } from '../utils';
 import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
@@ -20,23 +19,13 @@ export function List({ data, listPath, lists }) {
 		item.name.toLowerCase().includes(searchItem.toLocaleLowerCase()),
 	);
 
-	const handleCheck = async (itemId) => {
+	const handleCheck = async (itemData) => {
+		let itemId = itemData.id;
 		const item = data.find((item) => item.id === itemId);
-		const currentTime = new Date();
-
 		const newTotalPurchases = (item.totalPurchases || 0) + 1;
-
 		await updateItem(listPath, itemId, {
-			dateLastPurchased: currentTime,
 			totalPurchases: newTotalPurchases,
 		});
-
-		setTimeout(async () => {
-			await updateItem(listPath, itemId, {
-				dateLastPurchased: null,
-				totalPurchases: newTotalPurchases,
-			});
-		}, getFutureDate);
 	};
 
 	return (
@@ -86,7 +75,7 @@ export function List({ data, listPath, lists }) {
 									id={item.id}
 									name={item.name}
 									dateLastPurchased={item.dateLastPurchased}
-									onCheck={handleCheck}
+									onCheck={() => handleCheck(item)}
 								/>
 							))}
 						</ul>
@@ -99,7 +88,7 @@ export function List({ data, listPath, lists }) {
 								name={item.name}
 								id={item.id}
 								dateLastPurchased={item.dateLastPurchased}
-								onCheck={handleCheck}
+								onCheck={() => handleCheck(item)}
 							/>
 						))}
 					</ul>

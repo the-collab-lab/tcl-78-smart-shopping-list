@@ -1,31 +1,24 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
-import { getFutureDate } from '../utils';
 
-export function ListItem({ name, id, dateLastPurchased, onCheck }) {
-	// State to track whether the item is checked
-
+export function ListItem({ name, dateLastPurchased, onCheck }) {
 	const [isChecked, setIsChecked] = useState(false);
 
-	// Update `isChecked` based on the `dateLastPurchased` value
-
+// Update `isChecked` based on the `dateLastPurchased` value
 	useEffect(() => {
 		const checkStatus = () => {
 			if (dateLastPurchased) {
-				// If dateLastPurchased is a Firestore _Timestamp, convert it to a JavaScript Date
-				const purchaseDate = dateLastPurchased.toDate
-					? dateLastPurchased.toDate()
-					: new Date(dateLastPurchased);
+				const purchaseDate = dateLastPurchased.toDate();
 				const timeSinceLastPurchase = new Date() - purchaseDate;
 				const hasBeenPurchasedRecently =
-					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
+
+				timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
 				setIsChecked(hasBeenPurchasedRecently);
 			} else {
 				setIsChecked(false);
 			}
 		};
 
-		// initial check
 		checkStatus();
 	}, [dateLastPurchased]);
 
@@ -39,7 +32,7 @@ export function ListItem({ name, id, dateLastPurchased, onCheck }) {
 				<input
 					type="checkbox"
 					checked={isChecked}
-					onChange={handleChecked}
+					onChange={onCheck}
 					disabled={isChecked}
 				/>
 				{name}

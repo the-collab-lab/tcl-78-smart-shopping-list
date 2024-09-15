@@ -10,7 +10,8 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
  * A custom hook that subscribes to the user's shopping lists in our Firestore
@@ -182,11 +183,7 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 	}
 }
 
-export async function updateItem(
-	listPath,
-	itemId,
-	{ dateLastPurchased, totalPurchases },
-) {
+export async function updateItem(listPath, itemId, { totalPurchases }) {
 	/**
 	 * TODO: Fill this out so that it uses the correct Firestore function
 	 * to update an existing item. You'll need to figure out what arguments
@@ -196,12 +193,26 @@ export async function updateItem(
 	try {
 		// Get a reference to the specific item document in Firestore
 		const itemRef = doc(db, listPath, 'items', itemId);
+		const docSnap = await getDoc(itemRef);
+		const data = docSnap.data();
+
+		const lastPurchase = data.dateLastPurchased
+			? data.dateLastPurchased.toDate()
+			: data.dateCreated.toDate();
+		const nextPurchase = data.dateNextPurchased.toDate();
+
+		const prevEstimate = getDaysBetweenDates(lastPurchase, nextPurchase);
+		const daysSinceLastPurch = getDaysBetweenDates(lastPurchase, new Date());
+		const newEstimate = calculateEstimate(
+			prevEstimate,
+			daysSinceLastPurch,
+			data.totalPurchases,
+		);
 
 		await updateDoc(itemRef, {
-			dateLastPurchased: dateLastPurchased || new Date(), // Use the provided date or the current date
-			// totalPurchases need to be incremented every time the checkbox is ticked off
-			totalPurchases: totalPurchases, // Increment totalPurchases or set it to 1 if undefined
-			// dateNextPurchased will be addressed in the future
+			dateLastPurchased: new Date(),
+			totalPurchases: totalPurchases,
+			dateNextPurchased: getFutureDate(newEstimate),
 		});
 	} catch (error) {
 		console.log(error);

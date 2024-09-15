@@ -1,5 +1,4 @@
 import { Outlet, NavLink } from 'react-router-dom';
-
 import './Layout.css';
 import { auth } from '../api/config.js';
 import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
