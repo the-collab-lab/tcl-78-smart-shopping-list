@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { addItem } from '../api';
 import { shareList } from '../api/firebase';
 
-export function ManageList({ listPath, userId }) {
+export function ManageList({ listPath, userId, data }) {
 	const [formNewItem, setFormNewItem] = useState({
 		name: '',
 		nextPurchase: 0,
@@ -31,6 +31,25 @@ export function ManageList({ listPath, userId }) {
 			return;
 		}
 		try {
+			//Function to normalize the item name and convert to lowercase goes here
+			const normalizedName = (name) => {
+				return name
+					.toLowerCase()
+					.replace(/[^\w\s]|_/g, '') // for punctuation
+					.replace(/\s+/g, ''); // for spaces
+			};
+
+			// check if the item already exists
+			const itemExists = data.some(
+				(item) => normalizedName(item.name) === normalizedName(name),
+			);
+
+			// if the item already exists, show an error message
+			if (itemExists) {
+				setMessageItem(`${normalizedName(name)} is already in the list`);
+				return;
+			}
+			// if the item does not exist, add it to the list
 			await addItem(listPath, {
 				itemName: name,
 				daysUntilNextPurchase: nextPurchase,
