@@ -21,9 +21,9 @@ export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 		checkStatus();
 	}, [dateLastPurchased]);
 
-	const handleDelete = () => {
+	const handleDeleteButton = () => {
 		if (window.confirm(`Do you really want to delete ${name}?`)) {
-			onDelete(name);
+			onDelete();
 		}
 	};
 
@@ -38,7 +38,7 @@ export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 				/>
 				{name}
 			</label>
-			<button onClick={handleDelete}>delete</button>
+			<button onClick={handleDeleteButton}>delete</button>
 		</li>
 	);
 }

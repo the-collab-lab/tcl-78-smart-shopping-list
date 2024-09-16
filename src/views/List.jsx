@@ -1,6 +1,6 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
-import { updateItem } from '../api/firebase';
+import { updateItem, deleteItem } from '../api/firebase';
 import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
@@ -26,6 +26,14 @@ export function List({ data, listPath, lists }) {
 		await updateItem(listPath, itemId, {
 			totalPurchases: newTotalPurchases,
 		});
+	};
+
+	const handleDelete = async (itemId) => {
+		try {
+			await deleteItem(listPath, itemId);
+		} catch (error) {
+			console.error('Failed to delete the item', error);
+		}
 	};
 
 	return (
@@ -76,6 +84,7 @@ export function List({ data, listPath, lists }) {
 									name={item.name}
 									dateLastPurchased={item.dateLastPurchased}
 									onCheck={() => handleCheck(item)}
+									onDelete={() => handleDelete(item.id)}
 								/>
 							))}
 						</ul>
@@ -89,6 +98,7 @@ export function List({ data, listPath, lists }) {
 								id={item.id}
 								dateLastPurchased={item.dateLastPurchased}
 								onCheck={() => handleCheck(item)}
+								onDelete={() => handleDelete(item.id)}
 							/>
 						))}
 					</ul>
