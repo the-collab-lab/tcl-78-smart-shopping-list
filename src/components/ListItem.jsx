@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
 
-export function ListItem({ name, dateLastPurchased, onCheck }) {
+export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 	const [isChecked, setIsChecked] = useState(false);
 
-// Update `isChecked` based on the `dateLastPurchased` value
+	// Update `isChecked` based on the `dateLastPurchased` value
 	useEffect(() => {
 		const checkStatus = () => {
 			if (dateLastPurchased) {
 				const purchaseDate = dateLastPurchased.toDate();
 				const timeSinceLastPurchase = new Date() - purchaseDate;
 				const hasBeenPurchasedRecently =
-
-				timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
+					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
 				setIsChecked(hasBeenPurchasedRecently);
 			} else {
 				setIsChecked(false);
@@ -22,8 +21,10 @@ export function ListItem({ name, dateLastPurchased, onCheck }) {
 		checkStatus();
 	}, [dateLastPurchased]);
 
-	const handleChecked = () => {
-		onCheck(id);
+	const handleDelete = () => {
+		if (window.confirm(`Do you really want to delete ${name}?`)) {
+			onDelete(name);
+		}
 	};
 
 	return (
@@ -37,6 +38,7 @@ export function ListItem({ name, dateLastPurchased, onCheck }) {
 				/>
 				{name}
 			</label>
+			<button onClick={handleDelete}>delete</button>
 		</li>
 	);
 }
