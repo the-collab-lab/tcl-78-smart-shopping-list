@@ -226,3 +226,15 @@ export async function deleteItem() {
 	 * this function must accept!
 	 */
 }
+
+export async function comparePurchaseUrgency(listPath, itemId) {
+	try {
+		const itemRef = doc(db, listPath, 'items', itemId);
+		const docSnap = await getDoc(itemRef);
+		const data = docSnap.data();
+
+		const nextPurchase = data.dateNextPurchased.toDate();
+
+		const futureEstimate = getDaysBetweenDates(new Date(), nextPurchase);
+	} catch (error) {}
+}
