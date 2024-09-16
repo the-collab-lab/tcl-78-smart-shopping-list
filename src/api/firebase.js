@@ -236,5 +236,7 @@ export async function comparePurchaseUrgency(listPath, itemId) {
 		const nextPurchase = data.dateNextPurchased.toDate();
 
 		const futureEstimate = getDaysBetweenDates(new Date(), nextPurchase);
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+	}
 }
