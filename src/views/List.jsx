@@ -1,6 +1,6 @@
 import { ListItem } from '../components';
-import { useState } from 'react';
-import { updateItem } from '../api/firebase';
+import { useEffect, useState } from 'react';
+import { comparePurchaseUrgency, updateItem } from '../api/firebase';
 import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
@@ -27,6 +27,50 @@ export function List({ data, listPath, lists }) {
 			totalPurchases: newTotalPurchases,
 		});
 	};
+
+	//Code segment to sort items using the compareUrgency function from firebase.js
+	const [items, setItems] = useState([]); //to store the sorted items for display
+
+	useEffect(() => {
+		const fetchItems = async () => {
+			//function to get items from the data prop and pass the Urgency function to each item
+			try {
+				const sortedItems = await Promise.all(
+					//use Promise.all to wait for all items to be sorted
+					data.map(async (item) => {
+						const itemId = item.id;
+						const sortedItem = await comparePurchaseUrgency(listPath, itemId); //pass the listPath and itemId to the comparePurchaseUrgency function
+						return sortedItem; //return the sorted item
+					}),
+				);
+
+				//sort the items based on urgency, futureEstimate, and name
+				sortedItems.sort((a, b) => {
+					//if urgency is inactive, sort it to the bottom
+					if (a.urgency === 'inactive' && b.urgency !== 'inactive') {
+						return 1;
+					}
+					//if urgency is not inactive, sort it to the top
+					if (a.urgency !== 'inactive' && b.urgency === 'inactive') {
+						return -1;
+					}
+					//if urgency is the same, sort based on futureEstimate(days until next purchase)
+					if (a.futureEstimate !== b.futureEstimate) {
+						return a.futureEstimate - b.futureEstimate;
+					}
+					//if futureEstimate is the same, sort based on name
+					return a.name.localeCompare(b.name);
+				});
+
+				//set the sorted items to the items state
+				setItems(sortedItems);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		//call the fetchItems function
+		fetchItems();
+	}, [data, listPath]);
 
 	return (
 		<>
@@ -94,6 +138,15 @@ export function List({ data, listPath, lists }) {
 					</ul>
 				</>
 			)}
+
+			{/* Display the sorted items */}
+			<ul>
+				{items.map((item, index) => (
+					<li key={index}>
+						{item.name} - {item.urgency} - {item.futureEstimate}
+					</li>
+				))}
+			</ul>
 		</>
 	);
 }
