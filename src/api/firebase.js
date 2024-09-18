@@ -13,7 +13,7 @@ import { db } from './config';
 import {
 	getFutureDate,
 	getDaysBetweenDates,
-	getDaysBetweenDates2,
+	getPurchaseUrgency,
 } from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
@@ -232,7 +232,6 @@ export async function deleteItem() {
 }
 
 export async function comparePurchaseUrgency(data) {
-	const inactiveItem = -1;
 	const buyKindOfSoon = 30;
 	const buySoon = 7;
 	const buyNotSoon = 60;
@@ -240,7 +239,7 @@ export async function comparePurchaseUrgency(data) {
 	const now = new Date();
 	data.map((item) => {
 		const urgencyIndex = Math.ceil(
-			getDaysBetweenDates2(now, item.dateNextPurchased.toDate()),
+			getDaysBetweenDates(now, item.dateNextPurchased.toDate()),
 		);
 
 		item.urgencyIndex = urgencyIndex;
@@ -252,9 +251,21 @@ export async function comparePurchaseUrgency(data) {
 			item.category = 'kind of soon';
 		} else if (urgencyIndex <= buyNotSoon) {
 			item.category = 'Not soon';
-		} else {
-			item.category = 'inactive';
 		}
+
+		data.map((item) => {
+			const lastPurchase = item.dateLastPurchased
+				? item.dateLastPurchased.toDate()
+				: item.dateCreated.toDate();
+
+			const inactiveIndex = Math.ceil(getPurchaseUrgency(lastPurchase, now));
+
+			item.inactiveIndex = inactiveIndex;
+
+			if (inactiveIndex >= 60) {
+				item.category = 'inactive';
+			}
+		});
 
 		return item;
 	});
