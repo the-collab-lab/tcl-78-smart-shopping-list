@@ -234,9 +234,9 @@ export async function comparePurchaseUrgency(data) {
 	const buyNotSoon = 30;
 
 	const now = new Date();
-	const futureEstimate = item.map((item) => {
+	const futureEstimate = data.map((item) => {
 		const daysUntilNextPurchase = getDaysBetweenDates(
-			item.dateNextPurchased.toDate(),
+			data.dateNextPurchased.toDate(),
 			now,
 		);
 		console.log(futureEstimate);
