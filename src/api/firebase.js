@@ -228,11 +228,19 @@ export async function deleteItem() {
 }
 
 export async function comparePurchaseUrgency(data) {
-	const inactiveItem = 60;
+	const inactiveItem = -60;
 	const buySoon = 7;
 	const kindOfSoon = 14;
 	const buyNotSoon = 30;
+
 	const now = new Date();
+	const futureEstimate = item.map((item) => {
+		const daysUntilNextPurchase = getDaysBetweenDates(
+			item.dateNextPurchased.toDate(),
+			now,
+		);
+		console.log(futureEstimate);
+	});
 
 	const futurePurchaseEstimate = data.sort((a, b) => {
 		//if urgency is inactive, sort it to the bottom
