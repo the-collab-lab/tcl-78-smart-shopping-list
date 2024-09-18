@@ -227,16 +227,29 @@ export async function deleteItem() {
 	 */
 }
 
-export async function comparePurchaseUrgency(listPath, itemId) {
-	try {
-		const itemRef = doc(db, listPath, 'items', itemId);
-		const docSnap = await getDoc(itemRef);
-		const data = docSnap.data();
+export async function comparePurchaseUrgency(data) {
+	const inactiveItem = 60;
+	const buySoon = 7;
+	const kindOfSoon = 14;
+	const buyNotSoon = 30;
+	const now = new Date();
 
-		const nextPurchase = data.dateNextPurchased.toDate();
+	const futurePurchaseEstimate = data.sort((a, b) => {
+		//if urgency is inactive, sort it to the bottom
+		if (a.urgency === 'inactive' && b.urgency !== 'inactive') {
+			return 1;
+		}
+		//if urgency is not inactive, sort it to the top
+		if (a.urgency !== 'inactive' && b.urgency === 'inactive') {
+			return -1;
+		}
+		//if urgency is the same, sort based on futureEstimate(days until next purchase)
+		if (a.futureEstimate !== b.futureEstimate) {
+			return a.futureEstimate - b.futureEstimate;
+		}
+		//if futureEstimate is the same, sort based on name
+		return a.name.localeCompare(b.name);
+	});
 
-		const futureEstimate = getDaysBetweenDates(new Date(), nextPurchase);
-	} catch (error) {
-		console.log(error);
-	}
+	return data;
 }

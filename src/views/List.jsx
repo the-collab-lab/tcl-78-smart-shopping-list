@@ -32,45 +32,11 @@ export function List({ data, listPath, lists }) {
 	const [items, setItems] = useState([]); //to store the sorted items for display
 
 	useEffect(() => {
-		const fetchItems = async () => {
-			//function to get items from the data prop and pass the Urgency function to each item
-			try {
-				const sortedItems = await Promise.all(
-					//use Promise.all to wait for all items to be sorted
-					data.map(async (item) => {
-						const itemId = item.id;
-						const sortedItem = await comparePurchaseUrgency(listPath, itemId); //pass the listPath and itemId to the comparePurchaseUrgency function
-						return sortedItem; //return the sorted item
-					}),
-				);
+		const sortedItems = comparePurchaseUrgency(data);
+		setItems(sortedItems);
+	}, [data]);
 
-				//sort the items based on urgency, futureEstimate, and name
-				sortedItems.sort((a, b) => {
-					//if urgency is inactive, sort it to the bottom
-					if (a.urgency === 'inactive' && b.urgency !== 'inactive') {
-						return 1;
-					}
-					//if urgency is not inactive, sort it to the top
-					if (a.urgency !== 'inactive' && b.urgency === 'inactive') {
-						return -1;
-					}
-					//if urgency is the same, sort based on futureEstimate(days until next purchase)
-					if (a.futureEstimate !== b.futureEstimate) {
-						return a.futureEstimate - b.futureEstimate;
-					}
-					//if futureEstimate is the same, sort based on name
-					return a.name.localeCompare(b.name);
-				});
-
-				//set the sorted items to the items state
-				setItems(sortedItems);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		//call the fetchItems function
-		fetchItems();
-	}, [data, listPath]);
+	console.log(items);
 
 	return (
 		<>
