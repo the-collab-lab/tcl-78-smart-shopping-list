@@ -44,6 +44,8 @@ export function List({ data, listPath, lists }) {
 		fetchItems();
 	}, [data]);
 
+	console.log(items);
+
 	return (
 		<>
 			<p>
@@ -111,14 +113,14 @@ export function List({ data, listPath, lists }) {
 				</>
 			)}
 
-			{/* Display the sorted items */}
+			{/* Display the sorted items
 			<ul>
-				{items.map((item, index) => (
+				{data.map((item, index) => (
 					<li key={index}>
 						{item.name} - {item.urgency} - {item.futureEstimate}
 					</li>
 				))}
-			</ul>
+			</ul> */}
 		</>
 	);
 }
