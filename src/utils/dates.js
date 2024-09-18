@@ -20,3 +20,7 @@ export function getFutureDate(offset) {
 export function getDaysBetweenDates(lastDate, nextDate) {
 	return Math.abs(nextDate - lastDate) / ONE_DAY_IN_MILLISECONDS;
 }
+//Does the same as above, but can return negative numbers(i.e, there's no absolute math function here)
+export function getDaysBetweenDates2(lastDate, nextDate) {
+	return (nextDate - lastDate) / ONE_DAY_IN_MILLISECONDS;
+}

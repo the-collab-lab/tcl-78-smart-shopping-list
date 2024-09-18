@@ -113,7 +113,7 @@ export function List({ data, listPath, lists }) {
 			<ul>
 				{items.map((item, index) => (
 					<li key={index}>
-						{item.name} - {item.category} - {item.urgencyIndex}
+						{item.name} - {item.category} __ {item.urgencyIndex} days
 					</li>
 				))}
 			</ul>

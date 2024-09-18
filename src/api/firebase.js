@@ -10,7 +10,11 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate, getDaysBetweenDates } from '../utils';
+import {
+	getFutureDate,
+	getDaysBetweenDates,
+	getDaysBetweenDates2,
+} from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
@@ -234,9 +238,9 @@ export async function comparePurchaseUrgency(data) {
 	const buyNotSoon = 60;
 
 	const now = new Date();
-	const newCategory = data.map((item) => {
+	data.map((item) => {
 		const urgencyIndex = Math.ceil(
-			getDaysBetweenDates(now, item.dateNextPurchased.toDate()),
+			getDaysBetweenDates2(now, item.dateNextPurchased.toDate()),
 		);
 
 		item.urgencyIndex = urgencyIndex;
@@ -256,11 +260,11 @@ export async function comparePurchaseUrgency(data) {
 	});
 
 	data.sort((a, b) => {
-		//if urgency is inactive, sort it to the bottom
+		//if urgency of a is inactive and b is not inactive, sort b ontop the top of a
 		if (a.category === 'inactive' && b.category !== 'inactive') {
 			return 1;
 		}
-		//if urgency is not inactive, sort it to the top
+		//if urgency of a is not inactive and b is inactive, sort a ontop of b
 		if (a.category !== 'inactive' && b.category === 'inactive') {
 			return -1;
 		}
