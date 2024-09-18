@@ -5,6 +5,21 @@ import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
+	const [items, setItems] = useState([]); //to store the sorted items for display
+
+	//Code segment to sort items using the compareUrgency function from firebase.js
+	useEffect(() => {
+		const fetchItems = async () => {
+			try {
+				const sortedItems = await comparePurchaseUrgency(data);
+				setItems(sortedItems);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchItems();
+	}, [data]);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -27,22 +42,6 @@ export function List({ data, listPath, lists }) {
 			totalPurchases: newTotalPurchases,
 		});
 	};
-
-	//Code segment to sort items using the compareUrgency function from firebase.js
-	const [items, setItems] = useState([]); //to store the sorted items for display
-
-	useEffect(() => {
-		const fetchItems = async () => {
-			try {
-				const sortedItems = await comparePurchaseUrgency(data);
-				setItems(sortedItems);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchItems();
-	}, [data]);
 
 	return (
 		<>

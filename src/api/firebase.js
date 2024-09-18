@@ -10,11 +10,7 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import {
-	getFutureDate,
-	getDaysBetweenDates,
-	getPurchaseUrgency,
-} from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
@@ -232,44 +228,40 @@ export async function deleteItem() {
 }
 
 export async function comparePurchaseUrgency(data) {
-	const buyKindOfSoon = 30;
-	const buySoon = 7;
-	const buyNotSoon = 60;
-
 	const now = new Date();
+	// Add urgencyIndex and inactiveIndex to each item to determine their category
+
 	data.map((item) => {
 		const urgencyIndex = Math.ceil(
-			getDaysBetweenDates(now, item.dateNextPurchased.toDate()),
+			getDaysBetweenDates(now, item.dateNextPurchased.toDate()), //takes the difference between the current date and the date the item is next purchased
 		);
 
+		// Get the last purchaseDate of item. If the item has never been purchased, use the date it was created
+		const lastPurchase = item.dateLastPurchased
+			? item.dateLastPurchased.toDate()
+			: item.dateCreated.toDate();
+
+		// Get the inactiveIndex of the item
+		const inactiveItem = getDaysBetweenDates(lastPurchase, now);
+		item.inactiveIndex = inactiveItem;
 		item.urgencyIndex = urgencyIndex;
-		if (urgencyIndex < 0) {
+
+		// Determine the category of the item based on the inactiveIndex first, then the urgencyIndex
+		if (inactiveItem > 60) {
+			item.category = 'inactive';
+		} else if (urgencyIndex < 0) {
 			item.category = 'Overdue';
-		} else if (urgencyIndex <= buySoon) {
+		} else if (urgencyIndex <= 7) {
 			item.category = 'soon';
-		} else if (urgencyIndex <= buyKindOfSoon) {
+		} else if (urgencyIndex <= 30) {
 			item.category = 'kind of soon';
-		} else if (urgencyIndex <= buyNotSoon) {
+		} else if (urgencyIndex <= 60) {
 			item.category = 'Not soon';
+		} else {
+			item.category = 'not accounted for';
 		}
-
-		data.map((item) => {
-			const lastPurchase = item.dateLastPurchased
-				? item.dateLastPurchased.toDate()
-				: item.dateCreated.toDate();
-
-			const inactiveIndex = Math.ceil(getPurchaseUrgency(lastPurchase, now));
-
-			item.inactiveIndex = inactiveIndex;
-
-			if (inactiveIndex >= 60) {
-				item.category = 'inactive';
-			}
-		});
-
 		return item;
 	});
-
 	data.sort((a, b) => {
 		//if urgency of a is inactive and b is not inactive, sort b ontop the top of a
 		if (a.category === 'inactive' && b.category !== 'inactive') {
@@ -286,6 +278,41 @@ export async function comparePurchaseUrgency(data) {
 		//if futureEstimate is the same, sort based on name
 		return a.name.localeCompare(b.name);
 	});
-
 	return data;
 }
+
+// export async function comparePurchaseUrgency(data) {
+// 	const now = new Date();
+// 	const urgencyIndex = data.map((item) => {
+// 		const daysBeforePurchase = getDaysBetweenDates(
+// 			item.dateNextPurchased.toDate(),
+// 			now,
+// 		);
+
+// 		item.daysBeforePurchase = daysBeforePurchase;
+
+// 		if (daysBeforePurchase < 60) {
+// 			item.category = 'inactive';
+// 		} else if (daysBeforePurchase >= 60 && daysBeforePurchase < 0) {
+// 			item.category = 'not soon';
+// 		} else if (daysBeforePurchase >= 0 && daysBeforePurchase <= 7) {
+// 			item.category = 'buy soon';
+// 		} else if (daysBeforePurchase > 7 && daysBeforePurchase <= 14) {
+// 			item.category = 'buy somewhat soon';
+// 		} else {
+// 			item.category = 'buy not so soon';
+// 		}
+
+// 		return item;
+// 	});
+
+// 	const sortedByDaysBeforePurchase = urgencyIndex.sort((itemA, itemB) => {
+// 		if (itemA.daysBeforePurchase === itemB.daysBeforePurchase) {
+// 			return itemA.name.localeCompare(itemB.name);
+// 		}
+// 	});
+
+// 	console.log(sortedByDaysBeforePurchase);
+
+// 	return sortedByDaysBeforePurchase;
+// }

@@ -18,9 +18,5 @@ export function getFutureDate(offset) {
  * @returns {number}
  */
 export function getDaysBetweenDates(lastDate, nextDate) {
-	return Math.abs(nextDate - lastDate) / ONE_DAY_IN_MILLISECONDS;
-}
-
-export function getPurchaseUrgency(lastDate, nextDate) {
-	return (nextDate - lastDate) / ONE_DAY_IN_MILLISECONDS;
+	return Math.ceil(nextDate - lastDate) / ONE_DAY_IN_MILLISECONDS;
 }
