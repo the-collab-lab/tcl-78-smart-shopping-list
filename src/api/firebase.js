@@ -228,26 +228,26 @@ export async function deleteItem() {
 }
 
 export async function comparePurchaseUrgency(data) {
-	const inactiveItem = -60;
-	const buyNotSoon = 30;
+	const inactiveItem = -1;
+	const buyKindOfSoon = 30;
 	const buySoon = 7;
-	const dateOfExpectedPurchase = 0;
+	const buyNotSoon = 60;
 
 	const now = new Date();
 	const newCategory = data.map((item) => {
-		const urgencyIndex = getDaysBetweenDates(
-			now,
-			item.dateNextPurchased.toDate(),
+		const urgencyIndex = Math.ceil(
+			getDaysBetweenDates(now, item.dateNextPurchased.toDate()),
 		);
 
 		item.urgencyIndex = urgencyIndex;
-
-		if (urgencyIndex < buyNotSoon) {
-			item.category = 'not soon';
-		} else if (urgencyIndex >= buyNotSoon && urgencyIndex >= buySoon) {
-			item.category = 'kind of soon';
+		if (urgencyIndex < 0) {
+			item.category = 'Overdue';
 		} else if (urgencyIndex <= buySoon) {
 			item.category = 'soon';
+		} else if (urgencyIndex <= buyKindOfSoon) {
+			item.category = 'kind of soon';
+		} else if (urgencyIndex <= buyNotSoon) {
+			item.category = 'Not soon';
 		} else {
 			item.category = 'inactive';
 		}
@@ -255,18 +255,18 @@ export async function comparePurchaseUrgency(data) {
 		return item;
 	});
 
-	const futurePurchaseEstimate = data.sort((a, b) => {
+	data.sort((a, b) => {
 		//if urgency is inactive, sort it to the bottom
-		if (a.urgency === 'inactive' && b.urgency !== 'inactive') {
+		if (a.category === 'inactive' && b.category !== 'inactive') {
 			return 1;
 		}
 		//if urgency is not inactive, sort it to the top
-		if (a.urgency !== 'inactive' && b.urgency === 'inactive') {
+		if (a.category !== 'inactive' && b.category === 'inactive') {
 			return -1;
 		}
-		//if urgency is the same, sort based on futureEstimate(days until next purchase)
-		if (a.futureEstimate !== b.futureEstimate) {
-			return a.futureEstimate - b.futureEstimate;
+		//if urgency is the same, sort based on UrgencyIndex(days until next purchase)
+		if (a.urgencyIndex !== b.urgencyIndex) {
+			return a.urgencyIndex - b.urgencyIndex;
 		}
 		//if futureEstimate is the same, sort based on name
 		return a.name.localeCompare(b.name);

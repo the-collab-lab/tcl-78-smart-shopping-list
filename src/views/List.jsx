@@ -44,8 +44,6 @@ export function List({ data, listPath, lists }) {
 		fetchItems();
 	}, [data]);
 
-	console.log(items);
-
 	return (
 		<>
 			<p>
@@ -58,7 +56,6 @@ export function List({ data, listPath, lists }) {
 					organizing your shopping!
 				</p>
 			)}
-
 			{lists.length > 0 && data.length === 0 && (
 				<p>
 					Your list is currently empty. To add items, visit{' '}
@@ -112,15 +109,14 @@ export function List({ data, listPath, lists }) {
 					</ul>
 				</>
 			)}
-
-			{/* Display the sorted items
+			Display the sorted items
 			<ul>
-				{data.map((item, index) => (
+				{items.map((item, index) => (
 					<li key={index}>
-						{item.name} - {item.urgency} - {item.futureEstimate}
+						{item.name} - {item.category} - {item.urgencyIndex}
 					</li>
 				))}
-			</ul> */}
+			</ul>
 		</>
 	);
 }
