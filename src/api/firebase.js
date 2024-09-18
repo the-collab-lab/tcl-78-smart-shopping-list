@@ -229,17 +229,30 @@ export async function deleteItem() {
 
 export async function comparePurchaseUrgency(data) {
 	const inactiveItem = -60;
-	const buySoon = 7;
-	const kindOfSoon = 14;
 	const buyNotSoon = 30;
+	const buySoon = 7;
+	const dateOfExpectedPurchase = 0;
 
 	const now = new Date();
-	const futureEstimate = data.map((item) => {
-		const daysUntilNextPurchase = getDaysBetweenDates(
-			data.dateNextPurchased.toDate(),
+	const newCategory = data.map((item) => {
+		const urgencyIndex = getDaysBetweenDates(
 			now,
+			item.dateNextPurchased.toDate(),
 		);
-		console.log(futureEstimate);
+
+		item.urgencyIndex = urgencyIndex;
+
+		if (urgencyIndex < buyNotSoon) {
+			item.category = 'not soon';
+		} else if (urgencyIndex >= buyNotSoon && urgencyIndex >= buySoon) {
+			item.category = 'kind of soon';
+		} else if (urgencyIndex <= buySoon) {
+			item.category = 'soon';
+		} else {
+			item.category = 'inactive';
+		}
+
+		return item;
 	});
 
 	const futurePurchaseEstimate = data.sort((a, b) => {

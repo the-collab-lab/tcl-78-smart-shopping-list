@@ -39,7 +39,7 @@ export function App() {
 	 * Check ./api/firestore.js for its implementation.
 	 */
 	const data = useShoppingListData(listPath);
-	console.log(data);
+	// console.log(data);
 
 	return (
 		<Router>
