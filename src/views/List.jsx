@@ -32,11 +32,17 @@ export function List({ data, listPath, lists }) {
 	const [items, setItems] = useState([]); //to store the sorted items for display
 
 	useEffect(() => {
-		const sortedItems = comparePurchaseUrgency(data);
-		setItems(sortedItems);
-	}, [data]);
+		const fetchItems = async () => {
+			try {
+				const sortedItems = await comparePurchaseUrgency(data);
+				setItems(sortedItems);
+			} catch (error) {
+				console.log(error);
+			}
+		};
 
-	console.log(items);
+		fetchItems();
+	}, [data]);
 
 	return (
 		<>
