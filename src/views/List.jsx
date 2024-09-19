@@ -43,6 +43,14 @@ export function List({ data, listPath, lists }) {
 		});
 	};
 
+	const groupedItems = data.reduce((acc, item) => {
+		if (!acc[item.category]) {
+			acc[item.category] = [];
+		}
+		acc[item.category].push(item);
+		return acc;
+	}, {});
+
 	return (
 		<>
 			<p>
@@ -90,32 +98,36 @@ export function List({ data, listPath, lists }) {
 									name={item.name}
 									dateLastPurchased={item.dateLastPurchased}
 									onCheck={() => handleCheck(item)}
+									category={item.category}
 								/>
 							))}
 						</ul>
 					)}
 
-					<ul>
-						{data.map((item) => (
-							<ListItem
-								key={item.id}
-								name={item.name}
-								id={item.id}
-								dateLastPurchased={item.dateLastPurchased}
-								onCheck={() => handleCheck(item)}
-							/>
-						))}
-					</ul>
+					{
+						<ul>
+							{Object.keys(groupedItems).map((category) => (
+								<li key={category}>
+									<h3>{category}</h3>
+
+									<ul>
+										{groupedItems[category].map((item) => (
+											<ListItem
+												key={item.id}
+												name={item.name}
+												id={item.id}
+												dateLastPurchased={item.dateLastPurchased}
+												onCheck={() => handleCheck(item)}
+												category={item.category}
+											/>
+										))}
+									</ul>
+								</li>
+							))}
+						</ul>
+					}
 				</>
 			)}
-			Display the sorted items
-			<ul>
-				{items.map((item, index) => (
-					<li key={index}>
-						{item.name} - {item.category} __ {item.urgencyIndex} days
-					</li>
-				))}
-			</ul>
 		</>
 	);
 }
