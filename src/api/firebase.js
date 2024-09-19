@@ -232,5 +232,6 @@ export async function deleteItem(listPath, itemId) {
 		return 'Item has been deleted successfully';
 	} catch (error) {
 		console.log(error);
+		throw new Error('Error deleting the item');
 	}
 }

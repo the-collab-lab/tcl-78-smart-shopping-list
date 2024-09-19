@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -31,8 +32,10 @@ export function List({ data, listPath, lists }) {
 	const handleDelete = async (itemId) => {
 		try {
 			await deleteItem(listPath, itemId);
+			setErrorMsg('');
 		} catch (error) {
-			console.error('Failed to delete the item', error);
+			console.error(error.message, error);
+			setErrorMsg('Failed to delete the item. Please try again!');
 		}
 	};
 
@@ -89,6 +92,8 @@ export function List({ data, listPath, lists }) {
 							))}
 						</ul>
 					)}
+
+					{errorMsg && <p>{errorMsg}</p>}
 
 					<ul>
 						{data.map((item) => (
