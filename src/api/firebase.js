@@ -253,12 +253,10 @@ export async function comparePurchaseUrgency(data) {
 			item.category = 'Overdue';
 		} else if (urgencyIndex <= 7) {
 			item.category = 'soon';
-		} else if (urgencyIndex <= 30) {
+		} else if (urgencyIndex < 30) {
 			item.category = 'kind of soon';
-		} else if (urgencyIndex <= 60) {
-			item.category = 'Not soon';
 		} else {
-			item.category = 'not accounted for';
+			item.category = 'Not soon';
 		}
 		return item;
 	});
@@ -280,39 +278,3 @@ export async function comparePurchaseUrgency(data) {
 	});
 	return data;
 }
-
-// export async function comparePurchaseUrgency(data) {
-// 	const now = new Date();
-// 	const urgencyIndex = data.map((item) => {
-// 		const daysBeforePurchase = getDaysBetweenDates(
-// 			item.dateNextPurchased.toDate(),
-// 			now,
-// 		);
-
-// 		item.daysBeforePurchase = daysBeforePurchase;
-
-// 		if (daysBeforePurchase < 60) {
-// 			item.category = 'inactive';
-// 		} else if (daysBeforePurchase >= 60 && daysBeforePurchase < 0) {
-// 			item.category = 'not soon';
-// 		} else if (daysBeforePurchase >= 0 && daysBeforePurchase <= 7) {
-// 			item.category = 'buy soon';
-// 		} else if (daysBeforePurchase > 7 && daysBeforePurchase <= 14) {
-// 			item.category = 'buy somewhat soon';
-// 		} else {
-// 			item.category = 'buy not so soon';
-// 		}
-
-// 		return item;
-// 	});
-
-// 	const sortedByDaysBeforePurchase = urgencyIndex.sort((itemA, itemB) => {
-// 		if (itemA.daysBeforePurchase === itemB.daysBeforePurchase) {
-// 			return itemA.name.localeCompare(itemB.name);
-// 		}
-// 	});
-
-// 	console.log(sortedByDaysBeforePurchase);
-
-// 	return sortedByDaysBeforePurchase;
-// }
