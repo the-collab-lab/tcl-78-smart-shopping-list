@@ -10,7 +10,11 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate, getDaysBetweenDates } from '../utils';
+import {
+	getFutureDate,
+	getDaysBetweenDates,
+	capitalizeFirstLetter,
+} from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
@@ -175,7 +179,7 @@ export async function addItem(listPath, { itemName, daysUntilNextPurchase }) {
 			// We'll use updateItem to put a Date here when the item is purchased!
 			dateLastPurchased: null,
 			dateNextPurchased: getFutureDate(daysUntilNextPurchase),
-			name: itemName,
+			name: capitalizeFirstLetter(itemName),
 			totalPurchases: 0,
 		});
 	} catch (error) {

@@ -51,7 +51,7 @@ export function ManageList({ listPath, userId, data }) {
 			}
 			// if the item does not exist, add it to the list
 			await addItem(listPath, {
-				itemName: name.toLowerCase(),
+				itemName: name,
 				daysUntilNextPurchase: nextPurchase,
 			});
 			setMessageItem(`${name} has been successfully added to the list`);
