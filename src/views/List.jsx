@@ -118,7 +118,6 @@ export function List({ data, listPath, lists }) {
 												id={item.id}
 												dateLastPurchased={item.dateLastPurchased}
 												onCheck={() => handleCheck(item)}
-												category={item.category}
 											/>
 										))}
 									</ul>

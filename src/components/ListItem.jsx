@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
 
-export function ListItem({ name, dateLastPurchased, onCheck, category }) {
+export function ListItem({ name, dateLastPurchased, onCheck }) {
 	const [isChecked, setIsChecked] = useState(false);
 
 	// Update `isChecked` based on the `dateLastPurchased` value
@@ -30,7 +30,7 @@ export function ListItem({ name, dateLastPurchased, onCheck, category }) {
 					onChange={onCheck}
 					disabled={isChecked}
 				/>
-				{name} <button>{category}</button>
+				{name}
 			</label>
 		</li>
 	);

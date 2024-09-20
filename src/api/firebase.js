@@ -264,17 +264,16 @@ export async function comparePurchaseUrgency(data) {
 		//if urgency of a is inactive and b is not inactive, sort b ontop the top of a
 		if (a.category === 'inactive' && b.category !== 'inactive') {
 			return 1;
-		}
-		//if urgency of a is not inactive and b is inactive, sort a ontop of b
-		if (a.category !== 'inactive' && b.category === 'inactive') {
+			//if urgency of a is not inactive and b is inactive, sort a ontop of b
+		} else if (a.category !== 'inactive' && b.category === 'inactive') {
 			return -1;
-		}
-		//if urgency is the same, sort based on UrgencyIndex(days until next purchase)
-		if (a.urgencyIndex !== b.urgencyIndex) {
+			//if urgency is the same, sort based on UrgencyIndex
+		} else if (a.urgencyIndex !== b.urgencyIndex) {
 			return a.urgencyIndex - b.urgencyIndex;
+		} else {
+			//if urgencyIndex is the same, sort based on name
+			return a.name.localeCompare(b.name);
 		}
-		//if futureEstimate is the same, sort based on name
-		return a.name.localeCompare(b.name);
 	});
 	return data;
 }
