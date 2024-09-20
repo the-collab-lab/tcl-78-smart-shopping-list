@@ -1,10 +1,14 @@
 import { ListItem } from '../components';
+
 import { useEffect, useState } from 'react';
-import { comparePurchaseUrgency, updateItem } from '../api/firebase';
+import { comparePurchaseUrgency, updateItem, deleteItem } from '../api/firebase';
+
 import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
+  	const [errorMsg, setErrorMsg] = useState('');
+
 	const [items, setItems] = useState([]); //to store the sorted items for display
 
 	//Code segment to sort items using the compareUrgency function from firebase.js
@@ -20,6 +24,7 @@ export function List({ data, listPath, lists }) {
 
 		fetchItems();
 	}, [data]);
+
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -43,6 +48,7 @@ export function List({ data, listPath, lists }) {
 		});
 	};
 
+
 	const groupedItems = data.reduce((acc, item) => {
 		if (!acc[item.category]) {
 			acc[item.category] = [];
@@ -50,6 +56,16 @@ export function List({ data, listPath, lists }) {
 		acc[item.category].push(item);
 		return acc;
 	}, {});
+
+	const handleDelete = async (itemId) => {
+		try {
+			await deleteItem(listPath, itemId);
+			setErrorMsg('');
+		} catch (error) {
+			console.error(error.message, error);
+			setErrorMsg('Failed to delete the item. Please try again!');
+		}
+	};
 
 	return (
 		<>
@@ -99,17 +115,20 @@ export function List({ data, listPath, lists }) {
 									dateLastPurchased={item.dateLastPurchased}
 									onCheck={() => handleCheck(item)}
 									category={item.category}
+									onDelete={() => handleDelete(item.id)}
 								/>
 							))}
 						</ul>
 					)}
 
-					{
+					{ 
+            {errorMsg && <p>{errorMsg}</p>}
+             
 						<ul>
 							{Object.keys(groupedItems).map((category) => (
 								<li key={category}>
 									<h3>{category}</h3>
-
+           
 									<ul>
 										{groupedItems[category].map((item) => (
 											<ListItem
@@ -118,6 +137,7 @@ export function List({ data, listPath, lists }) {
 												id={item.id}
 												dateLastPurchased={item.dateLastPurchased}
 												onCheck={() => handleCheck(item)}
+                        onDelete={() => handleDelete(item.id)}
 											/>
 										))}
 									</ul>
@@ -125,6 +145,7 @@ export function List({ data, listPath, lists }) {
 							))}
 						</ul>
 					}
+
 				</>
 			)}
 		</>

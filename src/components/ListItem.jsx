@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
 
-export function ListItem({ name, dateLastPurchased, onCheck }) {
+export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 	const [isChecked, setIsChecked] = useState(false);
 
 	// Update `isChecked` based on the `dateLastPurchased` value
@@ -21,6 +21,12 @@ export function ListItem({ name, dateLastPurchased, onCheck }) {
 		checkStatus();
 	}, [dateLastPurchased]);
 
+	const handleDeleteButton = () => {
+		if (window.confirm(`Do you really want to delete ${name}?`)) {
+			onDelete();
+		}
+	};
+  
 	return (
 		<li className="ListItem">
 			<label>
@@ -32,6 +38,7 @@ export function ListItem({ name, dateLastPurchased, onCheck }) {
 				/>
 				{name}
 			</label>
+			<button onClick={handleDeleteButton}>delete</button>
 		</li>
 	);
 }
