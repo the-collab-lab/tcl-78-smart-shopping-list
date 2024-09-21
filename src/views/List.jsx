@@ -1,13 +1,17 @@
 import { ListItem } from '../components';
 
 import { useEffect, useState } from 'react';
-import { comparePurchaseUrgency, updateItem, deleteItem } from '../api/firebase';
+import {
+	comparePurchaseUrgency,
+	updateItem,
+	deleteItem,
+} from '../api/firebase';
 
 import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
-  	const [errorMsg, setErrorMsg] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
 
 	const [items, setItems] = useState([]); //to store the sorted items for display
 
@@ -24,7 +28,6 @@ export function List({ data, listPath, lists }) {
 
 		fetchItems();
 	}, [data]);
-
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -47,7 +50,6 @@ export function List({ data, listPath, lists }) {
 			totalPurchases: newTotalPurchases,
 		});
 	};
-
 
 	const groupedItems = data.reduce((acc, item) => {
 		if (!acc[item.category]) {
@@ -121,14 +123,14 @@ export function List({ data, listPath, lists }) {
 						</ul>
 					)}
 
-					{ 
-            {errorMsg && <p>{errorMsg}</p>}
-             
+					{errorMsg && <p>{errorMsg}</p>}
+
+					{
 						<ul>
 							{Object.keys(groupedItems).map((category) => (
 								<li key={category}>
 									<h3>{category}</h3>
-           
+
 									<ul>
 										{groupedItems[category].map((item) => (
 											<ListItem
@@ -137,7 +139,7 @@ export function List({ data, listPath, lists }) {
 												id={item.id}
 												dateLastPurchased={item.dateLastPurchased}
 												onCheck={() => handleCheck(item)}
-                        onDelete={() => handleDelete(item.id)}
+												onDelete={() => handleDelete(item.id)}
 											/>
 										))}
 									</ul>
@@ -145,7 +147,6 @@ export function List({ data, listPath, lists }) {
 							))}
 						</ul>
 					}
-
 				</>
 			)}
 		</>
