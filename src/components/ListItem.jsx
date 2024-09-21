@@ -26,7 +26,7 @@ export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 			onDelete();
 		}
 	};
-
+  
 	return (
 		<li className="ListItem">
 			<label>

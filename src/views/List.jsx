@@ -1,11 +1,33 @@
 import { ListItem } from '../components';
-import { useState } from 'react';
-import { updateItem, deleteItem } from '../api/firebase';
+
+import { useEffect, useState } from 'react';
+import {
+	comparePurchaseUrgency,
+	updateItem,
+	deleteItem,
+} from '../api/firebase';
+
 import { Link } from 'react-router-dom';
 
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
+
+	const [items, setItems] = useState([]); //to store the sorted items for display
+
+	//Code segment to sort items using the compareUrgency function from firebase.js
+	useEffect(() => {
+		const fetchItems = async () => {
+			try {
+				const sortedItems = await comparePurchaseUrgency(data);
+				setItems(sortedItems);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchItems();
+	}, [data]);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
@@ -29,6 +51,14 @@ export function List({ data, listPath, lists }) {
 		});
 	};
 
+	const groupedItems = data.reduce((acc, item) => {
+		if (!acc[item.category]) {
+			acc[item.category] = [];
+		}
+		acc[item.category].push(item);
+		return acc;
+	}, {});
+
 	const handleDelete = async (itemId) => {
 		try {
 			await deleteItem(listPath, itemId);
@@ -51,7 +81,6 @@ export function List({ data, listPath, lists }) {
 					organizing your shopping!
 				</p>
 			)}
-
 			{lists.length > 0 && data.length === 0 && (
 				<p>
 					Your list is currently empty. To add items, visit{' '}
@@ -95,18 +124,28 @@ export function List({ data, listPath, lists }) {
 
 					{errorMsg && <p>{errorMsg}</p>}
 
-					<ul>
-						{data.map((item) => (
-							<ListItem
-								key={item.id}
-								name={item.name}
-								id={item.id}
-								dateLastPurchased={item.dateLastPurchased}
-								onCheck={() => handleCheck(item)}
-								onDelete={() => handleDelete(item.id)}
-							/>
-						))}
-					</ul>
+					{
+						<ul>
+							{Object.keys(groupedItems).map((category) => (
+								<li key={category}>
+									<h3>{category}</h3>
+
+									<ul>
+										{groupedItems[category].map((item) => (
+											<ListItem
+												key={item.id}
+												name={item.name}
+												id={item.id}
+												dateLastPurchased={item.dateLastPurchased}
+												onCheck={() => handleCheck(item)}
+												onDelete={() => handleDelete(item.id)}
+											/>
+										))}
+									</ul>
+								</li>
+							))}
+						</ul>
+					}
 				</>
 			)}
 		</>
