@@ -235,27 +235,26 @@ export async function deleteItem(listPath, itemId) {
 		throw new Error('Error deleting the item');
 	}
 }
-
+/**
+ * Sorts the items in the list according to category using urgencyIndex and inactiveIndex to determine what category an item belongs.
+ * @param {string} data The path to the data object to sort.
+ */
 export async function comparePurchaseUrgency(data) {
 	const now = new Date();
-	// Add urgencyIndex and inactiveIndex to each item to determine their category
 
 	data.map((item) => {
 		const urgencyIndex = Math.ceil(
 			getDaysBetweenDates(now, item.dateNextPurchased.toDate()), //takes the difference between the current date and the date the item is next purchased
 		);
 
-		// Get the last purchaseDate of item. If the item has never been purchased, use the date it was created
 		const lastPurchase = item.dateLastPurchased
 			? item.dateLastPurchased.toDate()
 			: item.dateCreated.toDate();
 
-		// Get the inactiveIndex of the item
 		const inactiveItem = getDaysBetweenDates(lastPurchase, now);
 		item.inactiveIndex = inactiveItem;
 		item.urgencyIndex = urgencyIndex;
 
-		// Determine the category of the item based on the inactiveIndex first, then the urgencyIndex
 		if (inactiveItem > 60) {
 			item.category = 'inactive';
 		} else if (urgencyIndex < 0) {
@@ -269,18 +268,21 @@ export async function comparePurchaseUrgency(data) {
 		}
 		return item;
 	});
+	/**
+	 * Function to implement custom sort based on inacrtivity, then on urgencyIndex and name
+	 * 1- if urgency of a is inactive and b is not inactive, sort b ontop the top of a
+	 * 2- if urgency of a is not inactive and b is inactive, sort a ontop of b
+	 * 3- if urgency is the same, sort based on UrgencyIndex
+	 * 4- if urgencyIndex is the same, sort based on name
+	 */
 	data.sort((a, b) => {
-		//if urgency of a is inactive and b is not inactive, sort b ontop the top of a
 		if (a.category === 'inactive' && b.category !== 'inactive') {
 			return 1;
-			//if urgency of a is not inactive and b is inactive, sort a ontop of b
 		} else if (a.category !== 'inactive' && b.category === 'inactive') {
 			return -1;
-			//if urgency is the same, sort based on UrgencyIndex
 		} else if (a.urgencyIndex !== b.urgencyIndex) {
 			return a.urgencyIndex - b.urgencyIndex;
 		} else {
-			//if urgencyIndex is the same, sort based on name
 			return a.name.localeCompare(b.name);
 		}
 	});
