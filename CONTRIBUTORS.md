@@ -6,11 +6,12 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Cohort Participants
 
--[Tataw Clarkson](https://github.com/tataw-cl) 😁
+- [Tataw Clarkson](https://github.com/tataw-cl) 😁
 
 - [Didem Aydin Cakir](https://github.com/didemydn) 🚀
 
 - [Eva Langerova](https://github.com/eva-lng) 👍
+- [Rebeca Taboada García] (https://github.com/GrannyYetta) :sparkles:
 
 ## Mentors
 
