@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Home, Layout, List, ManageList } from './views';
+import { Home, Layout, List, ManageList, About } from './views';
 
 import { useAuth, useShoppingListData, useShoppingLists } from './api';
 
@@ -55,6 +55,7 @@ export function App() {
 							/>
 						}
 					/>
+					<Route path="/about" element={<About />} />
 					<Route
 						path="/list"
 						element={<List data={data} lists={lists} listPath={listPath} />}
