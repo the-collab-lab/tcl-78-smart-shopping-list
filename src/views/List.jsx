@@ -18,14 +18,9 @@ export function List({ data, listPath, lists }) {
 	//Code segment to sort items using the compareUrgency function from firebase.js
 	useEffect(() => {
 		const fetchItems = async () => {
-			try {
-				const sortedItems = await comparePurchaseUrgency(data);
-				setItems(sortedItems);
-			} catch (error) {
-				console.log(error);
-			}
+			const sortedItems = await comparePurchaseUrgency(data);
+			setItems(sortedItems);
 		};
-
 		fetchItems();
 	}, [data]);
 
