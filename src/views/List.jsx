@@ -13,19 +13,12 @@ export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 
-	const [items, setItems] = useState([]); //to store the sorted items for display
-
-	//Code segment to sort items using the compareUrgency function from firebase.js
+	const [items, setItems] = useState([]);
 	useEffect(() => {
 		const fetchItems = async () => {
-			try {
-				const sortedItems = await comparePurchaseUrgency(data);
-				setItems(sortedItems);
-			} catch (error) {
-				console.log(error);
-			}
+			const sortedItems = await comparePurchaseUrgency(data);
+			setItems(sortedItems);
 		};
-
 		fetchItems();
 	}, [data]);
 
@@ -99,6 +92,7 @@ export function List({ data, listPath, lists }) {
 								id="search-item-in-list"
 								value={searchItem}
 								placeholder="Search item..."
+								aria-label="Search for items"
 							/>
 							{searchItem && (
 								<button type="button" onClick={clearSearch}>
@@ -107,7 +101,7 @@ export function List({ data, listPath, lists }) {
 							)}
 						</div>
 					</form>
-					{searchItem && (
+					{searchItem ? (
 						<ul>
 							{filterItems.map((item) => (
 								<ListItem
@@ -120,11 +114,7 @@ export function List({ data, listPath, lists }) {
 								/>
 							))}
 						</ul>
-					)}
-
-					{errorMsg && <p>{errorMsg}</p>}
-
-					{
+					) : (
 						<ul>
 							{Object.keys(groupedItems).map((category) => (
 								<li key={category}>
@@ -145,7 +135,9 @@ export function List({ data, listPath, lists }) {
 								</li>
 							))}
 						</ul>
-					}
+					)}
+
+					{errorMsg && <p>{errorMsg}</p>}
 				</>
 			)}
 		</>

@@ -4,14 +4,13 @@ import './ListItem.css';
 export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 	const [isChecked, setIsChecked] = useState(false);
 
-	// Update `isChecked` based on the `dateLastPurchased` value
 	useEffect(() => {
 		const checkStatus = () => {
 			if (dateLastPurchased) {
 				const purchaseDate = dateLastPurchased.toDate();
 				const timeSinceLastPurchase = new Date() - purchaseDate;
 				const hasBeenPurchasedRecently =
-					timeSinceLastPurchase < 24 * 60 * 60 * 1000; // 24 hours
+					timeSinceLastPurchase < 24 * 60 * 60 * 1000;
 				setIsChecked(hasBeenPurchasedRecently);
 			} else {
 				setIsChecked(false);
@@ -26,7 +25,7 @@ export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 			onDelete();
 		}
 	};
-  
+
 	return (
 		<li className="ListItem">
 			<label>
