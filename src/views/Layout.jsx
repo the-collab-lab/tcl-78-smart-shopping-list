@@ -1,6 +1,5 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, Link } from 'react-router-dom';
 import './Layout.css';
-import { auth } from '../api/config.js';
 import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
 
 /**
@@ -17,12 +16,11 @@ export function Layout() {
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
-					<h1>Smart shopping list</h1>
+					<Link to="/">
+						<h1>#APP/LogoPic</h1>
+					</Link>
 					{!!user ? (
-						<div>
-							<span>Welcome {auth.currentUser.displayName}!</span>
-							<SignOutButton></SignOutButton>
-						</div>
+						<SignOutButton></SignOutButton>
 					) : (
 						<SignInButton></SignInButton>
 					)}
@@ -35,11 +33,18 @@ export function Layout() {
 						<NavLink to="/" className="Nav-link">
 							Home
 						</NavLink>
-						<NavLink to="/list" className="Nav-link">
-							List
-						</NavLink>
-						<NavLink to="/manage-list" className="Nav-link">
-							Manage List
+						{user && (
+							<NavLink to="/list" className="Nav-link">
+								List
+							</NavLink>
+						)}
+						{user && (
+							<NavLink to="/manage-list" className="Nav-link">
+								Manage List
+							</NavLink>
+						)}
+						<NavLink to="/about" className="Nav-link">
+							About
 						</NavLink>
 					</div>
 				</nav>
