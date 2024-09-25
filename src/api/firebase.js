@@ -200,6 +200,7 @@ export async function deleteItem(listPath, itemId) {
  * Sorts the items in the list according to category using urgencyIndex and inactiveIndex to determine what category an item belongs.
  * @param {string} data The path to the data object to sort.
  */
+
 export async function comparePurchaseUrgency(data) {
 	const now = new Date();
 	const inactivityPeriod = 60;

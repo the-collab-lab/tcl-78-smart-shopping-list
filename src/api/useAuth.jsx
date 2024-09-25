@@ -3,11 +3,6 @@ import { auth } from './config.js';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { addUserToDatabase } from './firebase.js';
 
-/**
- * A button that signs the user in using Google OAuth. When clicked,
- * the button redirects the user to the Google OAuth sign-in page.
- * After the user signs in, they are redirected back to the app.
- */
 export const SignInButton = () => (
 	<button
 		type="button"
@@ -17,9 +12,6 @@ export const SignInButton = () => (
 	</button>
 );
 
-/**
- * A button that signs the user out of the app using Firebase Auth.
- */
 export const SignOutButton = () => (
 	<button type="button" onClick={() => auth.signOut()}>
 		Sign Out
