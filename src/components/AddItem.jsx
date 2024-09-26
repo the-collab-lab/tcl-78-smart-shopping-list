@@ -8,6 +8,13 @@ export function AddItem({ data, listPath }) {
 	});
 	const [messageItem, setMessageItem] = useState('');
 
+	const normalizeItemName = (name) => {
+		const lowercaseName = name.toLowerCase();
+		const normalizedName =
+			lowercaseName.charAt(0).toUpperCase() + lowercaseName.slice(1);
+		return normalizedName;
+	};
+
 	const handleNewItemChange = (e) => {
 		const { name, value } = e.target;
 		setFormNewItem((prevForm) => {
@@ -44,10 +51,12 @@ export function AddItem({ data, listPath }) {
 			}
 
 			await addItem(listPath, {
-				itemName: name,
+				itemName: normalizeItemName(name),
 				daysUntilNextPurchase: nextPurchase,
 			});
-			alert(`${name} has been successfully added to the list`);
+			alert(
+				`${normalizeItemName(name)} has been successfully added to the list`,
+			);
 			setFormNewItem({
 				name: '',
 				nextPurchase: 0,
