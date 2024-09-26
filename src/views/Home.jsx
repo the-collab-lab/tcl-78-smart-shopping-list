@@ -1,34 +1,29 @@
 import './Home.css';
-import { SingleList } from '../components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SingleList } from '../components';
 import { createList } from '../api/firebase';
 import { auth } from '../api/config.js';
 import { SignInButton, useAuth } from '../api/useAuth';
 
 export function Home({ data, setListPath, userId, userEmail }) {
 	const [listName, setListName] = useState('');
-	const [message, setMessage] = useState('');
 	const navigate = useNavigate();
 	const { user } = useAuth();
 
 	const handleCreateListButton = async (e) => {
 		e.preventDefault();
-		if (!listName) {
-			setMessage('Enter a list name');
-			return;
-		}
 
 		try {
 			await createList(userId, userEmail, listName);
-			setMessage('New list successfully created');
+			alert(`${listName} list was successfully created.`);
 
 			const createListPath = `${userId}/${listName}}`;
 			setListPath(createListPath);
 			navigate('/list');
 		} catch (error) {
 			console.error('error creating a list', error);
-			setMessage('Failed to create list. Please try again!');
+			alert('Failed to create the list. Please try again!');
 		}
 	};
 
@@ -65,11 +60,11 @@ export function Home({ data, setListPath, userId, userEmail }) {
 							value={listName}
 							onChange={(e) => setListName(e.target.value)}
 							placeholder="Enter the name of your new list"
+							required
 						/>
 						<button type="submit" className="button">
 							Create list
 						</button>
-						{message}
 					</form>
 				</>
 			) : (

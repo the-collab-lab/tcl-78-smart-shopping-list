@@ -1,19 +1,17 @@
-import { ListItem } from '../components';
-
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ListItem } from '../components';
+import { AddItem } from '../components/AddItem';
 import {
 	comparePurchaseUrgency,
 	updateItem,
 	deleteItem,
 } from '../api/firebase';
 
-import { Link } from 'react-router-dom';
-
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
-	const [errorMsg, setErrorMsg] = useState('');
-
 	const [items, setItems] = useState([]);
+
 	useEffect(() => {
 		const fetchItems = async () => {
 			const sortedItems = await comparePurchaseUrgency(data);
@@ -55,10 +53,9 @@ export function List({ data, listPath, lists }) {
 	const handleDelete = async (itemId) => {
 		try {
 			await deleteItem(listPath, itemId);
-			setErrorMsg('');
 		} catch (error) {
 			console.error(error.message, error);
-			setErrorMsg('Failed to delete the item. Please try again!');
+			alert('Failed to delete the item. Please try again!');
 		}
 	};
 
@@ -83,6 +80,8 @@ export function List({ data, listPath, lists }) {
 			)}
 			{lists.length > 0 && data.length > 0 && (
 				<>
+					<AddItem data={data} listPath={listPath} />
+
 					<form onSubmit={handleSearch}>
 						<div>
 							<label htmlFor="search-item-in-list"> Search items:</label>
@@ -101,6 +100,7 @@ export function List({ data, listPath, lists }) {
 							)}
 						</div>
 					</form>
+
 					{searchItem ? (
 						<ul>
 							{filterItems.map((item) => (
@@ -136,8 +136,6 @@ export function List({ data, listPath, lists }) {
 							))}
 						</ul>
 					)}
-
-					{errorMsg && <p>{errorMsg}</p>}
 				</>
 			)}
 		</>
