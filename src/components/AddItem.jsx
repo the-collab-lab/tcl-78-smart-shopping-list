@@ -60,7 +60,6 @@ export function AddItem({ data, listPath }) {
 
 	return (
 		<>
-			<h2>Add new item to your list</h2>
 			<form onSubmit={handleNewItemSubmit}>
 				<label htmlFor="name">Item name</label>
 				<input

@@ -72,11 +72,13 @@ export function List({ data, listPath, lists }) {
 				</p>
 			)}
 			{lists.length > 0 && data.length === 0 && (
-				<p>
-					Your list is currently empty. To add items, visit{' '}
-					<Link to="/manage-list">manage list</Link> and start building your
-					shopping list!
-				</p>
+				<>
+					<p>
+						Your shopping list is currently empty. Use the form below to add new
+						items.
+					</p>
+					<AddItem data={data} listPath={listPath} />
+				</>
 			)}
 			{lists.length > 0 && data.length > 0 && (
 				<>
