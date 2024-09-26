@@ -224,13 +224,13 @@ export async function comparePurchaseUrgency(data) {
 		if (inactiveItem > inactivityPeriod) {
 			item.category = 'inactive';
 		} else if (urgencyIndex < dayOfPurchase) {
-			item.category = 'Overdue';
+			item.category = 'overdue';
 		} else if (urgencyIndex <= soon) {
 			item.category = 'soon';
 		} else if (urgencyIndex < kindOfSoon) {
 			item.category = 'kind of soon';
 		} else {
-			item.category = 'Not soon';
+			item.category = 'not soon';
 		}
 		return item;
 	});

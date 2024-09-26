@@ -74,14 +74,14 @@ export function AddItem({ data, listPath }) {
 				<input
 					id="name"
 					type="text"
-					placeholder="Item"
+					placeholder="Enter item name"
 					value={formNewItem.name}
 					onChange={handleNewItemChange}
 					name="name"
 					required
 				/>
 
-				<label htmlFor="nextPurchase">When is your next purchase</label>
+				<label htmlFor="nextPurchase">Urgency</label>
 				<select
 					name="nextPurchase"
 					id="nextPurchase"
@@ -89,7 +89,7 @@ export function AddItem({ data, listPath }) {
 					value={formNewItem.nextPurchase}
 					required
 				>
-					<option value="">---</option>
+					<option value="">Select Urgency</option>
 					<option value={7}>Soon</option>
 					<option value={14}>Kind of soon</option>
 					<option value={30}>Not soon</option>
