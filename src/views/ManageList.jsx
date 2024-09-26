@@ -11,6 +11,13 @@ export function ManageList({ listPath, userId, data }) {
 	const [formAddUser, setFormAddUser] = useState('');
 	const [messageUser, setMessageUser] = useState('');
 
+	const NormalizeItemName = (name) => {
+		const lowercaseName = name.toLowerCase();
+		const normalizedName =
+			lowercaseName.charAt(0).toUpperCase() + lowercaseName.slice(1);
+		return normalizedName;
+	};
+
 	const handleNewItemChange = (e) => {
 		const { name, value } = e.target;
 		setFormNewItem((prevForm) => {
@@ -46,10 +53,12 @@ export function ManageList({ listPath, userId, data }) {
 				return;
 			}
 			await addItem(listPath, {
-				itemName: name,
+				itemName: NormalizeItemName(name),
 				daysUntilNextPurchase: nextPurchase,
 			});
-			setMessageItem(`${name} has been successfully added to the list`);
+			setMessageItem(
+				`${NormalizeItemName(name)} has been successfully added to the list`,
+			);
 			setFormNewItem({
 				name: '',
 				nextPurchase: 0,
