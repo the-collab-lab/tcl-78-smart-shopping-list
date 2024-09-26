@@ -12,6 +12,8 @@ export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
 	const [items, setItems] = useState([]);
 
+	const listTitle = listPath.split('/')[1];
+
 	useEffect(() => {
 		const fetchItems = async () => {
 			const sortedItems = await comparePurchaseUrgency(data);
@@ -61,9 +63,7 @@ export function List({ data, listPath, lists }) {
 
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
+			<h2>{listTitle}</h2>
 			{lists.length === 0 && (
 				<p>
 					It looks like you don&apos;t have any shopping lists yet. Head to the{' '}
@@ -73,11 +73,8 @@ export function List({ data, listPath, lists }) {
 			)}
 			{lists.length > 0 && data.length === 0 && (
 				<>
-					<p>
-						Your shopping list is currently empty. Use the form below to add new
-						items.
-					</p>
 					<AddItem data={data} listPath={listPath} />
+					<p>Your list is currently empty.</p>
 				</>
 			)}
 			{lists.length > 0 && data.length > 0 && (
