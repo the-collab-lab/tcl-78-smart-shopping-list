@@ -1,19 +1,19 @@
-import { ListItem } from '../components';
-
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ListItem } from '../components';
+import { AddItem } from '../components/AddItem';
 import {
 	comparePurchaseUrgency,
 	updateItem,
 	deleteItem,
 } from '../api/firebase';
 
-import { Link } from 'react-router-dom';
-
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
-	const [errorMsg, setErrorMsg] = useState('');
-
 	const [items, setItems] = useState([]);
+
+	const listTitle = listPath.split('/')[1];
+
 	useEffect(() => {
 		const fetchItems = async () => {
 			const sortedItems = await comparePurchaseUrgency(data);
@@ -55,18 +55,15 @@ export function List({ data, listPath, lists }) {
 	const handleDelete = async (itemId) => {
 		try {
 			await deleteItem(listPath, itemId);
-			setErrorMsg('');
 		} catch (error) {
 			console.error(error.message, error);
-			setErrorMsg('Failed to delete the item. Please try again!');
+			alert('Failed to delete the item. Please try again!');
 		}
 	};
 
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
+			<h2>{listTitle}</h2>
 			{lists.length === 0 && (
 				<p>
 					It looks like you don&apos;t have any shopping lists yet. Head to the{' '}
@@ -75,14 +72,15 @@ export function List({ data, listPath, lists }) {
 				</p>
 			)}
 			{lists.length > 0 && data.length === 0 && (
-				<p>
-					Your list is currently empty. To add items, visit{' '}
-					<Link to="/manage-list">manage list</Link> and start building your
-					shopping list!
-				</p>
+				<>
+					<AddItem data={data} listPath={listPath} />
+					<p>Your list is currently empty.</p>
+				</>
 			)}
 			{lists.length > 0 && data.length > 0 && (
 				<>
+					<AddItem data={data} listPath={listPath} />
+
 					<form onSubmit={handleSearch}>
 						<div>
 							<label htmlFor="search-item-in-list"> Search items:</label>
@@ -101,6 +99,7 @@ export function List({ data, listPath, lists }) {
 							)}
 						</div>
 					</form>
+
 					{searchItem ? (
 						<ul>
 							{filterItems.map((item) => (
@@ -136,8 +135,6 @@ export function List({ data, listPath, lists }) {
 							))}
 						</ul>
 					)}
-
-					{errorMsg && <p>{errorMsg}</p>}
 				</>
 			)}
 		</>
