@@ -1,8 +1,16 @@
 .ListItem {
-	align-items: baseline;
 	display: flex;
-	flex-direction: row;
-	font-size: 1.2em;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	background-color: rgb(247, 238, 238);
+	border: 1px solid #b9afaf;
+}
+
+.item-info {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
 }
 
 .ListItem-checkbox {
@@ -11,4 +19,14 @@
 
 .ListItem-label {
 	margin-left: 0.2em;
+}
+
+.item-category {
+	font-weight: bold;
+	margin-right: 20px;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
 }

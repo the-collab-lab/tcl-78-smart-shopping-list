@@ -89,7 +89,7 @@ export function List({ data, listPath, lists }) {
 								type="text"
 								id="search-item-in-list"
 								value={searchItem}
-								placeholder="Search item..."
+								placeholder="Search an item..."
 								aria-label="Search for items"
 							/>
 							{searchItem && (
@@ -117,8 +117,6 @@ export function List({ data, listPath, lists }) {
 						<ul>
 							{Object.keys(groupedItems).map((category) => (
 								<li key={category}>
-									<h3>{category}</h3>
-
 									<ul>
 										{groupedItems[category].map((item) => (
 											<ListItem
@@ -128,6 +126,7 @@ export function List({ data, listPath, lists }) {
 												dateLastPurchased={item.dateLastPurchased}
 												onCheck={() => handleCheck(item)}
 												onDelete={() => handleDelete(item.id)}
+												category={item.category}
 											/>
 										))}
 									</ul>

@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
 
-export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
+export function ListItem({
+	name,
+	dateLastPurchased,
+	onCheck,
+	onDelete,
+	category,
+}) {
 	const [isChecked, setIsChecked] = useState(false);
 
 	useEffect(() => {
@@ -26,6 +32,14 @@ export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 		}
 	};
 
+	const categoryColor = {
+		soon: 'purple',
+		'kind of soon': 'orange',
+		'not soon': 'green',
+		overdue: 'red',
+		inactive: 'gray',
+	};
+
 	return (
 		<li className="ListItem">
 			<label>
@@ -35,8 +49,14 @@ export function ListItem({ name, dateLastPurchased, onCheck, onDelete }) {
 					onChange={onCheck}
 					disabled={isChecked}
 				/>
-				{name}
+				<span className="item-name">{name}</span>
 			</label>
+			<span
+				className="item-category"
+				style={{ color: categoryColor[category] }}
+			>
+				{category}
+			</span>
 			<button onClick={handleDeleteButton}>delete</button>
 		</li>
 	);
