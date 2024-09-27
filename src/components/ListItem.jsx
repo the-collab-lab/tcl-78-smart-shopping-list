@@ -32,21 +32,12 @@ export function ListItem({
 		}
 	};
 
-	const categoryColor = (category) => {
-		switch (category) {
-			case 'soon':
-				return 'purple';
-			case 'kind of soon':
-				return 'orange';
-			case 'not soon':
-				return 'green';
-			case 'overdue':
-				return 'red';
-			case 'inactive':
-				return 'gray';
-			default:
-				return 'black';
-		}
+	const categoryColor = {
+		soon: 'purple',
+		'kind of soon': 'orange',
+		'not soon': 'green',
+		overdue: 'red',
+		inactive: 'gray',
 	};
 
 	return (
@@ -62,7 +53,7 @@ export function ListItem({
 			</label>
 			<span
 				className="item-category"
-				style={{ color: categoryColor(category) }}
+				style={{ color: categoryColor[category] }}
 			>
 				{category}
 			</span>
