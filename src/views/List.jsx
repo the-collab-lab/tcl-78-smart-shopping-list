@@ -12,10 +12,11 @@ export function List({ data, listPath, lists }) {
 	const [items, setItems] = useState([]);
 
 	const listTitle = listPath ? listPath.split('/')[1] : null;
-	const fixedListTitle =
-		listTitle[listTitle.length - 1] === '}'
+	const fixedListTitle = listTitle
+		? listTitle[listTitle.length - 1] === '}'
 			? listTitle.slice(0, -1)
-			: listTitle;
+			: listTitle
+		: null;
 
 	useEffect(() => {
 		const fetchItems = async () => {
