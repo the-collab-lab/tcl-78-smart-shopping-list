@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */
 
 :root {
 	--color-black: hsla(220, 13%, 18%, 1);
@@ -26,28 +26,6 @@
  */
 	font-size: 62.5%;
 }
-
-/* .gloria-hallelujah-regular {
-	font-family: 'Gloria Hallelujah', cursive;
-	font-weight: 400;
-	font-style: normal;
-}
-
-// <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 100 to 900
-
-.raleway {
-	font-family: 'Raleway', sans-serif;
-	font-optical-sizing: auto;
-	font-weight: <weight>;
-	font-style: normal;
-}
-
-h1 {
-	font-family: 'Gloria Hallelujah', cursive;
-	font-weight: 400;
-	font-style: normal;
-} */
 
 @media screen and (prefers-color-scheme: light) {
 	:root {
@@ -128,6 +106,22 @@ code {
 	--color-bg: var(--color-gray-light);
 }
 
-/* @import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities'; */
+// <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 100 to 900
+
+.raleway {
+	font-family: 'Raleway', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: <weight>;
+	font-style: normal;
+}
+
+.gloria-hallelujah-regular {
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
+h1 {
+	font-family: 'Gloria Hallelujah', cursive;
+}

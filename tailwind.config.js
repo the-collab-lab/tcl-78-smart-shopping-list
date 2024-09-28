@@ -2,7 +2,12 @@
 export default {
 	content: [],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				title: ['Gloria Hallelujah', 'cursive'],
+				text: ['Raleway', 'sans-serif'],
+			},
+		},
 	},
 	plugins: [],
 };
