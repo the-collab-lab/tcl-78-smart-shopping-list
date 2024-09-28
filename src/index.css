@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
 	--color-black: hsla(220, 13%, 18%, 1);
 	--color-gray-dark: hsla(220, 13%, 25%, 1);
@@ -23,7 +27,7 @@
 	font-size: 62.5%;
 }
 
-.gloria-hallelujah-regular {
+/* .gloria-hallelujah-regular {
 	font-family: 'Gloria Hallelujah', cursive;
 	font-weight: 400;
 	font-style: normal;
@@ -43,7 +47,7 @@ h1 {
 	font-family: 'Gloria Hallelujah', cursive;
 	font-weight: 400;
 	font-style: normal;
-}
+} */
 
 @media screen and (prefers-color-scheme: light) {
 	:root {
@@ -72,7 +76,7 @@ body {
 	color: var(--color-text);
 	font-family: 'Raleway', sans-serif;
 	font-optical-sizing: auto;
-	/* font-family:
+	font-family:
 		-apple-system,
 		BlinkMacSystemFont,
 		avenir next,
@@ -84,7 +88,7 @@ body {
 		roboto,
 		noto,
 		arial,
-		sans-serif; */
+		sans-serif;
 	font-size: 1.8rem;
 	/** Make sure the app fills the height of the screen. */
 	height: 100dvh;
@@ -123,3 +127,7 @@ code {
 :root.theme-light code {
 	--color-bg: var(--color-gray-light);
 }
+
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */

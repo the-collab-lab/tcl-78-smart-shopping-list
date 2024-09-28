@@ -15,7 +15,7 @@ export function Layout() {
 					<Link to="/">
 						<h1>
 							{' '}
-							<FaShoppingCart /> Shop&aposn Go
+							<FaShoppingCart /> Shop&apos;n Go
 						</h1>
 					</Link>
 					{!!user ? (
