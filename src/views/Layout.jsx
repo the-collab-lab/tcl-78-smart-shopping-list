@@ -1,6 +1,10 @@
 import { Outlet, NavLink, Link } from 'react-router-dom';
 import './Layout.css';
 import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
+import { IoMdHome } from 'react-icons/io';
+import { LuSettings2, LuListTodo } from 'react-icons/lu';
+import { RiFileInfoFill } from 'react-icons/ri';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export function Layout() {
 	const { user } = useAuth();
@@ -9,7 +13,10 @@ export function Layout() {
 			<div className="Layout">
 				<header className="Layout-header">
 					<Link to="/">
-						<h1>#APP/LogoPic</h1>
+						<h1>
+							{' '}
+							<FaShoppingCart /> Shop&aposn Go
+						</h1>
 					</Link>
 					{!!user ? (
 						<SignOutButton></SignOutButton>
@@ -23,20 +30,20 @@ export function Layout() {
 				<nav className="Nav">
 					<div className="Nav-container">
 						<NavLink to="/" className="Nav-link">
-							Home
+							<IoMdHome />
 						</NavLink>
 						{user && (
 							<NavLink to="/list" className="Nav-link">
-								List
+								<LuListTodo />
 							</NavLink>
 						)}
 						{user && (
 							<NavLink to="/manage-list" className="Nav-link">
-								Manage List
+								<LuSettings2 />
 							</NavLink>
 						)}
 						<NavLink to="/about" className="Nav-link">
-							About
+							<RiFileInfoFill />
 						</NavLink>
 					</div>
 				</nav>

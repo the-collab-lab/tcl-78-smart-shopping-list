@@ -23,6 +23,28 @@
 	font-size: 62.5%;
 }
 
+.gloria-hallelujah-regular {
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
+// <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 100 to 900
+
+.raleway {
+	font-family: 'Raleway', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: <weight>;
+	font-style: normal;
+}
+
+h1 {
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
 @media screen and (prefers-color-scheme: light) {
 	:root {
 		--color-accent: var(--color-cobalt-blue);
@@ -48,7 +70,9 @@
 body {
 	background-color: var(--color-bg);
 	color: var(--color-text);
-	font-family:
+	font-family: 'Raleway', sans-serif;
+	font-optical-sizing: auto;
+	/* font-family:
 		-apple-system,
 		BlinkMacSystemFont,
 		avenir next,
@@ -60,7 +84,7 @@ body {
 		roboto,
 		noto,
 		arial,
-		sans-serif;
+		sans-serif; */
 	font-size: 1.8rem;
 	/** Make sure the app fills the height of the screen. */
 	height: 100dvh;
