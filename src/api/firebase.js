@@ -8,6 +8,7 @@ import {
 	onSnapshot,
 	updateDoc,
 	deleteDoc,
+	arrayRemove,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
@@ -132,6 +133,24 @@ export async function shareList(listPath, currentUserId, recipientEmail) {
 		sharedLists: arrayUnion(listDocumentRef),
 	});
 	return `The list has been successfully shared with ${recipientEmail}`;
+}
+
+/**
+ * Delete user's list from the Firestore.
+ * @param {string} listPath The path to the list to be deleted.
+ * @param {string} userEmail The email of the user who owns the list.
+ */
+export async function deleteList(listPath, userEmail) {
+	const listDocRef = doc(db, listPath);
+	const userDocRef = doc(db, 'users', userEmail);
+	try {
+		await deleteDoc(listDocRef);
+		await updateDoc(userDocRef, {
+			sharedLists: arrayRemove(listDocRef),
+		});
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 /**

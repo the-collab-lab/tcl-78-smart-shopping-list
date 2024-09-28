@@ -1,6 +1,5 @@
 import './Home.css';
-import { SingleList } from '../components';
-import { AddList } from '../components/AddList';
+import { SingleList, AddList } from '../components';
 import { auth } from '../api/config.js';
 import { SignInButton, useAuth } from '../api/useAuth';
 
@@ -11,12 +10,12 @@ export function Home({ data, setListPath, userId, userEmail }) {
 		<div className="Home">
 			{!!user ? (
 				<>
-					<p>Welcome back {auth.currentUser.displayName}!</p>
+					<p>Welcome back {auth.currentUser.displayName.split(' ')[0]}!</p>
 					{data.length === 0 && (
 						<p>
 							{' '}
-							It seems you don&apos;t have any lists yet, Please create a list
-							using the form below
+							You don&apos;t have any shopping lists yet. Start by creating your
+							first one!
 						</p>
 					)}
 					{data.length > 0 && (
@@ -27,6 +26,8 @@ export function Home({ data, setListPath, userId, userEmail }) {
 									name={list.name}
 									path={list.path}
 									setListPath={setListPath}
+									userId={userId}
+									userEmail={userEmail}
 								/>
 							))}
 						</ul>
