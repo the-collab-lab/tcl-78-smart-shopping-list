@@ -3,29 +3,23 @@ import { shareList } from '../api/firebase';
 
 export function ManageList({ listPath, userId }) {
 	const [formAddUser, setFormAddUser] = useState('');
-	const [messageUser, setMessageUser] = useState('');
 
 	const handleAddUserSubmit = async (e) => {
 		e.preventDefault();
-		if (!formAddUser) {
-			setMessageUser('Enter a recipient email');
-			return;
-		}
+
 		try {
 			const successMessage = await shareList(listPath, userId, formAddUser);
-			setMessageUser(successMessage);
+			alert(successMessage);
 		} catch (error) {
 			console.error('Error sharing a list', error);
 			if (
 				error.message === 'You do not have permission to share this list' ||
 				error.message === 'The user with the provided email does not exist'
 			) {
-				setMessageUser(error.message);
+				alert(error.message);
 			} else {
-				setMessageUser('Failed to share the list. Please try again!');
+				alert('Failed to share the list. Please try again!');
 			}
-		} finally {
-			setFormAddUser('');
 		}
 	};
 
@@ -43,8 +37,6 @@ export function ManageList({ listPath, userId }) {
 					name="email"
 					required
 				/>
-
-				<p>{messageUser}</p>
 
 				<button>Invite</button>
 			</form>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ListItem } from '../components';
-import { AddItem } from '../components/AddItem';
+import { ListItem, AddItem } from '../components';
 import {
 	comparePurchaseUrgency,
 	updateItem,
@@ -12,7 +11,11 @@ export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
 	const [items, setItems] = useState([]);
 
-	const listTitle = listPath.split('/')[1];
+	const listTitle = listPath ? listPath.split('/')[1] : null;
+	const fixedListTitle =
+		listTitle[listTitle.length - 1] === '}'
+			? listTitle.slice(0, -1)
+			: listTitle;
 
 	useEffect(() => {
 		const fetchItems = async () => {
@@ -63,7 +66,19 @@ export function List({ data, listPath, lists }) {
 
 	return (
 		<>
-			<h2>{listTitle}</h2>
+			<h2>{fixedListTitle}</h2>
+			{!listPath && lists.length > 0 && data.length > 0 && (
+				<p>
+					Oops! No list selected yet. Head to the <Link to="/">home page</Link>{' '}
+					and select one!
+				</p>
+			)}
+			{!listPath && lists.length > 0 && data.length === 0 && (
+				<p>
+					Oops! No list selected yet. Head to the <Link to="/">home page</Link>{' '}
+					and select one!
+				</p>
+			)}
 			{lists.length === 0 && (
 				<p>
 					It looks like you don&apos;t have any shopping lists yet. Head to the{' '}
@@ -71,13 +86,13 @@ export function List({ data, listPath, lists }) {
 					organizing your shopping!
 				</p>
 			)}
-			{lists.length > 0 && data.length === 0 && (
+			{listPath && lists.length > 0 && data.length === 0 && (
 				<>
 					<AddItem data={data} listPath={listPath} />
 					<p>Your list is currently empty.</p>
 				</>
 			)}
-			{lists.length > 0 && data.length > 0 && (
+			{listPath && lists.length > 0 && data.length > 0 && (
 				<>
 					<AddItem data={data} listPath={listPath} />
 
