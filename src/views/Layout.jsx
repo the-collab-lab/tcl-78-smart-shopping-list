@@ -40,7 +40,7 @@ export function Layout() {
 						)}
 						{user && (
 							<NavLink to="/manage-list" className="Nav-link">
-								<LuSettings2 /> Manage List
+								<LuSettings2 /> Manage
 							</NavLink>
 						)}
 						<NavLink to="/about" className="Nav-link">

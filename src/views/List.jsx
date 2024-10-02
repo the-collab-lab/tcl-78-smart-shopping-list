@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ListItem, AddItem } from '../components';
+import './List.css';
 import {
 	comparePurchaseUrgency,
 	updateItem,
@@ -66,8 +67,8 @@ export function List({ data, listPath, lists }) {
 	};
 
 	return (
-		<>
-			<h2>{fixedListTitle}</h2>
+		<div className="container">
+			<h2 className="text-center">{fixedListTitle}</h2>
 			{!listPath && lists.length > 0 && data.length > 0 && (
 				<p>
 					Oops! No list selected yet. Head to the <Link to="/">home page</Link>{' '}
@@ -97,9 +98,15 @@ export function List({ data, listPath, lists }) {
 				<>
 					<AddItem data={data} listPath={listPath} />
 
-					<form onSubmit={handleSearch}>
-						<div>
-							<label htmlFor="search-item-in-list"> Search items:</label>
+					<div>
+						<form onSubmit={handleSearch} className="mb-4">
+							<label
+								htmlFor="search-item-in-list"
+								className="flex items-center justify-between space-x-2"
+							>
+								{' '}
+								Search items:
+							</label>
 							<input
 								onChange={handleSearch}
 								type="text"
@@ -113,45 +120,46 @@ export function List({ data, listPath, lists }) {
 									x
 								</button>
 							)}
+						</form>
+						<div>
+							{searchItem ? (
+								<ul>
+									{filterItems.map((item) => (
+										<ListItem
+											key={item.id}
+											id={item.id}
+											name={item.name}
+											dateLastPurchased={item.dateLastPurchased}
+											onCheck={() => handleCheck(item)}
+											onDelete={() => handleDelete(item.id)}
+										/>
+									))}
+								</ul>
+							) : (
+								<ul>
+									{Object.keys(groupedItems).map((category) => (
+										<li key={category}>
+											<ul>
+												{groupedItems[category].map((item) => (
+													<ListItem
+														key={item.id}
+														name={item.name}
+														id={item.id}
+														dateLastPurchased={item.dateLastPurchased}
+														onCheck={() => handleCheck(item)}
+														onDelete={() => handleDelete(item.id)}
+														category={item.category}
+													/>
+												))}
+											</ul>
+										</li>
+									))}
+								</ul>
+							)}
 						</div>
-					</form>
-
-					{searchItem ? (
-						<ul>
-							{filterItems.map((item) => (
-								<ListItem
-									key={item.id}
-									id={item.id}
-									name={item.name}
-									dateLastPurchased={item.dateLastPurchased}
-									onCheck={() => handleCheck(item)}
-									onDelete={() => handleDelete(item.id)}
-								/>
-							))}
-						</ul>
-					) : (
-						<ul>
-							{Object.keys(groupedItems).map((category) => (
-								<li key={category}>
-									<ul>
-										{groupedItems[category].map((item) => (
-											<ListItem
-												key={item.id}
-												name={item.name}
-												id={item.id}
-												dateLastPurchased={item.dateLastPurchased}
-												onCheck={() => handleCheck(item)}
-												onDelete={() => handleDelete(item.id)}
-												category={item.category}
-											/>
-										))}
-									</ul>
-								</li>
-							))}
-						</ul>
-					)}
+					</div>
 				</>
 			)}
-		</>
+		</div>
 	);
 }
