@@ -1,11 +1,13 @@
 import { Outlet, NavLink, Link } from 'react-router-dom';
-import './Layout.css';
 import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
-import { FaShoppingCart } from 'react-icons/fa';
-import { GoHomeFill } from 'react-icons/go';
-import { FaListCheck } from 'react-icons/fa6';
-import { LuSettings2 } from 'react-icons/lu';
-import { TbInfoHexagonFilled } from 'react-icons/tb';
+
+import {
+	FaShoppingCart,
+	FaHome,
+	FaClipboardList,
+	FaShareAlt,
+	FaInfoCircle,
+} from 'react-icons/fa';
 
 export function Layout() {
 	const { user } = useAuth();
@@ -13,17 +15,19 @@ export function Layout() {
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
-					<Link to="/">
-						<h1>
-							{' '}
-							<FaShoppingCart /> Shop&apos;n Go
-						</h1>
-					</Link>
-					{!!user ? (
-						<SignOutButton></SignOutButton>
-					) : (
-						<SignInButton></SignInButton>
-					)}
+					<div className="Header-container">
+						<Link to="/">
+							<h1 className="logo">
+								{' '}
+								<img src="/img/plastic-bag.png" alt="" /> Shop&apos;n Go
+							</h1>
+						</Link>
+						{!!user ? (
+							<SignOutButton></SignOutButton>
+						) : (
+							<SignInButton></SignInButton>
+						)}
+					</div>
 				</header>
 				<main className="Layout-main">
 					<Outlet />
@@ -31,20 +35,24 @@ export function Layout() {
 				<nav className="Nav">
 					<div className="Nav-container">
 						<NavLink to="/" className="Nav-link">
-							<GoHomeFill /> Home
+							<FaHome />
+							<span className="hidden md:inline">Home</span>
 						</NavLink>
 						{user && (
 							<NavLink to="/list" className="Nav-link">
-								<FaListCheck /> List
+								<FaClipboardList />
+								<span className="hidden md:inline">List</span>
 							</NavLink>
 						)}
 						{user && (
 							<NavLink to="/manage-list" className="Nav-link">
-								<LuSettings2 /> Manage List
+								<FaShareAlt />
+								<span className="hidden md:inline">Manage List</span>
 							</NavLink>
 						)}
 						<NavLink to="/about" className="Nav-link">
-							<TbInfoHexagonFilled /> About
+							<FaInfoCircle />
+							<span className="hidden md:inline">About</span>
 						</NavLink>
 					</div>
 				</nav>
