@@ -6,6 +6,7 @@ import { FiLogIn, FiLogOut } from 'react-icons/fi';
 
 export const SignInButton = () => (
 	<button
+		className="rounded-[30px] hover:bg-yellow-300 text-2xl p-3"
 		type="button"
 		onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
 	>
@@ -14,7 +15,11 @@ export const SignInButton = () => (
 );
 
 export const SignOutButton = () => (
-	<button type="button" onClick={() => auth.signOut()}>
+	<button
+		className="rounded-[30px] hover:bg-yellow-300 text-2xl p-3"
+		type="button"
+		onClick={() => auth.signOut()}
+	>
 		<FiLogOut />
 	</button>
 );
