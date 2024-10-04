@@ -7,7 +7,7 @@
 
 @layer base {
 	html {
-		@apply text-blue-950 font-sans;
+		@apply text-blue-950 font-sans dark:bg-slate-900 dark:text-white;
 	}
 
 	a {
@@ -28,9 +28,13 @@
 		@apply h-[50px] md:h-[60px];
 	}
 
+	.btn-auth {
+		@apply rounded-[30px] hover:bg-yellow-300 p-3 inline-flex items-center gap-3;
+	}
+
 	.Layout-header,
 	.Nav {
-		@apply bg-yellow-200;
+		@apply bg-yellow-200 dark:text-blue-950;
 	}
 
 	.Layout-header {

@@ -6,21 +6,19 @@ import { FiLogIn, FiLogOut } from 'react-icons/fi';
 
 export const SignInButton = () => (
 	<button
-		className="rounded-[30px] hover:bg-yellow-300 text-2xl p-3"
+		className="btn-auth"
 		type="button"
 		onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
 	>
-		<FiLogIn />
+		<span className="text-md md:text-xl">Sign In</span>
+		<FiLogIn className="text-2xl" />
 	</button>
 );
 
 export const SignOutButton = () => (
-	<button
-		className="rounded-[30px] hover:bg-yellow-300 text-2xl p-3"
-		type="button"
-		onClick={() => auth.signOut()}
-	>
-		<FiLogOut />
+	<button className="btn-auth" type="button" onClick={() => auth.signOut()}>
+		<span className="text-md md:text-xl">Sign Out</span>
+		<FiLogOut className="text-2xl" />
 	</button>
 );
 
