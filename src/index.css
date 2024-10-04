@@ -7,8 +7,7 @@
 
 @layer base {
 	html {
-		@apply text-blue-950;
-		font-family: 'Fredoka', sans-serif;
+		@apply text-blue-950 font-sans;
 	}
 
 	a {
