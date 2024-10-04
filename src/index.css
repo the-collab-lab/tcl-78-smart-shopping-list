@@ -1,105 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--color-black: hsla(220, 13%, 18%, 1);
-	--color-gray-dark: hsla(220, 13%, 25%, 1);
-	--color-white: hsla(220, 13%, 98%, 1);
-	--color-gray-light: hsla(220, 13%, 94%, 1);
-	--color-emerald-green: hsla(168, 92%, 25%, 1);
-	--color-vermillion-green: hsla(168, 92%, 43%, 1);
-	--color-cobalt-blue: hsla(215, 100%, 34%, 1);
-	--color-pastel-blue: hsla(215, 100%, 73%, 1);
-	--color-red: hsl(0, 68%, 42%);
-
-	--color-accent: var(--color-pastel-blue);
-	--color-bg: var(--color-black);
-	--color-border: hsla(220, 13%, 32%, 1);
-	--color-error: var(--color-red);
-	--color-text: var(--color-white);
-
-	/**
- * Set the value of 1rem to 10px to make relative units
- * easier to work with.
- * (The default is 16px. 16 * 62.5% = 10)
- */
-	font-size: 62.5%;
-}
-
-@media screen and (prefers-color-scheme: light) {
-	:root {
-		--color-accent: var(--color-cobalt-blue);
-		--color-bg: var(--color-white);
-		--color-border: hsla(220, 13%, 78%, 1);
-		--color-text: var(--color-black);
+@layer base {
+	html {
+		@apply text-blue-950 font-sans dark:bg-slate-900 dark:text-white;
 	}
-}
 
-:root.theme-light {
-	--color-accent: var(--color-cobalt-blue);
-	--color-bg: var(--color-white);
-	--color-border: hsla(220, 13%, 78%, 1);
-	--color-text: var(--color-black);
-}
-
-*,
-*::after,
-*::before {
-	box-sizing: border-box;
-}
-
-body {
-	background-color: var(--color-bg);
-	color: var(--color-text);
-	font-family:
-		-apple-system,
-		BlinkMacSystemFont,
-		avenir next,
-		avenir,
-		segoe ui,
-		helvetica neue,
-		helvetica,
-		Ubuntu,
-		roboto,
-		noto,
-		arial,
-		sans-serif;
-	font-size: 1.8rem;
-	/** Make sure the app fills the height of the screen. */
-	height: 100dvh;
-	line-height: 1.4;
-	margin: 0;
-
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-code {
-	--color-bg: var(--color-gray-dark);
-	--color-text: var(--color-accent);
-
-	background-color: var(--color-bg);
-	border-radius: 4px;
-	color: var(--color-text);
-	display: inline-block;
-	font-family:
-		Menlo,
-		Consolas,
-		Monaco,
-		Liberation Mono,
-		Lucida Console,
-		monospace;
-	font-size: 0.9em;
-	padding: 2px 2px;
-}
-
-@media screen and (prefers-color-scheme: light) {
-	code {
-		--color-bg: var(--color-gray-light);
+	a {
+		@apply cursor-pointer;
 	}
-}
 
-:root.theme-light code {
-	--color-bg: var(--color-gray-light);
+	.Layout {
+		@apply flex flex-col;
+		height: 100dvh;
+	}
+
+	.logo {
+		@apply text-2xl md:text-3xl flex flex-row items-center md:gap-2;
+		font-family: 'Gloria Hallelujah', sans-serif;
+	}
+
+	.logo img {
+		@apply h-[50px] md:h-[60px];
+	}
+
+	.btn-auth {
+		@apply rounded-[30px] hover:bg-yellow-300 p-3 inline-flex items-center gap-3;
+	}
+
+	.Layout-header,
+	.Nav {
+		@apply bg-yellow-200 dark:text-blue-950;
+	}
+
+	.Layout-header {
+		@apply mb-6 md:mb-12 lg:mb-16;
+	}
+
+	.Header-container {
+		@apply container mx-auto flex justify-between items-center p-2;
+	}
+
+	.Layout-main {
+		@apply mx-auto p-2;
+		width: min(700px, 100%);
+	}
+
+	.Nav {
+		@apply bottom-0 fixed w-full p-2 md:py-0;
+	}
+
+	.Nav-container {
+		@apply container mx-auto flex flex-row justify-evenly;
+	}
+
+	.Nav-link {
+		@apply flex flex-col lg:flex-row items-center justify-center gap-y-1 lg:gap-x-2 
+			leading-tight text-2xl p-3 lg:p-5 rounded-[30px] hover:bg-yellow-300 md:w-full lg:w-[250px];
+	}
+
+	.Nav-link.active {
+		@apply underline bg-yellow-400;
+	}
 }

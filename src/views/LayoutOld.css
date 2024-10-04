@@ -71,9 +71,3 @@
 	text-decoration-thickness: 0.22em;
 	text-underline-offset: 0.1em;
 }
-
-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}

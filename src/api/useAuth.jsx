@@ -2,19 +2,23 @@ import { useEffect, useState } from 'react';
 import { auth } from './config.js';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { addUserToDatabase } from './firebase.js';
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
 
 export const SignInButton = () => (
 	<button
+		className="btn-auth"
 		type="button"
 		onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
 	>
-		Sign In
+		<span className="text-md md:text-xl">Sign In</span>
+		<FiLogIn className="text-2xl" />
 	</button>
 );
 
 export const SignOutButton = () => (
-	<button type="button" onClick={() => auth.signOut()}>
-		Sign Out
+	<button className="btn-auth" type="button" onClick={() => auth.signOut()}>
+		<span className="text-md md:text-xl">Sign Out</span>
+		<FiLogOut className="text-2xl" />
 	</button>
 );
 
