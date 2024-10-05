@@ -71,7 +71,7 @@ export function AddItem({ data, listPath }) {
 		<>
 			<form
 				onSubmit={handleNewItemSubmit}
-				className="add-item-form flex p-1 items-center rounded mb-2"
+				className="add-item-form flex p-1 rounded mb-2"
 			>
 				{/* Item Name Section */}
 				<div className="flex items-center mb-4">
