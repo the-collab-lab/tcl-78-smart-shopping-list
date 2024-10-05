@@ -26,7 +26,10 @@ export function ManageList({ listPath, userId }) {
 	return (
 		<>
 			<h2>Invite a user to share your list with you</h2>
-			<form onSubmit={handleAddUserSubmit}>
+			<form
+				onSubmit={handleAddUserSubmit}
+				className="flex p-1 items-center rounded mb-2"
+			>
 				<label htmlFor="email">User email</label>
 				<input
 					id="email"
@@ -36,6 +39,7 @@ export function ManageList({ listPath, userId }) {
 					onChange={(e) => setFormAddUser(e.target.value)}
 					name="email"
 					required
+					className="w-auto p-2 border border-blue-200 rounded focus:outline-none focus:ring-opacity-50"
 				/>
 
 				<button>Invite</button>

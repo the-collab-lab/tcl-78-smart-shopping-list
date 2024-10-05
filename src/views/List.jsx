@@ -98,8 +98,14 @@ export function List({ data, listPath, lists }) {
 					<AddItem data={data} listPath={listPath} />
 
 					<form onSubmit={handleSearch}>
-						<div>
-							<label htmlFor="search-item-in-list"> Search items:</label>
+						<div className="flex p-1 items-center space-x-2 mb-5 border-blue-100 border-2 w-fit rounded-md">
+							<label
+								htmlFor="search-item-in-list"
+								className="text-gray-700 font-medium"
+							>
+								{' '}
+								Search items:
+							</label>
 							<input
 								onChange={handleSearch}
 								type="text"
@@ -107,6 +113,7 @@ export function List({ data, listPath, lists }) {
 								value={searchItem}
 								placeholder="Search an item..."
 								aria-label="Search for items"
+								className="p-1 w-auto text-black rounded-md focus:outline-none focus:ring-opacity-50"
 							/>
 							{searchItem && (
 								<button type="button" onClick={clearSearch}>

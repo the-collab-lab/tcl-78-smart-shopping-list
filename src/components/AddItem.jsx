@@ -69,7 +69,10 @@ export function AddItem({ data, listPath }) {
 
 	return (
 		<>
-			<form onSubmit={handleNewItemSubmit} className="add-item-form">
+			<form
+				onSubmit={handleNewItemSubmit}
+				className="add-item-form flex p-1 items-center rounded mb-2"
+			>
 				{/* Item Name Section */}
 				<div className="flex items-center mb-4">
 					<label htmlFor="name" className="mr-2">
@@ -83,7 +86,7 @@ export function AddItem({ data, listPath }) {
 						onChange={handleNewItemChange}
 						name="name"
 						required
-						className="border p-2"
+						className="border p-2 w-auto border-blue-100  text-black rounded-md focus:outline-none focus:ring-opacity-50"
 					/>
 				</div>
 
@@ -98,9 +101,11 @@ export function AddItem({ data, listPath }) {
 						onChange={handleNewItemChange}
 						value={formNewItem.nextPurchase}
 						required
-						className="border p-2 rounded mb-4"
+						className="border p-2 rounded mb-4 border-blue-100 "
 					>
-						<option value="">Select Urgency</option>
+						<option className="border-blue-200" value="">
+							Select Urgency
+						</option>
 						<option value={7}>Soon</option>
 						<option value={14}>Kind of soon</option>
 						<option value={30}>Not soon</option>
