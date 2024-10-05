@@ -69,33 +69,45 @@ export function AddItem({ data, listPath }) {
 
 	return (
 		<>
-			<form onSubmit={handleNewItemSubmit}>
-				<label htmlFor="name">Item name</label>
-				<input
-					id="name"
-					type="text"
-					placeholder="Enter item name"
-					value={formNewItem.name}
-					onChange={handleNewItemChange}
-					name="name"
-					required
-				/>
+			<form onSubmit={handleNewItemSubmit} className="add-item-form">
+				{/* Item Name Section */}
+				<div className="flex items-center mb-4">
+					<label htmlFor="name" className="mr-2">
+						Item name:{' '}
+					</label>
+					<input
+						id="name"
+						type="text"
+						placeholder="Enter new item name"
+						value={formNewItem.name}
+						onChange={handleNewItemChange}
+						name="name"
+						required
+						className="border p-2"
+					/>
+				</div>
 
-				<label htmlFor="nextPurchase">Urgency</label>
-				<select
-					name="nextPurchase"
-					id="nextPurchase"
-					onChange={handleNewItemChange}
-					value={formNewItem.nextPurchase}
-					required
-				>
-					<option value="">Select Urgency</option>
-					<option value={7}>Soon</option>
-					<option value={14}>Kind of soon</option>
-					<option value={30}>Not soon</option>
-				</select>
+				{/* Urgency Section */}
+				<div className="flex items-center mb-4">
+					<label htmlFor="nextPurchase" className="mb-2">
+						Urgency:{' '}
+					</label>
+					<select
+						name="nextPurchase"
+						id="nextPurchase"
+						onChange={handleNewItemChange}
+						value={formNewItem.nextPurchase}
+						required
+						className="border p-2 rounded mb-4"
+					>
+						<option value="">Select Urgency</option>
+						<option value={7}>Soon</option>
+						<option value={14}>Kind of soon</option>
+						<option value={30}>Not soon</option>
+					</select>
+				</div>
 
-				<button>Add Item</button>
+				<button type="submit">Add Item</button>
 
 				<p>{messageItem}</p>
 			</form>
