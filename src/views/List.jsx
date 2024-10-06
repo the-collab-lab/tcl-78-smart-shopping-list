@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ListItem, AddItem } from '../components';
+import { FiDelete } from 'react-icons/fi';
 import {
 	comparePurchaseUrgency,
 	updateItem,
@@ -9,6 +10,7 @@ import {
 
 export function List({ data, listPath, lists }) {
 	const [searchItem, setSearchItem] = useState('');
+	// eslint-disable-next-line no-unused-vars
 	const [items, setItems] = useState([]);
 
 	const listTitle = listPath ? listPath.split('/')[1] : null;
@@ -66,8 +68,8 @@ export function List({ data, listPath, lists }) {
 	};
 
 	return (
-		<>
-			<h2>{fixedListTitle}</h2>
+		<div className="container mx-auto px-4 min-h-screen flex flex-col items-center justify-center justify-items-center mb-40">
+			<h2 className="text-3xl">{fixedListTitle}</h2>
 			{!listPath && lists.length > 0 && data.length > 0 && (
 				<p>
 					Oops! No list selected yet. Head to the <Link to="/">home page</Link>{' '}
@@ -99,20 +101,29 @@ export function List({ data, listPath, lists }) {
 
 					<form onSubmit={handleSearch}>
 						<div>
-							<label htmlFor="search-item-in-list"> Search items:</label>
-							<input
-								onChange={handleSearch}
-								type="text"
-								id="search-item-in-list"
-								value={searchItem}
-								placeholder="Search an item..."
-								aria-label="Search for items"
-							/>
-							{searchItem && (
-								<button type="button" onClick={clearSearch}>
-									x
-								</button>
-							)}
+							<span className="flex flex-col m-2 p-2 justify-evenly">
+								<label
+									htmlFor="search-item-in-list"
+									className="text-center m-4"
+								>
+									{' '}
+									Search items:
+								</label>
+								<input
+									className="border"
+									onChange={handleSearch}
+									type="text"
+									id="search-item-in-list"
+									value={searchItem}
+									placeholder="Search an item..."
+									aria-label="Search for items"
+								/>
+								{searchItem && (
+									<button type="button" onClick={clearSearch}>
+										<FiDelete />
+									</button>
+								)}
+							</span>
 						</div>
 					</form>
 
@@ -152,6 +163,6 @@ export function List({ data, listPath, lists }) {
 					)}
 				</>
 			)}
-		</>
+		</div>
 	);
 }
