@@ -2,7 +2,6 @@ import { Outlet, NavLink, Link } from 'react-router-dom';
 import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
 
 import {
-	FaShoppingCart,
 	FaHome,
 	FaClipboardList,
 	FaShareAlt,
