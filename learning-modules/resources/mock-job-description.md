@@ -21,7 +21,7 @@ You love collaborating with teammates to understand and address their data needs
 
 **You have substantial experience with Web APIs.** In this role, you'll be building integrations against partners' APIs. You'll need to know and love Web APIs.
 
-**You are a skilled programmer.** You don’t expect to come up with designs and leave implementation to others. Instead, you dig in and get stuff done. You'll be working in Python and/or Node on a day to day basis.
+**You are a skilled programmer.** You don’t expect to come up with designs and leave implementation to others. Instead, you dig in and get stuff done. You'll be working in React and/or Node on a day to day basis.
 
 **You are a skilled written communicator.** Zapier is a 100% remote team and writing is our primary means of communication. You can communicate unfamiliar technical topics clearly and in an approachable way.
 
