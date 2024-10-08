@@ -12,9 +12,9 @@ export function Layout() {
 	const { user } = useAuth();
 	return (
 		<>
-			<div className="Layout">
-				<header className="Layout-header">
-					<div className="Header-container">
+			<div className="layout">
+				<header className="layout-header">
+					<div className="header-container">
 						<Link to="/">
 							<h1 className="logo">
 								{' '}
@@ -28,28 +28,28 @@ export function Layout() {
 						)}
 					</div>
 				</header>
-				<main className="Layout-main">
+				<main className="layout-main">
 					<Outlet />
 				</main>
-				<nav className="Nav">
-					<div className="Nav-container">
-						<NavLink to="/" className="Nav-link">
+				<nav className="nav">
+					<div className="nav-container">
+						<NavLink to="/" className="nav-link">
 							<FaHome />
 							<span className="hidden md:inline">Home</span>
 						</NavLink>
 						{user && (
-							<NavLink to="/list" className="Nav-link">
+							<NavLink to="/list" className="nav-link">
 								<FaClipboardList />
 								<span className="hidden md:inline">List</span>
 							</NavLink>
 						)}
 						{user && (
-							<NavLink to="/manage-list" className="Nav-link">
+							<NavLink to="/manage-list" className="nav-link">
 								<FaShareAlt />
-								<span className="hidden md:inline">Settings</span>
+								<span className="hidden md:inline">Share</span>
 							</NavLink>
 						)}
-						<NavLink to="/about" className="Nav-link">
+						<NavLink to="/about" className="nav-link">
 							<FaInfoCircle />
 							<span className="hidden md:inline">About</span>
 						</NavLink>

@@ -7,20 +7,26 @@
 
 @layer base {
 	html {
-		@apply text-blue-950 font-sans dark:bg-slate-900 dark:text-white;
+		@apply font-sans bg-base text-secondary dark:bg-secondary dark:text-base;
 	}
 
-	a {
+	a,
+	button {
 		@apply cursor-pointer;
 	}
 
-	.Layout {
+	.subheading {
+		@apply text-center text-2xl mb-4;
+	}
+
+	.layout {
 		@apply flex flex-col;
 		height: 100dvh;
 	}
 
 	.logo {
-		@apply text-2xl md:text-3xl flex flex-row items-center md:gap-2;
+		@apply text-2xl md:text-3xl flex flex-row items-center md:gap-2
+			text-accent dark:text-primary;
 		font-family: 'Gloria Hallelujah', sans-serif;
 	}
 
@@ -29,41 +35,78 @@
 	}
 
 	.btn-auth {
-		@apply rounded-[30px] hover:bg-yellow-300 p-3 inline-flex items-center gap-3;
+		@apply rounded-[30px] p-2 md:p-3 inline-flex items-center gap-3 border-2
+			border-accent text-accent hover:bg-accent hover:text-primary
+			dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-secondary;
 	}
 
-	.Layout-header,
-	.Nav {
-		@apply bg-yellow-200 dark:text-blue-950;
+	.layout-header {
+		@apply mb-4;
 	}
 
-	.Layout-header {
-		@apply mb-6 md:mb-12 lg:mb-16;
-	}
-
-	.Header-container {
+	.header-container {
 		@apply container mx-auto flex justify-between items-center p-2;
 	}
 
-	.Layout-main {
-		@apply mx-auto p-2;
-		width: min(700px, 100%);
+	.layout-main {
+		@apply mx-auto p-5;
+		width: min(600px, 100%);
 	}
 
-	.Nav {
+	.nav {
 		@apply bottom-0 fixed w-full p-2 md:py-0;
 	}
 
-	.Nav-container {
+	.nav-container {
 		@apply container mx-auto flex flex-row justify-evenly;
 	}
 
-	.Nav-link {
+	.nav-link {
 		@apply flex flex-col lg:flex-row items-center justify-center gap-y-1 lg:gap-x-2 
-			leading-tight text-2xl p-3 lg:p-5 rounded-[30px] hover:bg-yellow-300 md:w-full lg:w-[250px];
+			leading-tight text-2xl py-3 lg:py-5 hover:text-accent;
 	}
 
-	.Nav-link.active {
-		@apply underline bg-yellow-400;
+	.nav-link.active {
+		@apply underline text-accent;
+	}
+
+	.list-item {
+		@apply bg-primary text-secondary hover:bg-accent hover:text-primary
+		my-2 px-3 py-2 rounded-lg;
+		transition:
+			background-color 0.3s,
+			box-shadow 0.3s;
+	}
+
+	.list-item:hover {
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.list-item-flex {
+		@apply flex items-center justify-between space-x-2;
+	}
+
+	.single-list {
+		@apply mx-auto flex justify-between items-center mb-3 py-2 px-3 border-2 rounded-lg 
+			border-accent hover:shadow-lg cursor-pointer;
+		width: min(100%, 450px);
+	}
+
+	.form-container {
+		width: min(500px, 100%);
+		@apply mx-auto;
+	}
+
+	.form-group {
+		@apply flex justify-between items-center mb-2;
+	}
+
+	.form-input {
+		@apply border border-accent rounded-lg py-1 px-2 grow;
+	}
+
+	.btn-form {
+		@apply block mx-auto mt-4 py-1.5 px-3 rounded-full bg-accent text-primary 
+			hover:shadow-lg;
 	}
 }

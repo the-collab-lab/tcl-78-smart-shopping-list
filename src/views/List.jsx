@@ -68,8 +68,8 @@ export function List({ data, listPath, lists }) {
 	};
 
 	return (
-		<div className="container mx-auto px-4 min-h-screen flex flex-col items-center justify-center justify-items-center mb-40">
-			<h2 className="text-3xl">{fixedListTitle}</h2>
+		<>
+			<h2 className="subheading">{fixedListTitle}</h2>
 			{!listPath && lists.length > 0 && data.length > 0 && (
 				<p>
 					Oops! No list selected yet. Head to the <Link to="/">home page</Link>{' '}
@@ -99,23 +99,19 @@ export function List({ data, listPath, lists }) {
 				<>
 					<AddItem data={data} listPath={listPath} />
 
-					<form onSubmit={handleSearch}>
-						<div>
-							<span className="flex flex-col m-2 p-2 justify-evenly">
-								<label
-									htmlFor="search-item-in-list"
-									className="text-center m-4"
-								>
-									{' '}
-									Search items:
+					<div className="form-container">
+						<form onSubmit={handleSearch}>
+							<div className="form-group">
+								<label htmlFor="search-item-in-list" className="mr-2">
+									Filter:
 								</label>
 								<input
-									className="border"
+									className="form-input"
 									onChange={handleSearch}
 									type="text"
 									id="search-item-in-list"
 									value={searchItem}
-									placeholder="Search an item..."
+									placeholder="Search Item..."
 									aria-label="Search for items"
 								/>
 								{searchItem && (
@@ -123,9 +119,9 @@ export function List({ data, listPath, lists }) {
 										<FiDelete />
 									</button>
 								)}
-							</span>
-						</div>
-					</form>
+							</div>
+						</form>
+					</div>
 
 					{searchItem ? (
 						<ul>
@@ -163,6 +159,6 @@ export function List({ data, listPath, lists }) {
 					)}
 				</>
 			)}
-		</div>
+		</>
 	);
 }
