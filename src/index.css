@@ -49,7 +49,7 @@
 	}
 
 	.layout-main {
-		@apply mx-auto p-5;
+		@apply mx-auto p-5 pb-20;
 		width: min(600px, 100%);
 	}
 
