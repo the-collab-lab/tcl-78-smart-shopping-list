@@ -1,6 +1,7 @@
-import './SingleList.css';
+// import './SingleList.css';
 import { useNavigate } from 'react-router-dom';
 import { deleteList } from '../api';
+import { FaTrashCan } from 'react-icons/fa6';
 
 export function SingleList({ name, path, setListPath, userId, userEmail }) {
 	const navigate = useNavigate();
@@ -24,10 +25,15 @@ export function SingleList({ name, path, setListPath, userId, userEmail }) {
 	};
 
 	return (
-		<li className="SingleList">
+		<li className="flex flex-row items-baseline text-lg m-4 p-2 border-2 rounded-xl border-yellow-300 hover:shadow-lg">
 			<button onClick={handleClick}>{name}</button>
 			{isUsersList && (
-				<button onClick={() => handleDelete(path, userEmail)}>X</button>
+				<button
+					className="flex place-self-center pl-2"
+					onClick={() => handleDelete(path, userEmail)}
+				>
+					<FaTrashCan className="" />
+				</button>
 			)}
 		</li>
 	);

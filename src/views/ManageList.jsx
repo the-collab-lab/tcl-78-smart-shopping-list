@@ -24,11 +24,16 @@ export function ManageList({ listPath, userId }) {
 	};
 
 	return (
-		<>
-			<h2>Invite a user to share your list with you</h2>
-			<form onSubmit={handleAddUserSubmit}>
-				<label htmlFor="email">User email</label>
+		<div className="container mx-auto px-4 flex flex-col items-center justify-center justify-items-center mb-40">
+			<h2 className="text-xl text-center">
+				Invite a user to share your list with you
+			</h2>
+			<form className="flex flex-col m-2 p-2" onSubmit={handleAddUserSubmit}>
+				<label className="text-lg text-center" htmlFor="email">
+					User email
+				</label>
 				<input
+					className="border m-3 p-3"
 					id="email"
 					type="email"
 					placeholder="Email"
@@ -38,8 +43,10 @@ export function ManageList({ listPath, userId }) {
 					required
 				/>
 
-				<button>Invite</button>
+				<button className="text-lg m-3 p-2 border-2 rounded-full border-yellow-300 hover:shadow-lg">
+					Invite
+				</button>
 			</form>
-		</>
+		</div>
 	);
 }

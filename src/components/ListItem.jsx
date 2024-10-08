@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ListItem.css';
-import { FaTrashCan } from 'react-icons/fa6';
-import { FaCartShopping } from 'react-icons/fa6';
+import { FaTrashCan, FaCartShopping } from 'react-icons/fa6';
 
 export function ListItem({
 	name,
@@ -43,7 +42,7 @@ export function ListItem({
 	};
 
 	return (
-		<div className="list-item flex items-center justify-between p-3">
+		<div className="list-item items-center justify-between p-3 rounded-xl">
 			<div className="flex items-center justify-between space-x-2">
 				<label className="flex items-center space-x-2">
 					<input
@@ -60,7 +59,7 @@ export function ListItem({
 				</label>
 				<div className="flex items-center space-x-2">
 					<span
-						className={`px-2 py-1 border text-sm font-medium ${categoryColor[category]}`}
+						className={`px-2 py-1 border text-sm font-medium uppercase ${categoryColor[category]}`}
 						style={{ color: categoryColor[category] }}
 					>
 						{category}

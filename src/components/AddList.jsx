@@ -25,9 +25,12 @@ export function AddList({ setListPath, userId, userEmail }) {
 
 	return (
 		<>
-			<form onSubmit={handleCreateListButton}>
-				<label htmlFor="listName">List Name:</label>
+			<form className="m-2" onSubmit={handleCreateListButton}>
+				<label htmlFor="listName" className="text-2xl text-center m-2">
+					List Name:
+				</label>
 				<input
+					className="m-4"
 					type="text"
 					id="listName"
 					value={listName}
@@ -35,7 +38,10 @@ export function AddList({ setListPath, userId, userEmail }) {
 					placeholder="Enter the name of your new list"
 					required
 				/>
-				<button type="submit" className="button">
+				<button
+					type="submit"
+					className="m-4 p-2 border-2 rounded-full border-yellow-300 hover:shadow-lg"
+				>
 					Create list
 				</button>
 			</form>

@@ -2,7 +2,6 @@ import { Outlet, NavLink, Link } from 'react-router-dom';
 import { SignInButton, SignOutButton, useAuth } from '../api/useAuth';
 
 import {
-	FaShoppingCart,
 	FaHome,
 	FaClipboardList,
 	FaShareAlt,
@@ -47,7 +46,7 @@ export function Layout() {
 						{user && (
 							<NavLink to="/manage-list" className="Nav-link">
 								<FaShareAlt />
-								<span className="hidden md:inline">Manage List</span>
+								<span className="hidden md:inline">Settings</span>
 							</NavLink>
 						)}
 						<NavLink to="/about" className="Nav-link">
