@@ -88,7 +88,7 @@
 
 	.single-list {
 		@apply mx-auto flex justify-between items-center mb-3 py-2 px-3 border-2 rounded-lg 
-			border-accent hover:shadow-lg cursor-pointer;
+			border-accent cursor-pointer hover:shadow-lg hover:bg-accent;
 		width: min(100%, 450px);
 	}
 
