@@ -1,6 +1,7 @@
 import { SingleList, AddList } from '../components';
 import { auth } from '../api/config.js';
-import { SignInButton, useAuth } from '../api/useAuth';
+import { useAuth } from '../api/useAuth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 export function Home({ data, setListPath, userId, userEmail }) {
 	const { user } = useAuth();
@@ -45,10 +46,19 @@ export function Home({ data, setListPath, userId, userEmail }) {
 						Welcome to Shop&apos;n Go the smart app that keeps track of your
 						shopping lists and schedule.
 					</p>
-					<p className="text-lg italic mt-5 text-center">
+					<p className="text-lg italic mt-5 mb-16 text-center">
 						Smart Choices, Swift Shopping!
 					</p>
-					<SignInButton className="btn-auth"></SignInButton>
+					<p className="text-xl text-center">
+						To get started,{' '}
+						<button
+							className="text-accent underline underline-offset-2 hover:font-medium hover:decoration-[3px]"
+							onClick={() => signInWithPopup(auth, new GoogleAuthProvider())}
+						>
+							sign in
+						</button>{' '}
+						and begin creating your own shopping lists.
+					</p>
 				</>
 			)}
 		</>
