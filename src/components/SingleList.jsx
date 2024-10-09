@@ -24,7 +24,11 @@ export function SingleList({ name, path, setListPath, userId, userEmail }) {
 	};
 
 	return (
-		<li className="single-list">
+		<li
+			className="mx-auto w-full max-w-[450px] flex justify-between items-center mb-3 py-2 px-3 
+			border-2 rounded-lg border-accent cursor-pointer hover:shadow-lg hover:bg-accent 
+			hover:text-primary item-transition"
+		>
 			<button onClick={handleClick}>{name}</button>
 			{isUsersList && (
 				<button onClick={() => handleDelete(path, userEmail)}>

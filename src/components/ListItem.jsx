@@ -41,8 +41,11 @@ export function ListItem({
 	};
 
 	return (
-		<div className="list-item">
-			<div className="list-item-flex">
+		<div
+			className="bg-primary text-secondary hover:bg-accent hover:text-primary
+			hover:shadow-lg my-2 px-3 py-2 rounded-lg item-transition"
+		>
+			<div className="flex items-center justify-between space-x-2">
 				<label className="flex items-center cursor-pointer">
 					<input
 						type="checkbox"
