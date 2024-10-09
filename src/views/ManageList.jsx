@@ -4,6 +4,13 @@ import { shareList } from '../api/firebase';
 export function ManageList({ listPath, userId }) {
 	const [formAddUser, setFormAddUser] = useState('');
 
+	const listTitle = listPath ? listPath.split('/')[1] : null;
+	const fixedListTitle = listTitle
+		? listTitle[listTitle.length - 1] === '}'
+			? listTitle.slice(0, -1)
+			: listTitle
+		: null;
+
 	const handleAddUserSubmit = async (e) => {
 		e.preventDefault();
 
@@ -24,29 +31,32 @@ export function ManageList({ listPath, userId }) {
 	};
 
 	return (
-		<div className="container mx-auto px-4 flex flex-col items-center justify-center justify-items-center mb-40">
-			<h2 className="text-xl text-center">
-				Invite a user to share your list with you
-			</h2>
-			<form className="flex flex-col m-2 p-2" onSubmit={handleAddUserSubmit}>
-				<label className="text-lg text-center" htmlFor="email">
-					User email
-				</label>
-				<input
-					className="border m-3 p-3"
-					id="email"
-					type="email"
-					placeholder="Email"
-					value={formAddUser}
-					onChange={(e) => setFormAddUser(e.target.value)}
-					name="email"
-					required
-				/>
+		<>
+			<h2 className="subheading">{fixedListTitle}</h2>
+			<p className="text-center text-xl mb-3">
+				Share your list with another user
+			</p>
+			<div className="form-container">
+				<form onSubmit={handleAddUserSubmit}>
+					<div className="form-group">
+						<label className="w-[87px]" htmlFor="email">
+							User Email:
+						</label>
+						<input
+							className="form-input"
+							id="email"
+							type="email"
+							placeholder="Email"
+							value={formAddUser}
+							onChange={(e) => setFormAddUser(e.target.value)}
+							name="email"
+							required
+						/>
+					</div>
 
-				<button className="text-lg m-3 p-2 border-2 rounded-full border-yellow-300 hover:shadow-lg">
-					Invite
-				</button>
-			</form>
-		</div>
+					<button className="btn-form w-40">Share</button>
+				</form>
+			</div>
+		</>
 	);
 }

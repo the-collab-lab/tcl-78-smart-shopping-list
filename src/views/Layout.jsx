@@ -12,13 +12,18 @@ export function Layout() {
 	const { user } = useAuth();
 	return (
 		<>
-			<div className="Layout">
-				<header className="Layout-header">
-					<div className="Header-container">
+			<div className="flex flex-col h-dvh">
+				<header className="mb-4">
+					<div className="container mx-auto flex justify-between items-center p-2">
 						<Link to="/">
 							<h1 className="logo">
 								{' '}
-								<img src="/img/plastic-bag.png" alt="" /> Shop&apos;n Go
+								<img
+									className="h-[50px] md:h-[60px]"
+									src="/img/plastic-bag.png"
+									alt=""
+								/>{' '}
+								Shop&apos;n Go
 							</h1>
 						</Link>
 						{!!user ? (
@@ -28,28 +33,28 @@ export function Layout() {
 						)}
 					</div>
 				</header>
-				<main className="Layout-main">
+				<main className="mx-auto w-full max-w-[600px] p-5 pb-16 md:pb-20">
 					<Outlet />
 				</main>
-				<nav className="Nav">
-					<div className="Nav-container">
-						<NavLink to="/" className="Nav-link">
+				<nav className="bottom-0 fixed w-full p-2 md:py-0">
+					<div className="container mx-auto flex flex-row justify-evenly">
+						<NavLink to="/" className="nav-link">
 							<FaHome />
 							<span className="hidden md:inline">Home</span>
 						</NavLink>
 						{user && (
-							<NavLink to="/list" className="Nav-link">
+							<NavLink to="/list" className="nav-link">
 								<FaClipboardList />
 								<span className="hidden md:inline">List</span>
 							</NavLink>
 						)}
 						{user && (
-							<NavLink to="/manage-list" className="Nav-link">
+							<NavLink to="/manage-list" className="nav-link">
 								<FaShareAlt />
-								<span className="hidden md:inline">Settings</span>
+								<span className="hidden md:inline">Share</span>
 							</NavLink>
 						)}
-						<NavLink to="/about" className="Nav-link">
+						<NavLink to="/about" className="nav-link">
 							<FaInfoCircle />
 							<span className="hidden md:inline">About</span>
 						</NavLink>

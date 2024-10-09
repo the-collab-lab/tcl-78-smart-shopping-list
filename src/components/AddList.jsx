@@ -24,27 +24,26 @@ export function AddList({ setListPath, userId, userEmail }) {
 	};
 
 	return (
-		<>
-			<form className="m-2" onSubmit={handleCreateListButton}>
-				<label htmlFor="listName" className="text-2xl text-center m-2">
-					List Name:
-				</label>
-				<input
-					className="m-4"
-					type="text"
-					id="listName"
-					value={listName}
-					onChange={(e) => setListName(e.target.value)}
-					placeholder="Enter the name of your new list"
-					required
-				/>
-				<button
-					type="submit"
-					className="m-4 p-2 border-2 rounded-full border-yellow-300 hover:shadow-lg"
-				>
-					Create list
+		<div className="form-container mb-12">
+			<form onSubmit={handleCreateListButton}>
+				<div className="form-group">
+					<label htmlFor="listName" className="w-[68px]">
+						New List:
+					</label>
+					<input
+						className="form-input"
+						type="text"
+						id="listName"
+						value={listName}
+						onChange={(e) => setListName(e.target.value)}
+						placeholder="Enter List Name"
+						required
+					/>
+				</div>
+				<button type="submit" className="btn-form w-48">
+					Create List
 				</button>
 			</form>
-		</>
+		</div>
 	);
 }

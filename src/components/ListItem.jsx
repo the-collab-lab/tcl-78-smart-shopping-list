@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './ListItem.css';
 import { FaTrashCan, FaCartShopping } from 'react-icons/fa6';
 
 export function ListItem({
@@ -42,24 +41,27 @@ export function ListItem({
 	};
 
 	return (
-		<div className="list-item items-center justify-between p-3 rounded-xl">
+		<div
+			className="bg-primary text-secondary hover:bg-accent hover:text-primary
+			hover:shadow-lg my-2 px-3 py-2 rounded-lg item-transition"
+		>
 			<div className="flex items-center justify-between space-x-2">
-				<label className="flex items-center space-x-2">
+				<label className="flex items-center cursor-pointer">
 					<input
 						type="checkbox"
 						checked={isChecked}
 						onChange={onCheck}
 						disabled={isChecked}
-						className="form-checkbox h-5 w-5 hover:text-red-700"
+						className="form-checkbox h-4 w-4 lg:h-5 lg:w-5"
 					/>
-					<div className="flex items-center space-x-2">
-						<FaCartShopping />
-						<span className="item-name">{name}</span>
+					<div className="flex items-center space-x-1">
+						<FaCartShopping className="hidden md:block md:ml-2" />
+						<span className="lg:text-lg">{name}</span>
 					</div>
 				</label>
 				<div className="flex items-center space-x-2">
 					<span
-						className={`px-2 py-1 border text-sm font-medium uppercase ${categoryColor[category]}`}
+						className={`px-2 p-1 text-xs font-light uppercase ${categoryColor[category]}`}
 						style={{ color: categoryColor[category] }}
 					>
 						{category}
