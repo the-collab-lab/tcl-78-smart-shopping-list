@@ -33,7 +33,7 @@
 	}
 
 	.nav-link.active {
-		@apply underline text-accent;
+		@apply underline underline-offset-4 text-accent;
 	}
 
 	.form-container {
