@@ -33,7 +33,7 @@ export function Layout() {
 						)}
 					</div>
 				</header>
-				<main className="mx-auto w-full max-w-[600px] p-5 pb-16">
+				<main className="mx-auto w-full max-w-[600px] p-5 pb-16 md:pb-20">
 					<Outlet />
 				</main>
 				<nav className="bottom-0 fixed w-full p-2 md:py-0">
