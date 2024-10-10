@@ -33,11 +33,11 @@ export function ListItem({
 	};
 
 	const categoryColor = {
-		soon: 'bg-purple-100 text-purple-600 border-purple-300',
-		'kind of soon': 'bg-orange-100 text-orange-600 border-orange-300',
-		'not soon': 'bg-green-100 text-green-600 border-green-300',
-		overdue: 'bg-red-100 text-red-600 border-red-300',
-		inactive: 'bg-gray-100 text-gray-600 border-gray-300',
+		soon: 'bg-[#fdba74]',
+		'kind of soon': 'bg-[#d8b4fe]',
+		'not soon': 'bg-[#84cc16]',
+		overdue: 'bg-[#fca5a5]',
+		inactive: 'bg-[#a3a3a3]',
 	};
 
 	return (
@@ -61,7 +61,7 @@ export function ListItem({
 				</label>
 				<div className="flex items-center space-x-2">
 					<span
-						className={`px-2 p-1 text-xs font-light uppercase ${categoryColor[category]}`}
+						className={`px-2 p-1 text-xs font-bold rounded-lg uppercase ${categoryColor[category]}`}
 						style={{ color: categoryColor[category] }}
 					>
 						{category}
