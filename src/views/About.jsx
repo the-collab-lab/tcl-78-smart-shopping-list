@@ -3,7 +3,7 @@ import { DeveloperCard } from '../components/DeveloperCard';
 
 export function About() {
 	return (
-		<div className="flex flex-col h-dvh items-center justify-center max-w-3xl w-full px-4 sm:px-6 lg:px-8 ">
+		<div className="flex flex-col h-dvh">
 			<section className="mb-4 text-center">
 				<h1 className="subheading">About this application</h1>
 				<p>
@@ -44,8 +44,8 @@ export function About() {
 				</ol>
 			</section>
 			<section className="m-5 text-center">
-				<h3 className="subheading">This application was developed by:</h3>
-				<section className="grid grid-cols-2 gap-4 mt-2 ">
+				<h3 className="subheading mb-4">This application was developed by:</h3>
+				<section className="flex justify-items-center grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 max-w-4xl">
 					<DeveloperCard
 						name="Rebeca Taboada"
 						githubLink={'https://github.com/GrannyYetta'}
@@ -73,7 +73,9 @@ export function About() {
 				</p>
 				<p className="m-2 inline-flex items-center justify-center">
 					You can find the repository to this application on GitHub{' '}
-					<FaGithub className="ml-1" />
+					<a href="https://github.com/the-collab-lab/tcl-78-smart-shopping-list">
+						<FaGithub className="ml-1" />
+					</a>
 				</p>
 			</section>
 			<section className="m-5 text-center">

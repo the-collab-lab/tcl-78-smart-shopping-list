@@ -4,7 +4,7 @@ export function DeveloperCard({ name, githubLink, linkedinLink }) {
 	return (
 		<div>
 			<ul>
-				<li className="flex flex-row">
+				<li className="flex flex-row align-middle">
 					{name}{' '}
 					<a className="p-2" href={githubLink}>
 						<FaGithub />
