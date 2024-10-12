@@ -1,5 +1,6 @@
 import { FaGithub, FaShareAlt, FaHome } from 'react-icons/fa';
 import { DeveloperCard } from '../components/DeveloperCard';
+import { NavLink } from 'react-router-dom';
 
 export function About() {
 	return (
@@ -20,7 +21,9 @@ export function About() {
 						Create a List (if you don&apos;t already have one), click on an
 						existing one or manage your lists in{' '}
 						<span className="inline-flex items-center">
-							<FaHome className="mr-1" />
+							<NavLink to="/">
+								<FaHome className="mr-1" />
+							</NavLink>
 							Home
 						</span>
 					</li>
@@ -37,7 +40,10 @@ export function About() {
 						wish. Just click on{' '}
 						<span className="inline-flex items-center">
 							{' '}
-							<FaShareAlt className="mr-1" />
+							<NavLink to="/manage-list">
+								{' '}
+								<FaShareAlt className="mr-1" />
+							</NavLink>
 							Share{' '}
 						</span>
 					</li>
