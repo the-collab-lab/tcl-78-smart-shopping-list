@@ -13,7 +13,7 @@ export function Layout() {
 	return (
 		<>
 			<div className="flex flex-col h-dvh">
-				<header className="mb-4">
+				<header className="lg:mb-4">
 					<div className="container mx-auto flex justify-between items-center p-2">
 						<Link to="/">
 							<h1 className="logo">
@@ -36,7 +36,7 @@ export function Layout() {
 				<main className="mx-auto w-full max-w-[600px] p-5 pb-16 md:pb-20">
 					<Outlet />
 				</main>
-				<nav className="bottom-0 fixed w-full p-2 md:py-0">
+				<nav className="bottom-0 fixed w-full p-2 md:py-0 bg-base dark:bg-secondary">
 					<div className="container mx-auto flex flex-row justify-evenly">
 						<NavLink to="/" className="nav-link">
 							<FaHome />

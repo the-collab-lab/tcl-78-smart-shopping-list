@@ -7,10 +7,10 @@ export function DeveloperCard({ name, githubLink, linkedinLink }) {
 				<li className="flex flex-row align-middle">
 					{name}{' '}
 					<a className="p-2" href={githubLink}>
-						<FaGithub />
+						<FaGithub className="hover:text-accent" />
 					</a>{' '}
 					<a className="p-2" href={linkedinLink}>
-						<FaLinkedin />
+						<FaLinkedin className="hover:text-accent" />
 					</a>{' '}
 				</li>
 			</ul>

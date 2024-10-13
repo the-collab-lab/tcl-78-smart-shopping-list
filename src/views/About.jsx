@@ -20,12 +20,12 @@ export function About() {
 					<li>
 						Create a List (if you don&apos;t already have one), click on an
 						existing one or manage your lists in{' '}
-						<span className="inline-flex items-center">
-							<NavLink to="/">
-								<FaHome className="mr-1" />
-							</NavLink>
-							Home
-						</span>
+						<NavLink
+							to="/"
+							className="inline-flex items-center font-semibold hover:text-accent hover:underline underline-offset-2 decoration-[2px]"
+						>
+							<FaHome className="mr-1" /> Home
+						</NavLink>
 					</li>
 					<li>
 						Inside your list, add a new item and select how soon you will need
@@ -38,14 +38,13 @@ export function About() {
 					<li>
 						Share your list with friends, family, colleagues or whomever you
 						wish. Just click on{' '}
-						<span className="inline-flex items-center">
+						<NavLink
+							to="/manage-list"
+							className="inline-flex items-center font-semibold hover:text-accent hover:underline underline-offset-2 decoration-[2px]"
+						>
 							{' '}
-							<NavLink to="/manage-list">
-								{' '}
-								<FaShareAlt className="mr-1" />
-							</NavLink>
-							Share{' '}
-						</span>
+							<FaShareAlt className="mr-1" /> Share
+						</NavLink>
 					</li>
 				</ol>
 			</section>
@@ -80,7 +79,7 @@ export function About() {
 				<p className="m-2 inline-flex items-center justify-center">
 					You can find the repository to this application on GitHub{' '}
 					<a href="https://github.com/the-collab-lab/tcl-78-smart-shopping-list">
-						<FaGithub className="ml-1" />
+						<FaGithub className="ml-1 hover:text-accent" />
 					</a>
 				</p>
 			</section>
@@ -88,20 +87,23 @@ export function About() {
 				<p className="items-center justify-center">
 					Special thanks to our Mentors{' '}
 					<a
-						className="font-semibold"
+						className="font-semibold hover:text-accent hover:underline underline-offset-2 decoration-[2px]"
 						href="https://www.linkedin.com/in/chiamakaumeh/"
 					>
 						Chiamaka Umeh
 					</a>{' '}
 					and{' '}
 					<a
-						className="font-semibold"
+						className="font-semibold hover:text-accent hover:underline underline-offset-2 decoration-[2px]"
 						href="https://www.linkedin.com/in/viviana-yanez/"
 					>
 						Viviana Yanez{' '}
 					</a>
 					and{' '}
-					<a className="font-semibold" href="https://the-collab-lab.codes/">
+					<a
+						className="font-semibold hover:text-accent hover:underline underline-offset-2 decoration-[2px]"
+						href="https://the-collab-lab.codes/"
+					>
 						The Collab Lab&apos;s
 					</a>{' '}
 					Program. Check out their website to learn more about their awesome

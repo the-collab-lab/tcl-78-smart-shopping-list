@@ -52,7 +52,7 @@ export function ListItem({
 						checked={isChecked}
 						onChange={onCheck}
 						disabled={isChecked}
-						className="form-checkbox h-4 w-4 lg:h-5 lg:w-5"
+						className="form-checkbox h-4 w-4 lg:h-5 lg:w-5 cursor-pointer"
 					/>
 					<div className="flex items-center space-x-1">
 						<FaCartShopping className="hidden md:block md:ml-2" />
@@ -61,7 +61,7 @@ export function ListItem({
 				</label>
 				<div className="flex items-center space-x-2">
 					<span
-						className={`px-2 p-1 text-xs font-bold rounded-lg uppercase ${categoryColor[category]}`}
+						className={`px-1.5 py-[3px] text-xs font-light rounded-md uppercase ${categoryColor[category]}`}
 						style={{ color: categoryColor[category] }}
 					>
 						{category}
