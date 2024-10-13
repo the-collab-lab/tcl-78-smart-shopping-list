@@ -1,4 +1,4 @@
-import { FaGithub, FaShareAlt, FaHome } from 'react-icons/fa';
+import { FaGithub, FaHome } from 'react-icons/fa';
 import { DeveloperCard } from '../components/DeveloperCard';
 import { NavLink } from 'react-router-dom';
 
