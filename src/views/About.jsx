@@ -37,14 +37,7 @@ export function About() {
 					</li>
 					<li>
 						Share your list with friends, family, colleagues or whomever you
-						wish. Just click on{' '}
-						<NavLink
-							to="/manage-list"
-							className="inline-flex items-center font-semibold hover:text-accent hover:underline underline-offset-2 decoration-[2px]"
-						>
-							{' '}
-							<FaShareAlt className="mr-1" /> Share
-						</NavLink>
+						wish.
 					</li>
 				</ol>
 			</section>
