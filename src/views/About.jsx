@@ -8,9 +8,9 @@ export function About() {
 			<section className="mb-4 text-center">
 				<h1 className="subheading">About this application</h1>
 				<p>
-					Shop&apos;n Go is a smart shopping list application that enables our
-					users to level up their shopping experience. Create specialized lists
-					and share them how best suits you!
+					Shop&apos;n Go is a smart shopping list application that enables users
+					to level up their shopping experience. Create specialized lists, share
+					them with your friends, and keep track of your shopping with ease!
 				</p>
 			</section>
 			<section className="m-4">
@@ -29,11 +29,11 @@ export function About() {
 					</li>
 					<li>
 						Inside your list, add a new item and select how soon you will need
-						to buy it.
+						to buy it
 					</li>
 					<li>
 						Once you have bought your item, check it off and wait to be reminded
-						when you need it again.
+						when you need it again
 					</li>
 					<li>
 						Share your list with friends, family, colleagues or whomever you
