@@ -29,15 +29,19 @@ export const SignOutButton = () => (
  */
 export const useAuth = () => {
 	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		auth.onAuthStateChanged((user) => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setUser(user);
+			setLoading(false);
 			if (user) {
 				addUserToDatabase(user);
 			}
 		});
+
+		return () => unsubscribe();
 	}, []);
 
-	return { user };
+	return { user, loading };
 };

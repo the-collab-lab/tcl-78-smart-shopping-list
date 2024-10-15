@@ -1,10 +1,25 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from 'react-router-dom';
 
 import { Home, Layout, List, ManageList, About } from './views';
 
 import { useAuth, useShoppingListData, useShoppingLists } from './api';
 
 import { useStateWithStorage } from './utils';
+
+function PrivateRoute({ children }) {
+	const { user, loading } = useAuth();
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	return user ? children : <Navigate to="/" />;
+}
 
 export function App() {
 	const [listPath, setListPath] = useStateWithStorage(
@@ -38,12 +53,18 @@ export function App() {
 					<Route path="/about" element={<About />} />
 					<Route
 						path="/list"
-						element={<List data={data} lists={lists} listPath={listPath} />}
+						element={
+							<PrivateRoute>
+								<List data={data} lists={lists} listPath={listPath} />
+							</PrivateRoute>
+						}
 					/>
 					<Route
 						path="/manage-list"
 						element={
-							<ManageList listPath={listPath} userId={userId} data={data} />
+							<PrivateRoute>
+								<ManageList listPath={listPath} userId={userId} data={data} />
+							</PrivateRoute>
 						}
 					/>
 				</Route>
