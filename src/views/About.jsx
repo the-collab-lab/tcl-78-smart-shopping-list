@@ -37,7 +37,7 @@ export function About() {
 					</li>
 					<li>
 						Share your list with friends, family, colleagues or whomever you
-						wish.
+						wish
 					</li>
 				</ol>
 			</section>
