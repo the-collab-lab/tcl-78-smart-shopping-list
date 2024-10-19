@@ -19,7 +19,7 @@ export function Home({ data, setListPath, userId, userEmail }) {
 						userEmail={userEmail}
 					/>
 					{data.length === 0 && (
-						<p>
+						<p className="text-center">
 							{' '}
 							You don&apos;t have any shopping lists yet. Start by creating your
 							first one!

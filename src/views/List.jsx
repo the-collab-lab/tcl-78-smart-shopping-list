@@ -71,19 +71,19 @@ export function List({ data, listPath, lists }) {
 		<>
 			<h2 className="subheading">{fixedListTitle}</h2>
 			{!listPath && lists.length > 0 && data.length > 0 && (
-				<p>
+				<p className="text-center">
 					Oops! No list selected yet. Head to the <Link to="/">home page</Link>{' '}
 					and select one!
 				</p>
 			)}
 			{!listPath && lists.length > 0 && data.length === 0 && (
-				<p>
+				<p className="text-center">
 					Oops! No list selected yet. Head to the <Link to="/">home page</Link>{' '}
 					and select one!
 				</p>
 			)}
 			{lists.length === 0 && (
-				<p>
+				<p className="text-center">
 					It looks like you don&apos;t have any shopping lists yet. Head to the{' '}
 					<Link to="/">home page</Link> to create your first list and start
 					organizing your shopping!
@@ -92,7 +92,7 @@ export function List({ data, listPath, lists }) {
 			{listPath && lists.length > 0 && data.length === 0 && (
 				<>
 					<AddItem data={data} listPath={listPath} />
-					<p>Your list is currently empty.</p>
+					<p className="text-center">Your list is currently empty.</p>
 				</>
 			)}
 			{listPath && lists.length > 0 && data.length > 0 && (
